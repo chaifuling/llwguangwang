@@ -18,7 +18,7 @@
   };
   _utils.prototype.indexArticleDetails = function (id, type, tab = "", llh) {
     window.open(
-      "./index-Article-details.html?id=" +
+      (llw.istest?"":"/llh-bs/")+"static/index-pc/index-Article-details.html?id=" +
         id +
         "&&tab=" +
         tab +

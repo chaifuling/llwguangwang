@@ -114,7 +114,7 @@
     }
     _a.setAttribute(
       "href",
-      (!llw.istest ? "/llh-bs" : "/llh-bspre") +
+      (!llw.istest ? "/llh-bs" : "/") +
         adress +
         `&backUrl=${XbackUrl}`
     );
