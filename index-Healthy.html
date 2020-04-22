@@ -83,7 +83,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -131,7 +131,7 @@
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
       {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -179,16 +179,24 @@
       <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
       <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
-          {{#  layui.each(item.coverImgList, function(index, items){ }}
-          <img style="background: url({{items}});"class="imgs" alt="">
-          {{#  }); }}
+        {{#  layui.each(item.coverImgList, function(index, items){ }}
+        {{#   if(index <= 3){      }}
+        <img style="background: url({{items}});"class="imgs" alt="">
+        {{#     }   }}
+
+    
+
+        {{#  }); }}
+        {{#  if(item.img_num >0){  }}
+        <div class="img_load">+{{item.img_num}}</div>
+        {{#   }  }}   
       </div>
     </div>
   </div>           
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -249,7 +257,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -438,11 +446,11 @@
           </div>
   </div>
   <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
-  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
   <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
   <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
   <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
-  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index.html')" >
     <img class="header_div_img" src=""/></a>
   </div>
  </div>
@@ -460,7 +468,7 @@
         <div class="containera">
             <div  class="contenta container_left">
               <div class="body_left_div">
-                <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+                <a href="index.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>              
                 <ul id="nav">
                 
                 </ul>
@@ -595,7 +603,7 @@
   arr_sas=arr_sas.filter(item=>item.id!==13);
          var list_arr=[
     {id:"1",url:"./index-follow.html"},
-    {id:"5",url:"../../index-pc.html"},
+    {id:"5",url:"./index.html"},
     {id:"6",url:"./index-Hotspot.html"},
     {id:"11",url:"./index-video-list.html"},
     {id:"10",url:"./index-Original.html"},
@@ -637,21 +645,29 @@
           window.location.href = './index-search.html?id='+ $("#input_aaa").val()
         }
       })
-      llw.api.ws("info.headlines.get",
+      
+      getAllSeeList()
+      function getAllSeeList(){
+        llw.api.ws("info.headlines.get",
       {
        "llh": "123",
 		   "pageNo": "1",
 		   "channel": "20",
-		   "pageSize": 4,
+		   "pageSize": "3",
        "itemId": ""
       },
       function(rs){
+        if(!rs.data){
+              if(rs.readyState == 4){
+                getAllSeeList();
+              }
+            }
         if(rs.data.respData){
           layui.laytpl($("#tp_list_tuo").html()).render(rs.data.respData, function(html){
               $("#list_tuo").html(html);
           });
         }
-      })         
+      })       
       $.ajax({
           url: "sss.php",         
           dataType: 'json',
@@ -665,7 +681,8 @@
           error: function (err) {
            
           }
-      });     
+      });  
+      }    
 // 关注
 function gz(toUserId,ithis,type){
   if(llw.isLogin){
@@ -819,11 +836,17 @@ var arr_ac=[];
               pageSize: 20        
             };
             llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
+                  if(!rs.data){
+                  if(rs.readyState == 4){
+                    getPlList();
+                  }
+                  }
                   if(rs.data.success) {
                     current=true
                     var list_arr=rs.data.respData.list;
                     for(var i=0;i<list_arr.length;i++){
                       list_arr[i].content=list_arr[i].content?JSON.parse(list_arr[i].content):'';
+                      list_arr[i].img_num = list_arr[i].coverImgList.length-4;
                       list_arr[i].coverImgList=arr_update(list_arr[i].coverImgList,4);
                     }   
                     arr_ac=list_arr;
@@ -1050,6 +1073,20 @@ function text_num(text){
        text2=text2+"...";
        return text2;
      }
+}
+function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
 }
     </script>
 

@@ -147,6 +147,7 @@
           </li>
 
             {{#  }); }}
+          
          <div class="PL_showmore " style="display:none"><div >查看更多评论</div></div>
          <div class="PL_no_more_tips " style="display:none">以上为热门评论，老来网 App 还有更多内容</div>
     </script>
@@ -224,13 +225,17 @@
        {{# } }}
        {{# if(item.original.isvideo == 1){ }}
        {{# if(!item.original.videoUrl == 1){ }}
+       {{# if(item.original.originalType == 2){  }}
           {{#   if(item.original.covers){              }}
         {{#  layui.each(item.original.covers, function(index, item_img){ }}
         <div class="WZXQ_top_img">
         <img src="{{item_img}}"/>
       </div>
         {{#  }); }}
+        
           {{#      }         }}
+          {{#     } }}
+
           {{#     } }}
           {{#     } }}
 
@@ -368,7 +373,7 @@
         </div>
           <div class="single-mode-div-bottom">
             {{# if(item.tags){ }}
-            <div class="single-tags">{{item.tags}}</div>
+            <div class="single-tags">{{tag_text(item.tags)}}</div>
             {{# } }}
             {{# if(item.type!='cms_info') { }}
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  class="single-mode-div-bottom-b" >
@@ -439,7 +444,7 @@
         <a href="http://www.laolai.net" target="_blank">品牌介绍</a>
       </div>
       <div class="header_div_right">
-        <a onclick="utils.toMyLlh('/index-pc.html')">老来号认证</a>
+        <a onclick="utils.toMyLlh('/index.html')">老来号认证</a>
       </div>
       <div class="header_div_right">
         <a onclick="utils.toMyLlh('/common/register.html?type=topWeb')">注册</a>
@@ -455,7 +460,7 @@
         <a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a>
       </div>
       <div class="header_div_right" style="display: none;">
-        <a style="display: block;" onclick="utils.toMyLlh('/index-pc.html')">
+        <a style="display: block;" onclick="utils.toMyLlh('/index.html')">
           <img class="header_div_img" src=""
         /></a>
       </div>
@@ -485,7 +490,7 @@
       <div class="containera">
         <div class="contenta container_left">
           <div class="body_left_div">
-            <a href="./index-pc.html"
+            <a href="./index.html"
               ><img src="images/老来网logo组合.png" alt="老来网"
             /></a>
             <ul id="nav"></ul>
@@ -613,8 +618,8 @@
                   <div class="outer_div_div_DL_title" id="user_title"></div>
                   <div class="right_div_bottom">
                     <div class="right_div_bottom_left">发表：20</div>
-                    <div class="right_div_bottom_center">关注：20</div>
-                    <div class="right_div_bottom_right">粉丝：20</div>
+                    <div class="right_div_bottom_center">关注：<span>0</span></div>
+                    <div class="right_div_bottom_right">粉丝：<span>0</span></div>
                   </div>
                   <div class="outer_div_div_DL_button">
                     <button id="z_gz" style="display: none;">+ 关注</button>
@@ -717,7 +722,7 @@
             arr_sas = arr_sas.filter((item) => item.id !== 13);
             var list_arr = [
               { id: "1", url: "./index-follow.html" },
-              { id: "5", url: "../../index-pc.html" },
+              { id: "5", url: "./index.html" },
               { id: "6", url: "./index-Hotspot.html" },
               { id: "11", url: "./index-video-list.html" },
               { id: "10", url: "./index-Original.html" },
@@ -792,6 +797,10 @@
           itemId: "",
         },
         function (rs) {
+          debugger
+          if(rs.data){
+
+          
           if (rs.data.respData) {
             layui
               .laytpl($("#tp_list_tuo").html())
@@ -804,6 +813,13 @@
                 $("#ul_list").html(html);
               });
           }
+        }else{
+          $(".pane-module2").hide();
+          $(".WZXQ_center_bottom").hide();
+        }
+        },
+        function (err) {
+          $(".pane-module2").hide();
         }
       );
       $.ajax({
@@ -968,7 +984,7 @@
       //   pl();
 
       // }
-
+    var PL_num=0;
       function pl() {
         var data = {
           artId: getQueryVariable("id"),
@@ -984,6 +1000,7 @@
           dataType: "json",
           type: "POST",
           success: function (resp) {
+            PL_num=resp.data.list.length;
             $("#pl_loading").hide();
             if (resp.message == "没有更多评论了") {
               $(".PL_null_div").show();
@@ -1031,12 +1048,15 @@
                 debugger
                 if(!isPlOpen){
                   
-                $(".PL_showmore").show();
                 $(".PL_no_more_tips").hide();
                 $("#PL_list_ul .PL_list_lists:gt(4)").hide();
                 }else{
-                  $(".PL_showmore").hide();
                   $(".PL_no_more_tips").show();
+                }
+                if(PL_num >5){
+                  $(".PL_showmore").show();
+                }else{
+                  $(".PL_showmore").hide();
                 }
                 $(".PL_showmore").click(function () {
                   $("#PL_list_ul li").show();
@@ -1392,7 +1412,11 @@
             "src",
             rs.data.respData[0].user.headIcon
           );
-          if (rs.data.respData[0].user.isAttention == 1) {
+          if(llw.getCookie("llh") == getQueryVariable("llh")){
+            $("#z_gz").hide();
+            $("#z_qxgz").hide();
+          }else{
+            if (rs.data.respData[0].user.isAttention == 1) {
             
             $("#z_gz").hide();
             $("#z_qxgz").show();
@@ -1400,6 +1424,8 @@
             $("#z_gz").show();
             $("#z_qxgz").hide();
           }
+          }
+
           user_count();
           if (rs.data.respData[0].original.isLiked == 0) {
             $("#article_dz").show();
@@ -1676,7 +1702,6 @@
                 userName:hfplname
               }
             };
-            debugger;
             if (PLcommentTimes[plindex] > 2) {
               if (!myPllist[plindex]) myPllist[plindex] = [];
               myPllist[plindex].push(datas);
@@ -1716,7 +1741,6 @@
                 userName:hfplname
               }
             };
-            debugger;
             if (PLcommentTimes[plindex] > 2) {
               if (!myPllist[plindex]) myPllist[plindex] = [];
               myPllist[plindex].push(datas);
@@ -1829,6 +1853,24 @@
         );
       });
 
+
+
+
+
+      //
+      $(".right_div_bottom_right").click(function () {
+              if(!llw.getCookie("llh")){
+        llw.toHerf('/common/login.html?type=topWeb');
+        return
+      }
+      window.location.href = './index-personal.html?llh=' + getQueryVariable("llh")+'&type=1';
+    })
+    $(".right_div_bottom_center").click(function () {
+      if(llw.getCookie("llh") !=getQueryVariable("llh")){
+        return
+      }
+      window.location.href = './index-personal.html?llh=' + getQueryVariable("llh")+'&type=2';
+    })
       // 加载更多评论
       function showMore() {}
 
@@ -1850,12 +1892,13 @@
               }
 
               var item = rs.data.respData;
-              $(".header_div_img").attr("src", rs.data.respData.headIcon);
               $(".right_div_bottom_left").text("发表：" + item.totalArticle);
-              $(".right_div_bottom_center").text(
-                "关注数：" + item.attentionCount
-              );
-              $(".right_div_bottom_right").text("粉丝数：" + item.fansCount);
+              $(".right_div_bottom_center span").text(item.attentionCount);
+              $(".right_div_bottom_right span").text(item.fansCount);
+              if (llw.getCookie('llh') == getQueryVariable('llh')) {
+          $(".right_div_bottom_center span").text(item.attentionCount).attr('style', 'color:#0094ff');
+            }
+            $(".right_div_bottom_right span").text(item.fansCount).attr('style', 'color:#0094ff');
             } else {
               $(".outer_z").hide();
             }
@@ -1902,6 +1945,20 @@
 
         return a;
       }
+      function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
+}
     </script>
   </body>
 </html>

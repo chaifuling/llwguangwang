@@ -113,7 +113,7 @@
   {{#  layui.each(d, function(index, item){ }}
   {{# if(index<2){ }}
   <li class="right_list_li">
-    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1')">
+    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1',{{item.userId?item.userId:item.user.llh}})">
     <div class="right_list_li_div">
       <p class="right_list_li_div_top">{{item.original.title}}</p>
       <p class="right_list_li_div_bottom">{{llw.isdate(item.original.publishTime)}}</p>
@@ -145,11 +145,11 @@
       </div>
     </div>
     <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
-  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
   <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
   <div class="header_div_right"><a onclick="llw.toHerf('/common/login.html?type=topWeb')"  target="_blank">登录</a></div>
   <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
-  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index.html')" >
     <img class="header_div_img" src=""/></a>
   </div>
   </div>
@@ -264,7 +264,7 @@
         var arr_sas = rs.data.respData.channelList;
         var list_arr = [
           { id: "1", url: "./index-follow.html" },
-          { id: "5", url: "../../index-pc.html" },
+          { id: "5", url: "./index.html" },
           { id: "6", url: "./index-Hotspot.html" },
           { id: "11", url: "./index-video-list.html" },
           { id: "10", url: "./index-Original.html" },
@@ -443,10 +443,9 @@
         $(".right_div_img img").attr("src", item.headIcon);
         $(".right_div_name p").text(item.nickName);
         $(".right_div_text p").text(item.introduce);
-        $(".header_div_img").attr("src", rs.data.respData.headIcon);
         $(".right_div_bottom_left").text("发表：" + item.totalArticle);
-        $(".right_div_bottom_center").text("关注数：" + item.attentionCount);
-        $(".right_div_bottom_right").text("粉丝数：" + item.fansCount);
+        $(".right_div_bottom_center").text("关注：" + item.attentionCount);
+        $(".right_div_bottom_right").text("粉丝：" + item.fansCount);
         if (llw.getCookie('llh') == getQueryVariable('llh')){
         $(".right_div_bottom_button_gz").hide();
         $(".right_div_bottom_button").hide();

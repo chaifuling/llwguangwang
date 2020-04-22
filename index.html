@@ -10,7 +10,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
-  <script src="./static/index-pc/js/lib/layui/layui.all.js"></script>
+  <script src="./js/lib/layui/layui.all.js"></script>
   <script src="./js/lib/mock.min.js"></script>
   <script src="./js/mockdata/index.data.js"></script>
   <script src="./js/llwhelp.js"></script>
@@ -82,7 +82,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -130,7 +130,7 @@
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
       {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -179,15 +179,23 @@
       <div class="single-mode-div_b" >
       <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
           {{#  layui.each(item.coverImgList, function(index, items){ }}
+          {{#   if(index <= 3){      }}
           <img style="background: url({{items}});"class="imgs" alt="">
+          {{#     }   }}
+
+    
+
           {{#  }); }}
+          {{#  if(item.img_num >0){  }}
+          <div class="img_load">+{{item.img_num}}</div>
+          {{#   }  }}   
       </div>
     </div>
   </div>           
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -248,7 +256,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -305,7 +313,7 @@
       {{# if(index<5){ }}  
       {{#  if((index+1)==d.length){   }}
         <li  class="list_tuo_li">
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5')"> 
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img src="{{item.coverImgList[0]}}"/>
@@ -318,7 +326,7 @@
             </li> 
       {{#  }else{  }}
           <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5')"> 
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
           <div class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img src="{{item.coverImgList[0]}}"/>
@@ -644,7 +652,7 @@
                           <button id="inserthtml">
                             <img src="images/TK.png" />
                             <label for="file" class="label_file"> &nbsp;&nbsp;&nbsp;&nbsp;
-                              <input id="file" type="file" name="file" style="display:none;" />
+                              <input id="file" type="file" name="file" style="display:none; "  accept="image/png,image/jpeg"/>
                             </label>
                           </button>
                         </div>
@@ -652,7 +660,7 @@
                           <button style="position: relative;" id="inserthtml">
                             <img src="images/videoup.jpg" />
                             <label style="position: absolute;left: 15px;" for="fileVideo"> &nbsp;&nbsp;&nbsp;&nbsp;
-                              <input id="fileVideo" type="file" name="fileVideo" style="display:none;" />
+                              <input id="fileVideo" type="file" name="fileVideo" style="display:none;" accept="video/*" />
                             </label>
                           </button>
                         </div>
@@ -1118,7 +1126,16 @@ function ifDvideo(){
     console.log(llw.api.options);
 
     $('#file').change(function (rs) {
+      debugger
       var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
       if (window.FileReader) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -1129,6 +1146,14 @@ function ifDvideo(){
     })
     $('#fileVideo').change(function (rs) {
       var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }   
+
       if (window.FileReader) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -1150,7 +1175,7 @@ function ifDvideo(){
             processData: false,//用于对data参数进行序列化处理 这里必须false
             contentType: false, //必须
             success: function (resp) {
-              document.execCommand('inserthtml', false, `&nbsp;<video controls="" autoplay="" name="media"><source src=${resp.respData.src}  ></video>&nbsp;`);
+              document.execCommand('inserthtml', false, `&nbsp;<video controls="controls"  name="media"  src=${resp.respData.src}></video>&nbsp;`);
             },
             error: function (err) {
               layer.msg("上传失败");
@@ -1165,6 +1190,13 @@ function ifDvideo(){
       var b = Article_img.length+1
       if (b <= uploadImgTitle) {
         var file = this.files[0];
+         var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
         if (window.FileReader) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
@@ -1197,6 +1229,14 @@ function ifDvideo(){
       var b = $(".input_div_video_div_buttom_ul").length + 1;
       if (b <= 1) {
         var file = this.files[0];
+        var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != 'jpg' && pathf != 'png' && pathf != 'jpeg' && pathf != 'gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
         if (window.FileReader) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
@@ -1250,6 +1290,14 @@ function ifDvideo(){
       var b = $(".input_div_imgs_div_buttom_li").length + 1;
       if (b <= 9) {
         var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       debugger
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
         if (window.FileReader) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
@@ -1545,6 +1593,11 @@ function ifDvideo(){
         itemId: ''
       };
       llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+        if(!rs.data){
+              if(rs.readyState == 4){
+                getPlList();
+              }
+            }
         if (rs.data.success) {
           current = true
           var list_arr = rs.data.respData.list;
@@ -1552,6 +1605,7 @@ function ifDvideo(){
             if (list_arr[i].content) {
               list_arr[i].content = JSON.parse(list_arr[i].content);
             }
+            list_arr[i].img_num = list_arr[i].coverImgList.length-4;
             list_arr[i].coverImgList = arr_update(list_arr[i].coverImgList, 4);
           }
           arr_ac = list_arr;
@@ -1590,17 +1644,21 @@ function ifDvideo(){
       }
     });
 
-    getAllSeeList()
+   
     function getAllSeeList() {
       var that = this;
       var data = {
-        llh: llw.getCookie("llh"),
-        pageNo: pageNo,
-        pageSize: "20",
+        llh:123,
+        pageSize: "5",
         itemId: ''
       };
       data.channel = 20, // 不同的频道 数值不同
         llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+          if(!rs.data){
+              if(rs.readyState == 4){
+                getAllSeeList();
+              }
+            }
           if (rs.data.success) {
             var list_arr = rs.data.respData.list;
             for (var i = 0; i < list_arr.length; i++) {
@@ -1749,13 +1807,7 @@ function ifDvideo(){
         return
       }
       if (Article_img.length == 0) {
-        layer.msg("请输入文章封面");
-        return
-      }
-      if (Article_img.length == "") {
-        var coversType = 0;
-      } else {
-        var coversType = 1;
+          Article_type = 0;
       }
       var contenttext = $("#dds").text().trim()
       var content = $("#dds").html()
@@ -1768,7 +1820,7 @@ function ifDvideo(){
         title: title,
         author: "",
         contentUrl: "",
-        coversType: coversType,
+        coversType: Article_type,
         covers: Article_img.join(";"),
         file: "",
         originalType: 1,
@@ -2127,6 +2179,13 @@ function ifDvideo(){
 
     $("#file_three").change(function (re) {
       var file = this.files[0];
+             var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }  
       if (window.FileReader) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -2194,8 +2253,18 @@ function ifDvideo(){
         console.log(err)
       })
     }
+    
+    var Article_type=1
     $(".setTitle_type div").click(function(){
       var num =  $(".setTitle_type div").index(this)
+      debugger
+      if(num == 0){
+        Article_type =1;
+      }else if(num == 1){
+        Article_type=2
+      }else if(num == 2) {
+        Article_type=3
+      }
       var a = [0,1,2];
       if(num ==1){
         uploadImgTitle=3
@@ -2287,6 +2356,13 @@ function ifDvideo(){
 
     $("#Dfile_three").change(function (re) {
       var file = this.files[0];
+             var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }  
       if (window.FileReader) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -2350,6 +2426,14 @@ function ifDvideo(){
       var b = $(".input_div_video_div_buttom_ul").length + 1;
       if (b <= 1) {
         var file = this.files[0];
+         var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
         if (window.FileReader) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
@@ -2531,6 +2615,20 @@ function text_num(text){
        text2=text2+"...";
        return text2;
      }
+}
+function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
 }
   </script>
 

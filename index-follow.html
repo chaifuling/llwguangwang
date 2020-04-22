@@ -114,67 +114,239 @@
 
 <script id="tp_list" type="text/html">
   {{#  layui.each(d, function(index, item){ }}  
+
+  {{# if(item.originalType == 1){ }}  
+  {{#    if(item.coverImgList.length>= 1){  }}
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.user?item.user.llh:''}})"><p>{{item.title}}</p></div>
-      <div class="single-mode-div_b" >
-        <div class="single-mode-div-top" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.user?item.user.llh:''}})">
-            {{#  layui.each(item.coverImgList, function(index, items){ }}
-               <img style="background: url({{items}});"class="imgs" alt="">
-            {{#  }); }}
-        </div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+        <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
+
+     </div>
+      <div class="single-mode-div" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
-      </div>       
-      <div class="single-mode-div-bottom">
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
-          {{#   if(item.user.headIcon  !=  undefined) {                  }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
               {{# if(item.userType==1||item.userType==6){}}
-                    <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
-                    {{# } }}
-                    {{# if(item.userType==4){}}
-                    <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
-                    {{# } }}
-              <img  src="{{item.user.headIcon}}" /></a>
+              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
           </div> 
           {{#    }          }}
-          <div class="single-mode-div-bottom-name" >
-            {{#     if(item.user.nickName == undefined ){                  }}
-            <a href="#"  >该作者已注销</a>
-            {{#     }else {            }}
-            {{#     if(item.user.nickName) {  }}
-            <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}"  target="_blank">{{item.user.nickName}}</a>
-            {{#     }else{           }}
-            {{#     }          }}
-            {{#     }                  }}
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
 
-          </div>
+        </div>
         <div class="single-mode-div-bottom-time" >
-          {{#       if(item.createTimeStr){   }}
+          {{#       if(item.createTimeStr != undefined){   }}
           <a href="#">发布于{{item.createTimeStr}}</a>
         {{#  } }}
         </div>
-        <div class="">
-        <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/sc222.png" /></div>
-        <div class="single-mode-div-bottom-right_div_two"><p>{{(item.viewNum)?item.viewNum:0}}</p></div>
-        <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div> -->
-        <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/dz.png"/></div>
-        <div class="single-mode-div-bottom-right_div_two"><p>{{(item.likeNum)?item.likeNum:0}}</p></div> -->
-        <!-- <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div>
-        <div class="single-mode-div-bottom-right_div_one"><img src="images/xx.png"/></div>
-        <div class="single-mode-div-bottom-right_div_two"><p>{{(item.fakeViewNum)?item.fakeViewNum:0}}</p></div> -->
+      </div>    
+  </li>             
+  {{#    }else{        }}
+  <li>
+    <div style="cursor:pointer">
+    <div class="single-mode">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-div_b" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">
+        {{# if(item.tags){ }}
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
+      {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                  {{# if(item.userType==1||item.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.headIcon}}" />
+                </a>
+          </div> 
+          {{#    }          }}
+       
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
         </div>
       
       </div>
       </div>    
-  </li>   
+  </li>               
+  {{#    }   }}
+
+  {{# }else if(item.originalType == 2){ }}
+
+  <li>
+    <div style="cursor:pointer">
+
+    <div class="single-mode">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-div_b" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+          {{#  layui.each(item.coverImgList, function(index, items){ }}
+          {{#   if(index <= 3){      }}
+          <img style="background: url({{items}});"class="imgs" alt="">
+          {{#     }   }}
+
+    
+
+          {{#  }); }}
+          {{#  if(item.img_num >0){  }}
+          <div class="img_load">+{{item.img_num}}</div>
+          {{#   }  }}   
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">
+        {{# if(item.tags){ }}
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
+        {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+              {{# if(item.userType==1||item.userType==6){}}
+              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
+          </div> 
+          {{#    }          }}
+       
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      
+      </div>
+      </div>    
+  </li>                      
 
 
-  {{#  })}}  
+  {{# }else if(item.originalType == 3){ }}
+  <li>
+    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+    <div style="cursor:pointer">
+      <div class="single-mode">
+      <div class="single-mode-title" ><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox">
+      
+      {{#  layui.each(item.coverImgList, function(index, items){ }}
+        <img style="background: url({{items}});"class="imgs" alt="">
+        <div class="center_list_b_top_mc22"><img src="./images/btn.png"></div>
+      {{#  }); }}
+     </div>
+      <div class="single-mode-div" >
+      <div class="single-mode-div-top">
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">  
+        {{# if(item.tags){ }}
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
+        {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+              {{# if(item.userType==1||item.userType==6){}}
+              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
+          </div> 
+          {{#    }          }}
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      </div>   
+    </a>  
+  </li> 
+
+  {{#   }      }}
+
+  {{#  }); }}
 </script>
 <script id="tp_ugcBox_tab_current" type="text/html">
   {{#  layui.each(d.list)                                }}
@@ -238,11 +410,11 @@
           </div>
   </div>
   <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
-  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
   <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
   <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
   <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
-  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index.html')" >
     <img class="header_div_img" src=""/></a>
   </div>
 
@@ -251,7 +423,7 @@
         <div class="containera">
             <div  class="contenta container_left">
               <div class="body_left_div">
-                <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+                <a href="./index.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
                 <ul id="nav">
                 
                 </ul>
@@ -340,7 +512,9 @@
       var llh =llw.getCookie('llh');
       bodyCH.scroll(function(e) {
         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-          getPlList();
+          if(zzpageNo != 1){
+            getPlList();
+          }
         }
         if($(window).scrollTop() > 40){
           $(".body_left_div").addClass("body_left_div_div");
@@ -377,7 +551,7 @@
 
  var list_arr=[
     {id:"1",url:"#"},
-    {id:"5",url:"../../index-pc.html"},
+    {id:"5",url:"./index.html"},
     {id:"6",url:"./index-Hotspot.html"},
     {id:"11",url:"./index-video-list.html"},
     {id:"10",url:"./index-Original.html"},
@@ -688,6 +862,8 @@ function user_count(){
         })
 
 }
+var zzpageNo=1;
+var pageNo=1;
 utils.rightmue()
 var lbt_num=0;
 function asasa(index){
@@ -695,17 +871,17 @@ function asasa(index){
   lbt_num=index+1;
 }
 var arr_ac=[];
-var pageNo=1;
     function getPlList() {
            var that=this; 
            var data={  
               llh: llh,
-              pageNo: pageNo,
+              pageNo: zzpageNo,
               pageSize: "20",
               itemId:''         
             };
             data.channel=21;
             llw.api.ws("attention.content.find",data,function(rs){ //请求名,数据,回调方法,
+            getAllSeeList()
                   if(rs.data.success) {
                     var list_arr=rs.data.respData;
                     for(var i=0;i<list_arr.length;i++){
@@ -713,30 +889,31 @@ var pageNo=1;
                         list_arr[i].content=JSON.parse(list_arr[i].content);
                       }
                       if(list_arr[i].coverImgList){
-                        list_arr[i].coverImgList=arr_update(list_arr[i].coverImgList,3);
+                        list_arr[i].img_num = list_arr[i].coverImgList.length-4;
+                        list_arr[i].coverImgList=arr_update(list_arr[i].coverImgList,4);
+                      }else{
+                        list_arr[i].coverImgList=[];
                       }
                     }   
                     arr_ac=list_arr;
                     console.log(list_arr)                
                     layui.laytpl($("#tp_list").html()).render(list_arr, function(html){
                       $("#list").append(html);
-                      pageNo=pageNo+1;
+                      zzpageNo=zzpageNo+1;
                     });
                   } else {
                     layui.laytpl($("#tp_list").html()).render([], function(html){
                       console.log(html)
                       $("#list").append(html);
-                      pageNo=pageNo+1;
                     });
                   }
 
                   // }
             },function(err){
-               
+                  getAllSeeList()
             })
 }
 // 大家都在看
-getAllSeeList()
 function getAllSeeList () {
              var that=this; 
            var data={  
@@ -809,6 +986,54 @@ function isdate(date){
             var d=d.getDate() ;
             return y+"-"+m+"-"+d;
            }
+           function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
+}
+function text_num(text){
+    if(!text){
+      return text
+    }
+    var arrEntities={'lt':'<','gt':'>','nbsp':'','amp':'&','quot':'"','ldquo':'"','nb':'"'}; 
+    text= text.replace(/&(lt|gt|nbsp|amp|quot|ldquo|nb);/ig,function(all,t){return arrEntities[t];}); 
+    var k=0;
+    var j=0;
+    
+    for(var i=0;i<text.length;i++){
+         if(text[i] == "<"){
+          k=k+1
+         }
+         if(text[i] == ">"){
+          j=j+1
+         }
+    }
+    if(k > j){
+      text=text+">";
+    }
+
+    text=text.replace(/<\/?.+?>/g, "");
+    var text2=""
+
+     if(text.length <= 150){
+       return text;
+     }else{
+       for(var i=0;i<149;i++){
+        text2=text2+text[i];
+       }
+       text2=text2+"...";
+       return text2;
+     }
+}
     </script>
 
 </body>
