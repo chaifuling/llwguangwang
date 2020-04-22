@@ -114,7 +114,7 @@
     }
     _a.setAttribute(
       "href",
-      (!llw.istest ? "/llh-bs" : "/") +
+        llw.api.options.articleurl +
         adress +
         `&backUrl=${XbackUrl}`
     );
@@ -530,19 +530,19 @@ llw.Login = function () {
     llw.isLogin = true;
   } else llw.isLogin = false;
 };
-llw.istest = window.location.host === "www.laolai.show" ? true : false;
+llw.istest = window.location.host === "www.laolai.com" ? true : false;
 llw.api.options.articleurl =
-  (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
+  (llw.istest ? "http://www.laolai.com" : "http://dev.laolai.com:85") +
   (!llw.istest ? "/llh-bs" : "/");
 llw.api.options.bsurl =
-  (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llw-bs" : "/llw-bs-pc");
+  (llw.istest ? "http://www.laolai.com" : "http://dev.laolai.com:85") +
+  (!llw.istest ? "/llw-bs" : "/llw-bs");
 llw.api.options.wsurl =
   (llw.istest ? "http://identify.laolai.com" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/llw-ws-pc/services/ws?wsdl");
+  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/identify-prefor/services/ws?wsdl");
 llw.api.options.ws2url =
   (llw.istest ? "http://identify.laolai.com" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/llw-ws-pc/services/ws?wsdl");
+  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/identify-prefor/services/ws?wsdl");
 // llw.api.options.bs2url="http://dev.laolai.com:85/llw-bs-test/llh/article/";
 llw.api.options.ws3url =
   (llw.istest
