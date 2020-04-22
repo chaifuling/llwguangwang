@@ -387,7 +387,7 @@
         {{# if(item.original.tag){ }}
           <div class="single-tags">{{tag_text(item.original.tag)}}</div> 
         {{# } }}
-          {{#   if(item.original.headIcon) {                  }}
+          {{#   if(item.user.headIcon) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
               {{# if(item.user.userType==1||item.user.userType==6){}}
@@ -396,7 +396,7 @@
               {{# if(item.user.userType==4){}}
               <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
               {{# } }}
-              <img  src="{{item.original.headIcon}}" />
+              <img  src="{{item.user.headIcon}}" />
             </a>
           </div> 
           {{#    }          }}
@@ -431,7 +431,7 @@
         {{# if(item.original.tags){ }}
         <div class="single-tags">{{tag_text(item.original.tags)}}</div> 
       {{# } }}
-      {{#   if(item.original.headIcon) {                  }}
+      {{#   if(item.user.headIcon) {                  }}
       <div class="single-mode-div-bottom-b" > 
         <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
           {{# if(item.user.userType==1||item.user.userType==6){}}
@@ -440,7 +440,7 @@
           {{# if(item.user.userType==4){}}
           <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
           {{# } }}
-          <img  src="{{item.original.headIcon}}" />
+          <img  src="{{item.user.headIcon}}" />
         </a>
       </div> 
       {{#    }          }}

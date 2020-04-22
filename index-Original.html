@@ -822,6 +822,7 @@ function gz(toUserId,ithis,type){
             if(!rs.data){
               if(rs.readyState == 4){
                 getPlList();
+                return
               }
             }
             if (rs.data.success) {
@@ -871,6 +872,7 @@ function gz(toUserId,ithis,type){
             if(!rs.data){
               if(rs.readyState == 4){
                 getAllSeeList();
+                return
               }
             }
             if (rs.data.success) {
