@@ -8,13 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./static/index-pc/css/main.css">
+  <link rel="icon" href="./static/index-pc/images/favicon.ico" type="image/x-icon" />
   <script src="./static/index-pc/js/lib/layui/layui.all.js"></script>
-  <script src="./js/lib/mock.min.js"></script>
-  <script src="./js/mockdata/index.data.js"></script>
-  <script src="./js/llwhelp.js"></script>
-  <script src="./js/utils.js"></script>
+  <script src="./static/index-pc/js/lib/mock.min.js"></script>
+  <script src="./static/index-pc/js/mockdata/index.data.js"></script>
+  <script src="./static/index-pc/js/llwhelp.js"></script>
+  <script src="./static/index-pc/js/utils.js"></script>
   <title>【老来网】不负年华，再出发</title>
 </head>
 
@@ -88,10 +88,10 @@
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
               {{# if(item.userType==1||item.userType==6){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/static/index-pc/images/矢量智能对象.png">
               {{# } }}
               {{# if(item.userType==4){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
               {{# } }}
               <img  src="{{item.headIcon}}" />
             </a>
@@ -136,10 +136,10 @@
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
                   {{# if(item.userType==1||item.userType==6){}}
-                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
                   {{# } }}
                   {{# if(item.userType==4){}}
-                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
                   {{# } }}
                   <img  src="{{item.headIcon}}" />
                 </a>
@@ -193,10 +193,10 @@
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
               {{# if(item.userType==1||item.userType==6){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
               {{# } }}
               {{# if(item.userType==4){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
               {{# } }}
               <img  src="{{item.headIcon}}" />
             </a>
@@ -236,7 +236,7 @@
       
       {{#  layui.each(item.coverImgList, function(index, items){ }}
         <img style="background: url({{items}});"class="imgs" alt="">
-        <div class="center_list_b_top_mc22"><img src="./images/btn.png"></div>
+        <div class="center_list_b_top_mc22"><img src="./static/index-pc/images/btn.png"></div>
       {{#  }); }}
      </div>
       <div class="single-mode-div" >
@@ -254,10 +254,10 @@
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
               {{# if(item.userType==1||item.userType==6){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
               {{# } }}
               {{# if(item.userType==4){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
               {{# } }}
               <img  src="{{item.headIcon}}" />
             </a>
@@ -374,7 +374,7 @@
   <li class="one_list_three_li">
   <div class="list_three_li_left">
     <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
-      <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+      <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
     </a>
   </div>
     <div class="list_three_li_center">
@@ -392,7 +392,7 @@
   <li  class="list_three_li" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
     <div class="list_three_li_left">
       <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
-        <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+        <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
       </a>
     </div>
       <div class="list_three_li_center">
@@ -408,7 +408,7 @@
     <li class="max_list_three_li">
       <div class="list_three_li_left">
         <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
-          <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+          <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
         </a>
       </div>
         <div class="list_three_li_center">
@@ -488,7 +488,7 @@
   <div class="bodyer">
     <div class="mc_wdl" style="    display:none ">
       <div class="tologin">
-        <span><img src="./images/tishi.png"></span>
+        <span><img src="./static/index-pc/images/tishi.png"></span>
         <span>需要登录后才能操作</span>
       </div>
       <div class="mc_wdl_buttom">
@@ -501,7 +501,7 @@
     <div class="containera">
       <div class="contenta container_left">
         <div class="body_left_div">
-          <img src="images/llw-logo.png" alt="老来网">
+          <img src="./static/index-pc/images/llw-logo.png" alt="老来网">
           <ul id="nav">
 
           </ul>
@@ -529,7 +529,7 @@
                       <div class="title-bottom">
                         <div class="title-bottom_left">
                           <div class="title-bottom_left_img">
-                            <img src="images/img.png" />
+                            <img src="./static/index-pc/images/img.png" />
                             <div class="title-bottom_left_img_span">
                               <button class="title-bottom_left_img_span_button" id="button_img">
                                 <p>上传图片</p>
@@ -548,7 +548,7 @@
                                 </ul>
 
                                 <div class="input_div_imgs_div_buttom_li_one">
-                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="images/tj.png" />
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
                                     <label for="file_two" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
                                       <input id="file_two" type="file" name="filea" style="display:none;"
                                         accept="image/png,image/jpeg" />
@@ -561,7 +561,7 @@
 
                           </div>
                           <div class="title-bottom_left_img">
-                            <img id="title-bottom_left_img_img" src="images/fl.png" />
+                            <img id="title-bottom_left_img_img" src="./static/index-pc/images/fl.png" />
                             <div class="title-bottom_left_img_span"><button id="button_img_type"
                                 class="title-bottom_left_img_span_button">
                                 <p>设置分类</p>
@@ -594,12 +594,12 @@
                       <div class="title-div-center_div">
                         <div class="center_div_textweight">
                           <button id="bold">
-                            <img src="images/B.png" />
+                            <img src="./static/index-pc/images/B.png" />
                           </button>
                         </div>
                         <div class="center_div_textweight">
                           <button id="Underline">
-                            <img src="images/gx.png" />
+                            <img src="./static/index-pc/images/gx.png" />
                           </button>
                         </div>
                         <!-- <div class="center_div_textweight">
@@ -617,32 +617,32 @@
                                                     </div> -->
                         <div class="center_div_textweight">
                           <button id="text_blockquote">
-                            <img src="images/yy.png" />
+                            <img src="./static/index-pc/images/yy.png" />
                           </button>
                         </div>
                         <div class="center_div_textweight">
                           <button id="InsertOrderedList">
-                            <img src="images/yx-list.png" />
+                            <img src="./static/index-pc/images/yx-list.png" />
                           </button>
                         </div>
                         <div class="center_div_textweight">
                           <button id="InsertUnorderedList">
-                            <img src="images/TY.png" />
+                            <img src="./static/index-pc/images/TY.png" />
                           </button>
                         </div>
                         <div class="center_div_textweight">
                           <button id="text_hr">
-                            <img src="images/XZ8.png" />
+                            <img src="./static/index-pc/images/XZ8.png" />
                           </button>
                         </div>
                         <div class="center_div_textweight_center">
                           <div class="center_div_textweight_center_div">
-                            <img src="images/XZ9.png" /></div>
+                            <img src="./static/index-pc/images/XZ9.png" /></div>
                         </div>
 
                         <div class="center_div_textweight">
                           <button id="inserthtml">
-                            <img src="images/TK.png" />
+                            <img src="./static/index-pc/images/TK.png" />
                             <label for="file" class="label_file"> &nbsp;&nbsp;&nbsp;&nbsp;
                               <input id="file" type="file" name="file" style="display:none;" />
                             </label>
@@ -650,7 +650,7 @@
                         </div>
                         <div class="center_div_textweight">
                           <button style="position: relative;" id="inserthtml">
-                            <img src="images/videoup.jpg" />
+                            <img src="./static/index-pc/images/videoup.jpg" />
                             <label style="position: absolute;left: 15px;" for="fileVideo"> &nbsp;&nbsp;&nbsp;&nbsp;
                               <input id="fileVideo" type="file" name="fileVideo" style="display:none;" />
                             </label>
@@ -658,12 +658,12 @@
                         </div>
                         <div class="center_div_textweight_right">
                           <button id="Redo">
-                            <img src="images/FCX.png" />
+                            <img src="./static/index-pc/images/FCX.png" />
 
                           </button></div>
                         <div class="center_div_textweight_right">
                           <button id="Undo">
-                            <img src="images/FCX-COPE2.png" />
+                            <img src="./static/index-pc/images/FCX-COPE2.png" />
 
 
                           </button></div>
@@ -675,7 +675,7 @@
 
                       <div class="title-div-bottom">
                         <div class="title-div-bottom_left">
-                          <div class="title-div-bottom_left_img"><img src="images/fl.png"></div>
+                          <div class="title-div-bottom_left_img"><img src="./static/index-pc/images/fl.png"></div>
                           <div class="title-div-bottom_left_p"><button class="title-bottom_left_img_span_button"
                               id="text_type">
                               <p>设置封面</p>
@@ -697,7 +697,7 @@
 
                                 </ul>
                                 <div class="input_div_imgs_div_buttom_li_one">
-                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="images/tj.png" />
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
                                     <label for="Article_input" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
                                       <input id="Article_input" type="file" name="csrfmiddlewaretoken"
                                         style="display:none;" accept="image/png,image/jpeg" />
@@ -727,14 +727,14 @@
                     <div class="videoBox_div_bottom">
                       <div class="videoBox_div_bottom_left_a">
                         <a id="Video">
-                          <div class="videoBox_div_bottom_left_a_img"><img src="images/img.png" /></div>
+                          <div class="videoBox_div_bottom_left_a_img"><img src="./static/index-pc/images/img.png" /></div>
                           <div class="videoBox_div_bottom_left_div">
                             <p>添加视频</p>
                           </div>
                           <div class="videoBox_div_bottom_left_a_top click_xs">
                             <span class="myloading" style="display: none;">
                               <div class="content">
-                                <img src="./images/loading-1.gif" />
+                                <img src="./static/index-pc/images/loading-1.gif" />
                               </div>
                             </span>
 
@@ -748,7 +748,7 @@
                             <div class="videoBox_div_bottom_left_a_top_top_bottom">
                               <div class="videoBox_div_bottom_left_a_top_top_bottom_div">
                                 <div class="videoBox_div_bottom_left_a_top_top_bottom_div_left">
-                                  <img src="images/GX26.png" />
+                                  <img src="./static/index-pc/images/GX26.png" />
                                   <label for="file_three" class="label_file_three"> &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input id="file_three" type="file" name="filea" style="display:none;"
                                       accept="video/*" />
@@ -767,7 +767,7 @@
                       <span class="yes" style="float: left;pointer-events: none;">√</span>
                       <div class="videoBox_div_bottom_left_b">
                         <a>
-                          <div class="videoBox_div_bottom_left_b_img"><img src="images/fl.png" /> </div>
+                          <div class="videoBox_div_bottom_left_b_img"><img src="./static/index-pc/images/fl.png" /> </div>
                           <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
                               id="SP_video_type">
                               <p>设置封面</p>
@@ -784,7 +784,7 @@
 
                                 </ul>
                                 <div class="input_div_imgs_div_buttom_li_one">
-                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="images/tj.png" />
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
                                     <label for="file_c" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
                                       <input id="file_c" type="file" name="filea" style="display:none;"
                                         accept="image/png,image/jpeg" />
@@ -800,7 +800,7 @@
                       <span class="yes" style="float: left;pointer-events: none;">√</span>
                       <div class="videoBox_div_bottom_left_c">
                         <a>
-                          <div class="videoBox_div_bottom_left_c_img"><img src="images/Z4.png" /></div>
+                          <div class="videoBox_div_bottom_left_c_img"><img src="./static/index-pc/images/Z4.png" /></div>
                           <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
                               id="SP_video_jj">
                               <p>添加简介</p>
@@ -824,7 +824,7 @@
                       <span class="yes" style="float: left;pointer-events: none;">√</span>
                       <div class="videoBox_div_bottom_left_d">
                         <a>
-                          <div class="videoBox_div_bottom_left_d_img"><img src="images/BQ.png" /></div>
+                          <div class="videoBox_div_bottom_left_d_img"><img src="./static/index-pc/images/BQ.png" /></div>
                           <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
                               id="SP_video_bq">
                               <p>添加标签</p>
@@ -868,14 +868,14 @@
                     <div class="videoBox_div_bottom">
                       <div class="videoBox_div_bottom_left_a">
                         <a id="DVideo">
-                          <div class="videoBox_div_bottom_left_a_img"><img src="images/img.png" /></div>
+                          <div class="videoBox_div_bottom_left_a_img"><img src="./static/index-pc/images/img.png" /></div>
                           <div class="videoBox_div_bottom_left_div">
                             <p>添加视频</p>
                           </div>
                           <div class="videoBox_div_bottom_left_a_top click_xs">
                             <span class="myloading" style="display: none;">
                               <div class="content">
-                                <img src="./images/loading-1.gif" />
+                                <img src="./static/index-pc/images/loading-1.gif" />
                               </div>
                             </span>
 
@@ -889,7 +889,7 @@
                             <div class="videoBox_div_bottom_left_a_top_top_bottom">
                               <div class="videoBox_div_bottom_left_a_top_top_bottom_div">
                                 <div class="videoBox_div_bottom_left_a_top_top_bottom_div_left">
-                                  <img src="images/GX26.png" />
+                                  <img src="./static/index-pc/images/GX26.png" />
                                   <label for="Dfile_three" class="label_file_three"> &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input id="Dfile_three" type="file" name="filea" style="display:none;"
                                       accept="video/*" />
@@ -908,7 +908,7 @@
                       <span class="yes" style="float: left;pointer-events: none;">√</span>
                       <div class="videoBox_div_bottom_left_b">
                         <a>
-                          <div class="videoBox_div_bottom_left_b_img"><img src="images/fl.png" /> </div>
+                          <div class="videoBox_div_bottom_left_b_img"><img src="./static/index-pc/images/fl.png" /> </div>
                           <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
                               id="DSP_video_type">
                               <p>设置封面</p>
@@ -925,7 +925,7 @@
 
                                 </ul>
                                 <div class="input_div_imgs_div_buttom_li_one">
-                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="images/tj.png" />
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
                                     <label for="file_D" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
                                       <input id="file_D" type="file" name="filea" style="display:none;"
                                         accept="image/png,image/jpeg" />
@@ -941,7 +941,7 @@
                       <span class="yes" style="float: left;pointer-events: none;">√</span>
                       <div class="videoBox_div_bottom_left_c">
                         <a>
-                          <div class="videoBox_div_bottom_left_c_img"><img src="images/fl.png" /></div>
+                          <div class="videoBox_div_bottom_left_c_img"><img src="./static/index-pc/images/fl.png" /></div>
                           <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
                               id="SP_Dvideo_jj">
                               <p>设置分类</p>
@@ -976,8 +976,8 @@
         </div>
 
         <div class="loading-list">
-          <!-- <img src='./images/shuaxin.png' /> -->
-          <img src="./images/shuaxin.png" />
+          <!-- <img src='./static/index-pc/images/shuaxin.png' /> -->
+          <img src="./static/index-pc/images/shuaxin.png" />
           <div>正在加载中</div>
         </div>
       </div>
@@ -1019,7 +1019,7 @@
         <!-- <div class="right-iframe-img"  >
                 <div class="right-iframe-img_left"><img id="lbt" src=""/></div>
                 <div class="right-iframe-img_right">
-                  <div class="right-iframe-img_right_top"><img  src="images/JT1.png"/></div>
+                  <div class="right-iframe-img_right_top"><img  src="./static/index-pc/images/JT1.png"/></div>
                   <div class="right-iframe-img_right_bottom">
                     <ui id="LBT_list"></ui>
                   </div>
@@ -1292,14 +1292,14 @@ function ifDvideo(){
         var arr_sas = rs.data.respData.channelList;
         arr_sas = arr_sas.filter(item => item.id !== 13)
         var list_arr = [
-          { id: "1", url: "./index-follow.html" },
+          { id: "1", url: "./static/index-pc/index-follow.html" },
           { id: "5", url: "#" },
-          { id: "6", url: "./index-Hotspot.html" },
-          { id: "11", url: "./index-video-list.html" },
-          { id: "10", url: "./index-Original.html" },
-          { id: "9", url: "./index-Healthy.html" },
-          { id: "12", url: "./index-Study.html" },
-          { id: "7", url: "./index-activity-list.html" },
+          { id: "6", url: "./static/index-pc/index-Hotspot.html" },
+          { id: "11", url: "./static/index-pc/images/index-video-list.html" },
+          { id: "10", url: "./static/index-pc/images/index-Original.html" },
+          { id: "9", url: "./static/index-pc/images/index-Healthy.html" },
+          { id: "12", url: "./static/index-pc/images/index-Study.html" },
+          { id: "7", url: "./static/index-pc/images/index-activity-list.html" },
           { id: "13", url: "#" }
         ]
         for (let index = 0; index < arr_sas.length; index++) {
