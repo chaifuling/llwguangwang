@@ -153,7 +153,7 @@
           {{#     if(item.user.nickName == undefined){                  }}
           <a href="#"  >该作者已注销</a>
           {{#     }else {            }}
-          {{#     if(item.nickName) {  }}
+          {{#     if(item.user.nickName) {  }}
           <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.user.nickName}}</a>
           {{#     }else{           }}
           {{#     }          }}
@@ -884,6 +884,7 @@ var getPlList_jiazai=true;
                 if(!rs.data){
                       if(rs.readyState == 4){
                         getPlList();
+                        return
                       }
                     }
                   if(rs.data.success) {
@@ -934,6 +935,7 @@ function getAllSeeList () {
     if(!rs.data){
                 if(rs.readyState == 4){
                   getAllSeeList();
+                  return
                 }
               }
             if(rs.data.respData){

@@ -875,6 +875,7 @@ var arr_ac=[];
             if(!rs.data){
                         if(rs.readyState == 4){
                           getPlList();
+                          return
                         }
                       }
                   if(rs.data.success) {
