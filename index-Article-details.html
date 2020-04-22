@@ -1667,6 +1667,10 @@
           dataType: "json",
           type: "POST",
           success: function (resp) {
+            if(!resp.data){
+              layer.msg(resp.message);
+              return
+            }
             layer.msg("评论成功");
             typeof successCallback != "undefined" && successCallback(resp);
             $("#pl_text").val("");
@@ -1693,6 +1697,10 @@
           dataType: "json",
           type: "POST",
           success: function (resp) {
+            if(!resp.data){
+              layer.msg(resp.message);
+              return
+            }
             var datas = {
               headIcon: userInof.headIcon,
               comment: text,
