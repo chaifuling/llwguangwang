@@ -2329,7 +2329,7 @@ function ifDvideo(){
 
 
     $("#article").click(function () {
-      window.open('./index-personal-Article.html?llh=' + llw.getCookie('llh'));
+      window.open((llw.istest?"":"/llh-bs/")+'static/index-pc/index-personal-Article.html?llh=' + llw.getCookie('llh'));
 
     })
 
