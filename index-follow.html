@@ -419,7 +419,7 @@
         <div class="containera">
             <div  class="contenta container_left">
               <div class="body_left_div">
-                <a href="./index.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+                <a class="body_logo_s" ><img src="images/老来网logo组合.png" alt="老来网" /></a>
                 <ul id="nav">
                 
                 </ul>
@@ -835,7 +835,9 @@ $(".header_div_left_XZ").mouseout(function(){
 })
 
 
-
+$(".body_logo_s").click(function () {
+      window.location.href = ( llw.istest?"":"/llh-bs")+"/index-pc.html"
+    })
 
 function user_count(){
   data={

@@ -374,7 +374,7 @@
     <div  class="bodyer">
         <div class="container">
             <div  class="content container_left">
-                <img src="images/老来网logo组合.png" alt="老来网" >
+              <a class="body_logo_s" ><img src="images/老来网logo组合.png" alt="老来网" /></a>
                 <ul id="nav">
                 
                 </ul>
@@ -637,7 +637,9 @@ $(".outer_div_div_DL_img img").click(function(){
             })      
       
 }
-
+$(".body_logo_s").click(function () {
+      window.location.href = ( llw.istest?"":"/llh-bs")+"/index-pc.html"
+    })
 $.ajax({
       url:"ul_list.php",
       dataType:'json',

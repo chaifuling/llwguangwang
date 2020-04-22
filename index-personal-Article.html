@@ -648,7 +648,7 @@
   <div class="bodyer">
     <div class="containera">
       <div class="contenta container_left">
-        <a href="./index.html" target="_blank"><img src="images/老来网logo组合.png" alt="老来网"></a>
+        <a  class="body_logo_s"  target="_blank"><img src="images/老来网logo组合.png" alt="老来网"></a>
         <ul id="nav">
 
         </ul>
@@ -1032,6 +1032,9 @@
     }
 
 
+    $(".body_logo_s").click(function () {
+      window.location.href = ( llw.istest?"":"/llh-bs")+"/index-pc.html"
+    })
     // 取消关注
     function qxgz(toUserId, ithis) {
       if (llw.isLogin) {

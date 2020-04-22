@@ -156,7 +156,7 @@
   <div class="bodyer">
     <div class="containera">
       <div class="contenta container_left">
-        <img src="images/老来网logo组合.png" alt="老来网">
+        <a class="body_logo_s" ><img src="images/老来网logo组合.png" alt="老来网" /></a>
         <ul id="nav">
 
         </ul>
@@ -496,7 +496,9 @@
       $(".right_div_bottom_button_gz").hide();
         $(".right_div_bottom_button").hide();
     }
-
+    $(".body_logo_s").click(function () {
+      window.location.href = ( llw.istest?"":"/llh-bs")+"/index-pc.html"
+    })
     // 取消关注
     function qxgz(toUserId, ithis) {
       if (llw.isLogin) {

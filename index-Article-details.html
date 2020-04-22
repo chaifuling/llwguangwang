@@ -490,7 +490,7 @@
       <div class="containera">
         <div class="contenta container_left">
           <div class="body_left_div">
-            <a href="./index.html"
+            <a class="body_logo_s"
               ><img src="images/老来网logo组合.png" alt="老来网"
             /></a>
             <ul id="nav"></ul>
@@ -1865,8 +1865,10 @@
 
 
 
-
-
+      $(".body_logo_s").click(function () {
+      window.location.href = ( llw.istest?"":"/llh-bs")+"/index-pc.html"
+    })
+      
       //
       $(".right_div_bottom_right").click(function () {
               if(!llw.getCookie("llh")){
