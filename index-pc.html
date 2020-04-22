@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="老来网，一个基于社区提供公共服务、头条资讯、在线直播、线上课堂、社交活动等综合性服务的平台">
+  <meta name="keywords" content="老来网,老来网头条,老来网APP,社保认证,养老金,健康资讯,退休,养生,娱乐,视频,直播,老人交友,社区服务,老人购物,在线课堂,老年大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./static/index-pc/css/main.css">
+  <link rel="icon" href="./static/index-pc/images/favicon.ico" type="image/x-icon" />
+  <script src="./static/index-pc/js/lib/layui/layui.all.js"></script>
+  <script src="./static/index-pc/js/lib/mock.min.js"></script>
+  <script src="./static/index-pc/js/mockdata/index.data.js"></script>
+  <script src="./static/index-pc/js/llwhelp.js"></script>
+  <script src="./static/index-pc/js/utils.js"></script>
+  <title>【老来网】不负年华，再出发</title>
+</head>
+
+<body>
+  <script id="tp_nav" type="text/html">
+            {{#  layui.each(d, function(index, item){ }}
+            <a href="{{item.url}}">
+              <li class="channel-item menus {{item.id==5?'mast':''}}" data-id="{{item.id}}">
+                {{item.channelName}}
+              </li>
+            </a> 
+            {{#  }); }}
+    </script>
+  <script id="tp_Label_list" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}
+        <li class="Label_li" >
+         <p>{{item}}</p>
+          <p class="Label_li_right">×</p>
+           
+        </li>
+      {{#  }); }}
+</script>
+
+
+  <script id="tp_radio_list" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}
+      {{#      console.log(item)}}
+        <li class="radio_list" id="{{item.id}}" name="{{item.imgName}}" value="{{item.imgName}}" onclick="list_img_type({{index}})">
+          <label><input class="layui-icon" type="radio" name="type_a"  value="{{item.imgName}}">{{item.imgName}}</label> 
+               </li>
+      {{#  }); }}
+
+</script>
+
+  <script id="tp_radio_list2" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}
+  {{#      console.log(item)}}
+    <li class="radio_list" id="{{item.id}}" name="{{item.imgName}}" value="{{item.imgName}}" onclick="list_img_type2({{index}})">
+      <label><input class="layui-icon2" type="radio" name="type_a"  value="{{item.imgName}}">{{item.name}}</label> 
+           </li>
+  {{#  }); }}
+
+</script>
+
+
+<script id="tp_list" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}  
+
+  {{# if(item.originalType == 1){ }}   
+  {{#    if(item.coverImgList.length>= 1){  }}
+  <li>
+    <div style="cursor:pointer">
+      <div class="single-mode">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+        <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
+
+     </div>
+      <div class="single-mode-div" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">  
+        {{# if(item.tags){ }}
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
+        {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+              {{# if(item.userType==1||item.userType==6){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/static/index-pc/images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
+          </div> 
+          {{#    }          }}
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      </div>    
+  </li>             
+  {{#    }else{        }}
+  <li>
+    <div style="cursor:pointer">
+    <div class="single-mode">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-div_b" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">
+        {{# if(item.tags){ }}
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
+      {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                  {{# if(item.userType==1||item.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.headIcon}}" />
+                </a>
+          </div> 
+          {{#    }          }}
+       
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      
+      </div>
+      </div>    
+  </li>               
+  {{#    }   }}
+
+  {{# }else if(item.originalType == 2){ }}
+
+  <li>
+    <div style="cursor:pointer">
+
+    <div class="single-mode">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-div_b" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+          {{#  layui.each(item.coverImgList, function(index, items){ }}
+          {{#   if(index <= 3){      }}
+          <img style="background: url({{items}});"class="imgs" alt="">
+          {{#     }   }}
+
+    
+
+          {{#  }); }}
+          {{#  if(item.img_num >0){  }}
+          <div class="img_load">+{{item.img_num}}</div>
+          {{#   }  }}   
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">
+        {{# if(item.tags){ }}
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
+        {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+              {{# if(item.userType==1||item.userType==6){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
+          </div> 
+          {{#    }          }}
+       
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      
+      </div>
+      </div>    
+  </li>                      
+
+
+  {{# }else if(item.originalType == 3){ }}
+  <li>
+    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+    <div style="cursor:pointer">
+      <div class="single-mode">
+      <div class="single-mode-title" ><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox">
+      
+      {{#  layui.each(item.coverImgList, function(index, items){ }}
+        <img style="background: url({{items}});"class="imgs" alt="">
+        <div class="center_list_b_top_mc22"><img src="./static/index-pc/images/btn.png"></div>
+      {{#  }); }}
+     </div>
+      <div class="single-mode-div" >
+      <div class="single-mode-div-top">
+        <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+      </div>
+    </div>
+  </div>           
+
+      <div class="single-mode-div-bottom">  
+        {{# if(item.tags){ }}
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
+        {{# } }}
+          {{#   if(item.headIcon  !=  undefined) {                  }}
+          <div class="single-mode-div-bottom-b" > 
+            <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+              {{# if(item.userType==1||item.userType==6){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/矢量智能对象.png">
+              {{# } }}
+              {{# if(item.userType==4){}}
+              <img class="single-mode-div-bottom-b-v" src="./static/index-pc/images/wan_vip.png">
+              {{# } }}
+              <img  src="{{item.headIcon}}" />
+            </a>
+          </div> 
+          {{#    }          }}
+        <div class="single-mode-div-bottom-name" >
+          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          <a href="#"  >该作者已注销</a>
+          {{#     }else {            }}
+          {{#     if(item.nickName) {  }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          {{#     }else{           }}
+          <a  href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+          {{#     }          }}
+          {{#     }                  }}
+
+        </div>
+        <div class="single-mode-div-bottom-time" >
+          {{#       if(item.createTimeStr != undefined){   }}
+          <a href="#">发布于{{item.createTimeStr}}</a>
+        {{#  } }}
+        </div>
+      </div>   
+    </a>  
+  </li> 
+
+  {{#   }      }}
+
+  {{#  }); }}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+ 
+  <script id="tp_list_tuo" type="text/html">
+        {{#  layui.each(d, function(index, item){ }}  
+      {{# if(index<5){ }}  
+      {{#  if((index+1)==d.length){   }}
+        <li  class="list_tuo_li">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
+          <div  class="list_tuo_li_a_div" >
+            {{# if(item.coversType!=0){ }}
+            <img src="{{item.coverImgList[0]}}"/>
+            {{#  }   }}
+          </div>
+          <div  class="list_tuo_li_a_divtwo" >
+          <p>{{item.title}}<p>
+          </div>
+        </div>            
+            </li> 
+      {{#  }else{  }}
+          <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
+          <div class="list_tuo_li_a_div" >
+            {{# if(item.coversType!=0){ }}
+            <img src="{{item.coverImgList[0]}}"/>
+            {{#  }   }}
+          </div>
+          <div class="list_tuo_li_a_divtwo">
+          <p >{{item.title}}<p>
+           
+          </div>
+        </div>            
+            </li> 
+       {{#   }   }}
+       {{#   }   }}
+   
+      {{#  }); }}
+      {{#  if(d.length === 0){ }}
+        无数据
+      {{#  } }}   
+  </script>
+
+  <script id="tp_sss" type="text/html">
+
+
+    {{#  layui.each(d.list, function(index, item){ }}
+    {{#  if(index != 1){ }}
+    
+    <li>
+      <div style="width:50% ;height:62px ;padding-right:13px;float:left;">
+       <div style="width:100%;height:32px;float:right"><img style="height:36px;width:36px;border-radius:50%; float:right" src="{{item.imga}}" /></div> 
+       <div style="text-align:center;width:36px;height:36px;float:right;padding-top:5px;font-size:12px; color:#777">{{item.name}}</div> 
+      </div>       
+  </li> 
+    {{#  }else{ }}
+ 
+    <li>
+      <div style="width:50% ;height:62px; padding-left:13px;float:left;">
+       <div style="width:100%;height:32px;float:left"><img style="height:36px;width:36px;border-radius:50%; float:left" src="{{item.imga}}" /></div> 
+       <div style="text-align:center;width:36px;height:36px;float:left;padding-top:5px;font-size:12px;color:#777">{{item.name}}</div> 
+      </div>       
+  </li>  
+    {{# } }}  
+      
+    {{#  }); }}
+    {{#  if(d.list.length === 0){ }}
+      无数据
+    {{#  } }}  
+   
+</script>
+  <script id="tp_imgs" type="text/html">
+  {{#   layui.each(d, function(index,item){ }}
+  {{# if(index<5){ }}
+  {{#  if(index==0){   }}
+  <li class="one_list_three_li">
+  <div class="list_three_li_left">
+    <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+      <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
+    </a>
+  </div>
+    <div class="list_three_li_center">
+      <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+      <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+    </div>
+    <div class="list_three_li_center_right">
+      <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+      <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+    </div>
+  </li>
+  
+  {{#  }else{ }}
+  {{#  if(!((index+1)==(d.length))){ }}
+  <li  class="list_three_li" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
+    <div class="list_three_li_left">
+      <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+        <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
+      </a>
+    </div>
+      <div class="list_three_li_center">
+        <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+        <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+      </div>
+      <div class="list_three_li_center_right">
+        <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+        <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+      </div>
+    </li>  
+    {{#  }else{ }}
+    <li class="max_list_three_li">
+      <div class="list_three_li_left">
+        <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+          <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
+        </a>
+      </div>
+        <div class="list_three_li_center">
+          <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+          <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+        </div>
+        <div class="list_three_li_center_right">
+          <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+          <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+        </div>
+      </li>
+    {{# } }}  
+    {{# } }}  
+    {{# } }}  
+    {{#  }); }}
+    {{#  if(d.length === 0){ }}
+      无数据
+    {{#  } }}  
+  </script>
+  <script id="tp_ugcBox_tab_current" type="text/html">
+  {{#  layui.each(d.list)                                }}
+</script>
+
+  <script id="tp_LBT_list" type="text/html">
+  {{#   layui.each(d.list.img_list, function(index,item){ }} 
+  <li lid={{d.list.lid}} class="LBT_list_li">
+    <div class="LBT_list_div">
+      <button class="LBT_list_div_bt" onclick="asasa({{index}})" ></button>
+    </div>
+</li>  
+  {{#  }); }}
+  {{#  if(d.list.length === 0){ }}
+    无数据
+  {{#  } }}  
+ 
+
+</script>
+
+  <script id="meitu_inglist" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}
+      <li class='input_div_imgs_div_buttom_li'>
+        <div class='img_del' style='display: flex;'>x</div>
+        <img src={{item}} /> 
+      </li>
+  {{#  }); }}
+</script>
+  <div class="header">
+    <div class="header_div_left_XZ">下载APP
+      <span class="mc_div_title_red"></span>
+      <div class="mc_div_XZ">
+        <div class="mc_div_title">老来网APP下载</div>
+
+        <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+
+
+    </div>
+    <div class="header_div_left"><a>微信公众号</a>
+      <div class="mc_div">
+        <div class="mc_div_title">微信公众号：老来网APP</div>
+        <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+    </div>
+    <div class="header_div_right"><a href="http://www.laolai.net" target="_blank">品牌介绍</a></div>
+    <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')">老来号认证</a></div>
+    <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
+    <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
+    <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()"
+          class="tcdl">退出登录</button></a></div>
+    <div class="header_div_right" style="display: none;"><a style="display: block;"
+        onclick="utils.toMyLlh('/index.html')">
+        <img class="header_div_img" src="" /></a>
+    </div>
+  </div>
+  <div class="bodyer">
+    <div class="mc_wdl" style="    display:none ">
+      <div class="tologin">
+        <span><img src="./static/index-pc/images/tishi.png"></span>
+        <span>需要登录后才能操作</span>
+      </div>
+      <div class="mc_wdl_buttom">
+        <div class="mc_wdl_qx"><button id="qx">取消</button></div>
+        <div class="mc_wdl_qdl" onclick="llw.toHerf('/common/login.html?type=topWeb')"><button><a>登录</a></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="containera">
+      <div class="contenta container_left">
+        <div class="body_left_div">
+          <img src="./static/index-pc/images/llw-logo.png" alt="老来网">
+          <ul id="nav">
+
+          </ul>
+        </div>
+      </div>
+      <div class="contenta container_center">
+        <div class="bui-left index-content">
+          <div class="searchbox_div">
+            <div class="searchbox">
+              <input id="input_aaa" placeholder="请输入要搜索的内容" type="text" />
+            </div>
+            <div class="searchbox_input">
+              <button id="seachBtn">搜索</button>
+            </div>
+          </div>
+          <div class="ugcBox ">
+            <div class="ugcBox-inner">
+
+              <ul class="bui-box ugc-tab-list">
+                <li class="bui-left ugc-tab-item current ">
+                  <span>发美图</span>
+                  <div>
+                    <div class="title-input"> <textarea style="font-size:16px" id="imgs_title"
+                        placeholder="写点你想和大家一起分享的话" minlength="5" maxlength="50"></textarea>
+                      <div class="title-bottom">
+                        <div class="title-bottom_left">
+                          <div class="title-bottom_left_img">
+                            <img src="./static/index-pc/images/img.png" />
+                            <div class="title-bottom_left_img_span">
+                              <button class="title-bottom_left_img_span_button" id="button_img">
+                                <p>上传图片</p>
+                              </button><span class="yes" style="display: inline-block;pointer-events: none;">√</span>
+                            </div>
+                            <div class="input_div_imgs click_xs">
+                              <div class="input_div_imgs_div_top">
+                                <p>本地上传</p>
+                              </div>
+                              <div class="input_div_imgs_div_center">
+                                <p id="text_p">共&nbsp;0&nbsp;张，还能上传&nbsp;9&nbsp;张</p>
+                              </div>
+                              <div class="input_div_imgs_div_buttom">
+                                <ul id="input_div_imgs_div_buttom_ul">
+
+                                </ul>
+
+                                <div class="input_div_imgs_div_buttom_li_one">
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
+                                    <label for="file_two" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                      <input id="file_two" type="file" name="filea" style="display:none;"
+                                        accept="image/png,image/jpeg" />
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+
+                          </div>
+                          <div class="title-bottom_left_img">
+                            <img id="title-bottom_left_img_img" src="./static/index-pc/images/fl.png" />
+                            <div class="title-bottom_left_img_span"><button id="button_img_type"
+                                class="title-bottom_left_img_span_button">
+                                <p>设置分类</p>
+                              </button><span class="yes" style="display: inline-block;">√</span></div>
+                            <div class="input_div_tuo click_xs">
+                              <ul id="radio_list_a"></ul>
+
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="title-bottom_right">
+                          <div class="tab_text" style="display: inline-block;"></div>
+                          <button class="tab_button" id="imgs_Release">发布</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+                <li class="bui-left ugc-tab-item">
+                  <span>写文章</span>
+                  <div class="title-div">
+                    <div class="title-div-top">
+                      <input type="text" id="Article_title" placeholder="请输入文章标题（5-30个汉字）" minlength="5"
+                        maxlength="30" />
+                    </div>
+                    <div class="title-div-center">
+                      <div class="title-div-center_div">
+                        <div class="center_div_textweight">
+                          <button id="bold">
+                            <img src="./static/index-pc/images/B.png" />
+                          </button>
+                        </div>
+                        <div class="center_div_textweight">
+                          <button id="Underline">
+                            <img src="./static/index-pc/images/gx.png" />
+                          </button>
+                        </div>
+                        <!-- <div class="center_div_textweight">
+                                      <button id="underline">
+                                        <img src="images/H.png" />
+                                        
+                                        <div class="font_sizi_div_button">
+                                          <div class="font_sizi_div_top"></div>
+                                          <div id="text_h" class="font_sizi_div_h">h</div>
+                                          <div id="text_h1" class="font_sizi_div_h">h1</div>
+                                          <div id="text_h2" class="font_sizi_div_h">h2</div>
+                                          <div id="text_h3" class="font_sizi_div_h">h3</div>
+                                        </div>
+                                      </button>
+                                                    </div> -->
+                        <div class="center_div_textweight">
+                          <button id="text_blockquote">
+                            <img src="./static/index-pc/images/yy.png" />
+                          </button>
+                        </div>
+                        <div class="center_div_textweight">
+                          <button id="InsertOrderedList">
+                            <img src="./static/index-pc/images/yx-list.png" />
+                          </button>
+                        </div>
+                        <div class="center_div_textweight">
+                          <button id="InsertUnorderedList">
+                            <img src="./static/index-pc/images/TY.png" />
+                          </button>
+                        </div>
+                        <div class="center_div_textweight">
+                          <button id="text_hr">
+                            <img src="./static/index-pc/images/XZ8.png" />
+                          </button>
+                        </div>
+                        <div class="center_div_textweight_center">
+                          <div class="center_div_textweight_center_div">
+                            <img src="./static/index-pc/images/XZ9.png" /></div>
+                        </div>
+
+                        <div class="center_div_textweight">
+                          <button id="inserthtml">
+                            <img src="./static/index-pc/images/TK.png" />
+                            <label for="file" class="label_file"> &nbsp;&nbsp;&nbsp;&nbsp;
+                              <input id="file" type="file" name="file" style="display:none; "  accept="image/png,image/jpeg"/>
+                            </label>
+                          </button>
+                        </div>
+                        <div class="center_div_textweight">
+                          <button style="position: relative;" id="inserthtml">
+                            <img src="./static/index-pc/images/videoup.jpg" />
+                            <label style="position: absolute;left: 15px;" for="fileVideo"> &nbsp;&nbsp;&nbsp;&nbsp;
+                              <input id="fileVideo" type="file" name="fileVideo" style="display:none;" accept="video/*" />
+                            </label>
+                          </button>
+                        </div>
+                        <div class="center_div_textweight_right">
+                          <button id="Redo">
+                            <img src="./static/index-pc/images/FCX.png" />
+
+                          </button></div>
+                        <div class="center_div_textweight_right">
+                          <button id="Undo">
+                            <img src="./static/index-pc/images/FCX-COPE2.png" />
+
+
+                          </button></div>
+                      </div>
+
+                      <div id="dds" contenteditable="true" class="contenteditable ">
+                        <p></p>
+                      </div>
+
+                      <div class="title-div-bottom">
+                        <div class="title-div-bottom_left">
+                          <div class="title-div-bottom_left_img"><img src="./static/index-pc/images/fl.png"></div>
+                          <div class="title-div-bottom_left_p"><button class="title-bottom_left_img_span_button"
+                              id="text_type">
+                              <p>设置封面</p>
+                            </button>
+                            <div class="input_div_tuo_b click_xs">
+                              <div class="input_div_imgs_div_top">
+                                <p>设置封面</p>
+                              </div>
+                              <div class="setTitle_type">
+                                <div >单图</div>
+                                <div>三图</div>
+                                <div>大图</div>
+                              </div>
+                              <div class="input_div_imgs_div_center">
+                                <p id="Article_p">共&nbsp;0&nbsp;张，还能上传&nbsp;1&nbsp;张</p>
+                              </div>
+                              <div class="input_div_imgs_div_buttom">
+                                <ul id="input_div_Article_div_buttom_ul">
+
+                                </ul>
+                                <div class="input_div_imgs_div_buttom_li_one">
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
+                                    <label for="Article_input" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                      <input id="Article_input" type="file" name="csrfmiddlewaretoken"
+                                        style="display:none;" accept="image/png,image/jpeg" />
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                          <span class="yes" style='    display: inline-block;pointer-events: none;'>√</span>
+                        </div>
+                        <div class="title-div-bottom_right">
+                          <div class="tab_text" style="display: inline-block;"></div>
+                          <button class="tab_button " id="Article_Release">发布</button>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+                <li style="display: none;" class="bui-left ugc-tab-item show-video">
+                  <span>发视频</span>
+                  <div class="videoBox_div">
+                    <div class="videoBox_div_tetle">
+                      <textarea style="color: #000;font-size:16px" id="video_title" placeholder="请输入视频标题（5~30汉字）"
+                        maxlength="30"></textarea>
+                    </div>
+                    <div class="videoBox_div_bottom">
+                      <div class="videoBox_div_bottom_left_a">
+                        <a id="Video">
+                          <div class="videoBox_div_bottom_left_a_img"><img src="./static/index-pc/images/img.png" /></div>
+                          <div class="videoBox_div_bottom_left_div">
+                            <p>添加视频</p>
+                          </div>
+                          <div class="videoBox_div_bottom_left_a_top click_xs">
+                            <span class="myloading" style="display: none;">
+                              <div class="content">
+                                <img src="./static/index-pc/images/loading-1.gif" />
+                              </div>
+                            </span>
+
+                            <div class="videoBox_div_bottom_left_a_top_top"></div>
+                            <div class="videoBox_div_bottom_left_a_top_top_top">
+                              <p>上传视频（横版视频）</p>
+                            </div>
+                            <div class="videoBox_div_bottom_left_a_top_top_center">
+                              <p>发布的视频将展示在APP中的短视频栏目</p>
+                            </div>
+                            <div class="videoBox_div_bottom_left_a_top_top_bottom">
+                              <div class="videoBox_div_bottom_left_a_top_top_bottom_div">
+                                <div class="videoBox_div_bottom_left_a_top_top_bottom_div_left">
+                                  <img src="./static/index-pc/images/GX26.png" />
+                                  <label for="file_three" class="label_file_three"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input id="file_three" type="file" name="filea" style="display:none;"
+                                      accept="video/*" />
+                                  </label>
+                                </div>
+                                <div class="videoBox_div_bottom_left_a_top_top_bottom_right">
+                                  <p>大小不超1G，建议720P及以上分辨率</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </a>
+
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_left_b">
+                        <a>
+                          <div class="videoBox_div_bottom_left_b_img"><img src="./static/index-pc/images/fl.png" /> </div>
+                          <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
+                              id="SP_video_type">
+                              <p>设置封面</p>
+                            </button>
+                            <div class="video_div_b click_xs">
+                              <div class="input_div_imgs_div_top">
+                                <p>设置封面</p>
+                              </div>
+                              <div class="input_div_imgs_div_center">
+                                <p id="video_p">共&nbsp;0&nbsp;张，还能上传&nbsp;1&nbsp;张</p>
+                              </div>
+                              <div class="input_div_imgs_div_buttom">
+                                <ul id="input_div_video_div_buttom_ul">
+
+                                </ul>
+                                <div class="input_div_imgs_div_buttom_li_one">
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
+                                    <label for="file_c" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                      <input id="file_c" type="file" name="filea" style="display:none;"
+                                        accept="image/png,image/jpeg" />
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_left_c">
+                        <a>
+                          <div class="videoBox_div_bottom_left_c_img"><img src="./static/index-pc/images/Z4.png" /></div>
+                          <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
+                              id="SP_video_jj">
+                              <p>添加简介</p>
+                            </button>
+                            <div class="video_div_c click_xs">
+                              <div class="video_div_c_top">
+                                <div class="video_div_c_top_title">
+                                  <p class="video_div_c_top_title_pa">添加简介</p>
+                                  <p class="video_div_c_top_title_pb">非必填</p>
+                                </div>
+                              </div>
+                              <div class="video_div_c_text"><textarea style="font-size:16px" id="video_content"
+                                  maxlength="50" placeholder="请输入视频简介（最多50汉字）"></textarea>
+                              </div>
+
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_left_d">
+                        <a>
+                          <div class="videoBox_div_bottom_left_d_img"><img src="./static/index-pc/images/BQ.png" /></div>
+                          <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
+                              id="SP_video_bq">
+                              <p>添加标签</p>
+                            </button>
+                          </div>
+                          <div class="video_div_d click_xs">
+                            <div class="video_div_c_top">
+                              <div class="video_div_c_top_title">
+                                <p class="video_div_c_top_title_pa">添加标签</p>
+                                <p class="video_div_c_top_title_pb">非必填</p>
+                              </div>
+                            </div>
+                            <div class="video_div_c_text">
+                              <div class="video_div_c_text_top">
+                                <ul id="Label_ul"></ul>
+                              </div>
+                              <div class="video_div_c_text_bottom">
+                                <textarea style="font-size:16px" placeholder="请输入标签" id="Label_text"
+                                  maxlength="20"></textarea>
+                              </div>
+                            </div>
+                            <div class="input_div_imgs_top"></div>
+                          </div>
+                        </a>
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_right">
+                        <div class="tab_text" style="display: inline-block;"></div>
+                        <button class="tab_button" id="video_Release">发布</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="bui-left ugc-tab-item">
+                  <span>发短视频</span>
+                  <div class="videoBox_div">
+                    <div class="videoBox_div_tetle">
+                      <textarea style="color: #000;font-size:16px" id="Dvideo_title" placeholder="请输入短视频标题（5~30汉字）"
+                        minlength="5" maxlength="30"></textarea>
+                    </div>
+                    <div class="videoBox_div_bottom">
+                      <div class="videoBox_div_bottom_left_a">
+                        <a id="DVideo">
+                          <div class="videoBox_div_bottom_left_a_img"><img src="./static/index-pc/images/img.png" /></div>
+                          <div class="videoBox_div_bottom_left_div">
+                            <p>添加视频</p>
+                          </div>
+                          <div class="videoBox_div_bottom_left_a_top click_xs">
+                            <span class="myloading" style="display: none;">
+                              <div class="content">
+                                <img src="./static/index-pc/images/loading-1.gif" />
+                              </div>
+                            </span>
+
+                            <div class="videoBox_div_bottom_left_a_top_top"></div>
+                            <div class="videoBox_div_bottom_left_a_top_top_top">
+                              <p>上传视频（竖版视频）</p>
+                            </div>
+                            <div class="videoBox_div_bottom_left_a_top_top_center">
+                              <p>发布的视频将展示在PC端视频栏目和个人中心</p>
+                            </div>
+                            <div class="videoBox_div_bottom_left_a_top_top_bottom">
+                              <div class="videoBox_div_bottom_left_a_top_top_bottom_div">
+                                <div class="videoBox_div_bottom_left_a_top_top_bottom_div_left">
+                                  <img src="./static/index-pc/images/GX26.png" />
+                                  <label for="Dfile_three" class="label_file_three"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input id="Dfile_three" type="file" name="filea" style="display:none;"
+                                      accept="video/*" />
+                                  </label>
+                                </div>
+                                <div class="videoBox_div_bottom_left_a_top_top_bottom_right">
+                                  <p>视频时长不超过5分钟，大小不超2G，建议720P及以上分辨率</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </a>
+
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_left_b">
+                        <a>
+                          <div class="videoBox_div_bottom_left_b_img"><img src="./static/index-pc/images/fl.png" /> </div>
+                          <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
+                              id="DSP_video_type">
+                              <p>设置封面</p>
+                            </button>
+                            <div class="video_div_b click_xs">
+                              <div class="input_div_imgs_div_top">
+                                <p>设置封面</p>
+                              </div>
+                              <div class="input_div_imgs_div_center">
+                                <p id="Dvideo_p">共&nbsp;0&nbsp;张，还能上传&nbsp;1&nbsp;张</p>
+                              </div>
+                              <div class="input_div_imgs_div_buttom">
+                                <ul id="input_div_Dvideo_div_buttom_ul">
+
+                                </ul>
+                                <div class="input_div_imgs_div_buttom_li_one">
+                                  <div class="input_div_imgs_div_buttom_li_one_div"><img src="./static/index-pc/images/tj.png" />
+                                    <label for="file_D" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;
+                                      <input id="file_D" type="file" name="filea" style="display:none;"
+                                        accept="image/png,image/jpeg" />
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+                      <div class="videoBox_div_bottom_left_c">
+                        <a>
+                          <div class="videoBox_div_bottom_left_c_img"><img src="./static/index-pc/images/fl.png" /></div>
+                          <div class="videoBox_div_bottom_left_div"><button class="title-bottom_left_img_span_button"
+                              id="SP_Dvideo_jj">
+                              <p>设置分类</p>
+                            </button>
+                            <div class="video_div_c click_xs">
+                              <ul id="radio_list_b"></ul>
+
+                              <div class="input_div_imgs_top"></div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <span class="yes" style="float: left;pointer-events: none;">√</span>
+
+                      <div class="videoBox_div_bottom_right">
+                        <div class="tab_text" style="display: inline-block;"></div>
+                        <button class="tab_button" id="Dvideo_Release">发布</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+            </div>
+            </li>
+            </ul>
+            <div>
+            </div>
+          </div>
+
+          <ul id="list">
+
+          </ul>
+        </div>
+
+        <div class="loading-list">
+          <!-- <img src='./static/index-pc/images/shuaxin.png' /> -->
+          <img src="./static/index-pc/images/shuaxin.png" />
+          <div>正在加载中</div>
+        </div>
+      </div>
+      <div class="contenta container_right">
+
+        <div class="outer">
+          <div class="outer_div">
+            <div class="outer_div_div">
+              <div class="outer_div_div_p">
+                <p>登录后可以保存您的浏览喜好、评论、收藏，并与APP同步，更可发布文章、美图</p>
+              </div>
+              <div class="outer_div_div_button">
+                <button><a class="index_a" onclick="llw.toHerf('/common/login.html?type=topWeb')"
+                    target="_blank">登录</a></button>
+              </div>
+              <div class="outer_div_div_button_bottom">
+                <button><a class="index_a" onclick="utils.toMyLlh('/common/register.html?type=topWeb')">注册</a></button>
+              </div>
+            </div>
+
+            <div class="outer_div_div_DL" style="    display:none ">
+              <div class="outer_div_div_DL_img"><img style="background: #ccc;" /></div>
+              <div class="outer_div_div_DL_name">
+                <p id="user_name"></p>
+              </div>
+              <div class="outer_div_div_DL_button"><button id="article">进入个人中心</button></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pane-module">
+          <div class="pane-module_title">大家都在看</div>
+          <ul id="list_tuo">
+
+          </ul>
+        </div>
+
+        <!-- <div class="right-iframe-img"  >
+                <div class="right-iframe-img_left"><img id="lbt" src=""/></div>
+                <div class="right-iframe-img_right">
+                  <div class="right-iframe-img_right_top"><img  src="./static/index-pc/images/JT1.png"/></div>
+                  <div class="right-iframe-img_right_bottom">
+                    <ui id="LBT_list"></ui>
+                  </div>
+                </div> -->
+        <div class="list_three">
+          <div class="pane-module_title">作者推荐</div>
+          <ul id="imgs">
+
+          </ul>
+        </div>
+        <div class="list_rights">
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="clearx">
+
+      </div>
+    </div>
+  </div>
+  <script>
+    var llh = llw.getCookie('llh');
+    var $ = layui.$;
+    var pageNo = 1;
+    var channel = 5;
+    var uploadImgTitle = 1;
+    var imgs_title_text="";
+    //验证上传美图
+    function ifimg(){
+      imgs_title_text =$('#imgs_title').val().length;
+     var img_num=$(".img_del").length;
+     if(imgs_type!="" & imgs_title_text >=5 & img_num>0 ){
+       $(".tab_text").eq(0).hide()
+     }else{
+      $(".tab_text").eq(0).show()
+
+     }
+    }
+    $('#imgs_title').keyup( function(){
+      ifimg();
+});
+// 上传文章验证
+$('#Article_title').keyup( function(){
+  ifArticle();
+});
+  function ifArticle(){
+  var Article_title_num=$("#Article_title").val().length;
+  
+  if((Article_img.length>=1) & (Article_title_num>=5) ){
+       $(".tab_text").eq(1).hide()
+     }else{
+      $(".tab_text").eq(1).show()
+
+     } 
+  }
+
+// 发布短视频验证 
+$('#Dvideo_title').keyup( function(){
+  ifDvideo();
+});
+function ifDvideo(){
+  var Dvideo_title_num=$("#Dvideo_title").val().length;
+  if(Dvideo_name !="" & Dvideo_title_num>=5 &  $(".input_div_video_div_buttom_ul img")[0]!="" & imgs_type2!="" ){
+    $(".tab_text").eq(3).hide()
+     }else{
+      $(".tab_text").eq(3).show()
+  }
+}
+
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1)
+      var vars = query.split('&')
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=')
+        if (pair[0] == variable) {
+          return pair[1]
+        }
+      }
+      return false
+    }
+    $('#input_aaa').focus(function () {
+      $('#input_aaa').addClass('input_aaa')
+    })
+    $('#input_aaa').blur(function () {
+      $('#input_aaa').removeClass('input_aaa')
+    })
+    $('#video_content').keyup(function () {
+      if ($('#video_content').val() != "") {
+        $(".yes").eq(5).show()
+      } else {
+        $(".yes").eq(5).hide()
+      }
+    })
+
+    console.log(llw.api.options);
+
+    $('#file').change(function (rs) {
+      debugger
+      var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
+      if (window.FileReader) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          $('#file').val("")
+          document.execCommand('inserthtml', false, `<img src=${e.target.result} style='width:100px;height:100px'>`);
+        }
+      }
+    })
+    $('#fileVideo').change(function (rs) {
+      var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }   
+
+      if (window.FileReader) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          var formData = new FormData();
+          formData.append('file', $("#fileVideo")[0].files[0]);  /*获取上传的图片对象*/
+          debugger
+          var si = $("#fileVideo")[0].files[0].size;
+          var ze = si / (1024 * 1024 * 1024);
+          if (ze >= 1) {
+            layer.msg("此视频超过1G");
+            return
+          }
+          $.ajax({
+            url: llw.api.options.articleurl + "/file/appUploadFile.jspx",
+            data: formData,
+            dataType: 'json',
+            type: 'post',
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (resp) {
+              document.execCommand('inserthtml', false, `&nbsp;<video controls="controls"  name="media"  src=${resp.respData.src}></video>&nbsp;`);
+              layer.msg("上传成功");
+              $("#fileVideo").val("")
+            },
+            error: function (err) {
+              layer.msg("上传失败");
+              $("#fileVideo").val("")
+            }
+          });
+
+        }
+      }
+    })
+    var Article_img = [];
+    $("#Article_input").change(function (re) {
+      var b = Article_img.length+1
+      if (b <= uploadImgTitle) {
+        var file = this.files[0];
+         var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+        if (window.FileReader) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function (e) {
+            var formData = new FormData();
+            formData.append('file', $("#Article_input")[0].files[0]);  /*获取上传的图片对象*/
+            Article_img_sc(formData);
+          }
+        }
+        Article_img_cg(true)
+      } else {
+        layer.msg("最多上传"+uploadImgTitle+"张封面");
+      }
+
+    })
+    function  Article_img_cg(add){
+      var b =(add&&Article_img.length+1)||Article_img.length;
+      var c = uploadImgTitle - b;
+        var aa = " ";
+        var d = "共" + aa + b + aa + "张，还能上传" + aa + c + aa + "张"
+        if (b > 0) {
+          $(".yes").eq(2).show();
+        } else {
+          $(".yes").eq(2).hide();
+        }
+        debugger
+        $("#Article_p").text(d);
+    }
+    $("#file_c").change(function (re) {
+      var b = $(".input_div_video_div_buttom_ul").length + 1;
+      if (b <= 1) {
+        var file = this.files[0];
+        var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != 'jpg' && pathf != 'png' && pathf != 'jpeg' && pathf != 'gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
+        if (window.FileReader) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function (e) {
+            var formData = new FormData();
+            formData.append('file', $("#file_c")[0].files[0]);  /*获取上传的图片对象*/
+            video_img_sc(formData);
+          }
+        }
+        var c = 1 - b;
+        var aa = " ";
+        var d = "共" + aa + b + aa + "张，还能上传" + aa + c + aa + "张"
+        if (b > 0) {
+          $(".yes").eq(4).show();
+        } else {
+          $(".yes").eq(4).hide();
+        }
+        $("#video_p").text(d);
+      } else {
+        layer.msg("最多上传"+1+"张封面");
+      }
+
+    })
+
+    imgs_arr = [];
+    function img_cg() {
+
+      layui.laytpl($("#meitu_inglist").html()).render(ssss_arr, function (html) {
+        $("#input_div_imgs_div_buttom_ul").html(html);
+        var b = $(".input_div_imgs_div_buttom_li").length;
+        var c = 9 - b;
+        var aa = " ";
+        var d = "共" + aa + b + aa + "张，还能上传" + aa + c + aa + "张"
+        if (b > 0) {
+          $(".yes").eq(0).show();
+        } else {
+          $(".yes").eq(0).hide();
+        }
+        $("#text_p").text(d);
+        $(".img_del").click(function () {
+          var num = $(".img_del").index(this);
+          ssss_arr = arr_delete_index(ssss_arr, num);
+          ifimg();
+          img_cg();
+          $("#file_two").val("");
+        })
+      });
+      ifimg();
+    }
+    $("#file_two").change(function (re) {
+      var b = $(".input_div_imgs_div_buttom_li").length + 1;
+      if (b <= 9) {
+        var file = this.files[0];
+       var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       debugger
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+        if (window.FileReader) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function (e) {
+            var formData = new FormData();
+            formData.append('file', $("#file_two")[0].files[0]);  /*获取上传的图片对象*/
+            img_sc(formData);
+          }
+        }
+        if (b > 0) {
+          $(".yes").eq(0).show();
+        } else {
+          $(".yes").eq(0).hide();
+        }
+      } else {
+        layer.msg("已经9张照片");
+      }
+
+    })
+    var llwpc = {
+      bindEvent: function (event, o) {
+        this[event].bind($(o))();
+      },
+      navEvent: function () {
+        this.mouseover(function () {
+          $(this).addClass("hover")
+        }).mouseout(function () {
+          $(this).removeClass("hover")
+        })
+      }
+    }
+    leftMenu()
+    function leftMenu() {
+      var that = this;
+      var data = {
+        llh: llw.getCookie('llh')
+      };
+
+      llw.api.ws("info.channel.get", data, function (rs) { //请求名,数据,回调方法,  
+        var arr_sas = rs.data.respData.channelList;
+        arr_sas = arr_sas.filter(item => item.id !== 13)
+        var list_arr = [
+          { id: "1", url: "./static/index-pc/index-follow.html" },
+          { id: "5", url: "#" },
+          { id: "6", url: "./static/index-pc/index-Hotspot.html" },
+          { id: "11", url: "./static/index-pc/index-video-list.html" },
+          { id: "10", url: "./static/index-pc/index-Original.html" },
+          { id: "9", url: "./static/index-pc/index-Healthy.html" },
+          { id: "12", url: "./static/index-pc/index-Study.html" },
+          { id: "7", url: "./static/index-pc/index-activity-list.html" },
+          { id: "13", url: "#" }
+        ]
+        for (let index = 0; index < arr_sas.length; index++) {
+          var element = arr_sas[index];
+          arr_sas = arr_sas.filter(item => (item.id !== 13 && item.id !== 7))
+          for (var j = 0; j < list_arr.length; j++) {
+            if (element.id == list_arr[j].id) {
+              element.url = list_arr[j].url;
+            }
+          }
+        }
+
+        layui.laytpl($("#tp_nav").html()).render(arr_sas, function (html) {
+          $("#nav").html(html);
+          llwpc.bindEvent("navEvent", ".channel-item")
+
+          $("#nav").on('click', ".menus", function (e) {
+            $(this).addClass("mast").siblings().removeClass("mast");
+            getPlList()
+          })
+        });
+      }, function (err) {
+        console.log(err)
+      })
+    }
+    $('#seachBtn').click(function () {
+      if ($("#input_aaa").val() === '') {
+        return layer.msg('搜索内容不能为空');
+      } else {
+        window.location.href = (llw.istest?"/":"/llh-bs/")+'static/index-pc/index-search.html?id=' + $("#input_aaa").val()
+      }
+    })
+    //mast    
+    $.ajax({
+      url: "sss.php",
+      dataType: 'json',
+      type: 'post',
+      success: function (resp) {
+        layui.laytpl($("#tp_sss").html()).render(resp, function (html) {
+          $("#sss").html(html);
+          // llw.bindEvent("navEvent",".channel-item")
+        });
+      },
+      error: function (err) {
+
+      }
+    });
+    var bodyCH = $(window);
+    bodyCH.scroll(function (e) {
+      if ($(window).scrollTop() > 40) {
+        $(".body_left_div").addClass("body_left_div_div");
+      }
+      if ($(window).scrollTop() <= 40) {
+        $(".body_left_div").removeClass("body_left_div_div");
+      }
+    });
+    function current_li() {
+      $.ajax({
+        url: "ugcBox_tab_current.php",
+        dataType: 'json',
+        type: 'post',
+        success: function (resp) {     //回调       
+          layui.laytpl($("#tp_ugcBox_tab_current").html()).render(resp, function (html) {
+
+            $("#ugcBox_tab_current").html(html);//替换原来上面的元素
+          });
+        },
+        error: function (err) {
+
+        }
+      });
+    }
+    shouci()
+    function shouci() {
+      $(".ugc-tab-item").eq(0).find("div").show();
+      $(".ugcBox-inner").css("height", "187px");
+      $(".input_div_tuo").hide();
+      $(".input_div_imgs").hide();
+      $(".yes").hide()
+    }
+
+
+    $(".ugc-tab-item").find("span").on("click", function () {
+      $(this).parent().siblings().find("div").hide();
+      $(this).siblings().show();
+      $(this).siblings().find("div").show();
+      $(".font_sizi_div_button").hide();
+      $(".input_div_imgs").hide();
+      $(".input_div_tuo").hide();
+      //  $(".videoBox_div_bottom_left_a_top").hide();
+      $(".input_div_tuo_b").hide();
+      $(".video_div_b").hide();
+      $(".video_div_c").hide();
+      $(".video_div_d").hide();
+
+
+      $(".bui-left .ugc-tab-item").removeClass("current");
+      $(this).parent().addClass("current");
+      if ($(this).parent().index() != 1) {
+        $(".ugcBox-inner").css("height", "187px");
+      } else {
+        $(".ugcBox-inner").css("height", "399px");
+        $("#dds").focus();
+      }
+
+      //parent()返回直接的父级元素
+    })
+    $('#bold,#Underline,#InsertUnorderedList,#InsertOrderedList,#Undo,#Redo').click(function (e) {
+      document.execCommand(this.id);
+      if (this.id == "Underline") {
+        $("#dds").find("u").focus();  //获取焦点
+      } else if (this.id == "bold") {
+        $("#dds").find("b").focus();  //获取焦点
+      } else if (this.id == "InsertUnorderedList") {
+        $("#dds").find("p").focus();  //获取焦点
+      } else if (this.id == "InsertOrderedList") {
+        $("#dds").find("p").focus();  //获取焦点   
+      }
+    })
+
+    $(".click_xs").click(function (e) {
+      $(".click_xs").hide();
+      $(this).addClass("click_xs").show();
+      e.stopPropagation()
+    })
+
+    //美图——上传图片显示，隐藏
+    $("#button_img").click(function (e) {
+      $(".click_xs").hide();
+      $(".input_div_imgs").show();//显示
+      e.stopPropagation()
+    })
+    //文章 设置封面显示
+    $("#text_type").click(function (e) {
+      $(".click_xs").hide();
+      $(".input_div_tuo_b").show();//显示
+      $(".setTitle_type div").eq(0).css("border","1px solid #208eda");
+      $(".setTitle_type div").eq(1).css("border","1px solid #ccc")
+      $(".setTitle_type div").eq(2).css("border","1px solid #ccc")
+      $("#Article_p").text( "共 0 张，还能上传 1 张");
+      e.stopPropagation()
+    })
+    $("body").click(function (e) {
+      $(".input_div_imgs").hide();//显示
+      $(".input_div_tuo_b").hide();//显示
+      $(".videoBox_div_bottom_left_a_top").hide();//显示
+      $(".video_div_b").hide();//显示
+      $(".video_div_c").hide();//显示
+      $(".video_div_d").hide();//显示
+      $(".input_div_tuo").hide();//显示
+
+    })
+    $("#button_img_type").click(function (e) {
+      $(".click_xs").hide();
+      $(".input_div_tuo").show();//显示
+      e.stopPropagation()
+
+    })
+
+    $("#Video").click(function (e) {
+      $(".click_xs").hide();
+      $(".videoBox_div_bottom_left_a_top").show();//显示
+      e.stopPropagation()
+
+    })
+    $("#SP_video_type").click(function (e) {
+      $(".click_xs").hide();
+      $(".video_div_b").show();//显示
+      e.stopPropagation()
+    })
+
+    $("#SP_video_jj").click(function (e) {
+      $(".click_xs").hide();
+      $(".video_div_c").show();//显示
+      e.stopPropagation()
+
+    })
+
+    $("#SP_video_bq").click(function (e) {
+      $(".click_xs").hide();
+      $(".video_div_d").show();//显示
+      e.stopPropagation()
+
+    })
+    $("#text_hr").click(function () {
+      document.execCommand('inserthtml', false, "<hr><p></p>");
+
+    })
+
+    $(".font_sizi_div_h").mouseenter(function () {  //鼠标经过
+
+      $(this).addClass("font_sizi_div_color");
+    })
+    $(".font_sizi_div_h").mouseleave(function () {  //鼠标经过结束
+      $(this).removeClass("font_sizi_div_color");
+    })
+    $("#underline").mouseenter(function () {
+      $(".font_sizi_div_button").show();
+    })
+    $("#underline").mouseleave(function () {
+      $(".font_sizi_div_button").hide();
+    })
+
+    $("#text_blockquote").click(function () {
+      document.execCommand('formatBlock', false, "<blockquote>");
+    })
+    $("#text_h").click(function () {
+      document.execCommand('formatBlock', true, "<p>");
+    })
+    $("#text_h1").click(function () {
+      document.execCommand('formatBlock', false, "<h1>");
+    })
+    $("#text_h2").click(function () {
+      document.execCommand('formatBlock', false, "<h2>");
+    })
+    $("#text_h3").click(function () {
+      document.execCommand('formatBlock', false, "<h3>");
+    })
+    var LBT_arr = [];
+    $.ajax({
+      url: "LBT_list.php",
+      dataType: 'json',
+      type: 'post',
+      success: function (resp) {
+        LBT_arr = resp.list.img_list;
+        layui.laytpl($("#tp_LBT_list").html()).render(resp, function (html) {
+          $("#LBT_list").html(html);
+          setInterval("sasas()", 5000);
+          // llw.bindEvent("navEvent",".channel-item")
+        });
+      },
+      error: function (err) {
+      }
+    });
+    var arr_ac = [];
+    function getPlList() {
+      var that = this;
+      var data = {
+        llh: llw.getCookie('llh'),
+        pageNo: pageNo,
+        channel: 5, // 不同的频道 数值不同
+        pageSize: "20",
+        itemId: ''
+      };
+      llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+        if(!rs.data){
+              if(rs.readyState == 4){
+                getPlList();
+                return
+              }
+            }
+        if (rs.data.success) {
+          current = true
+          var list_arr = rs.data.respData.list;
+          for (var i = 0; i < list_arr.length; i++) {
+            if (list_arr[i].content) {
+              list_arr[i].content = JSON.parse(list_arr[i].content);
+            }
+            list_arr[i].img_num = list_arr[i].coverImgList.length-4;
+            list_arr[i].coverImgList = arr_update(list_arr[i].coverImgList, 4);
+          }
+          arr_ac = list_arr;
+          $('.loading-list').hide()
+          layui.laytpl($("#tp_list").html()).render(list_arr, function (html) {
+            $("#list").append(html);
+            pageNo = pageNo + 1;
+          });
+        } else {
+          layui.laytpl($("#tp_list").html()).render([], function (html) {
+            console.log(html)
+            $("#list").html(html);
+            pageNo = pageNo + 1;
+          });
+        }
+
+        // }
+      }, function (err) {
+
+      })
+    }
+
+    function isdate(date) {
+      var d = new Date(date);
+      var y = d.getFullYear();
+      var m = d.getMonth() + 1;
+      var d = d.getDate();
+      return y + "-" + m + "-" + d;
+    }
+    var current = true
+    bodyCH.scroll(function (e) {
+      if (pageNo != 1 && current && $(window).scrollTop() + $(window).height() >= $(document).height() - 10) {
+        $('.loading-list').show()
+        getPlList();
+        current = false
+      }
+    });
+
+    getAllSeeList()
+    function getAllSeeList() {
+      var that = this;
+      var data = {
+        llh:123,
+        pageSize: "5",
+        itemId: ''
+      };
+      data.channel = 20, // 不同的频道 数值不同
+        llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+          debugger
+          if(!rs.data){
+              if(rs.readyState == 4){
+                getAllSeeList();
+                return
+              }
+            }
+          if (rs.data.success) {
+            var list_arr = rs.data.respData.list;
+            for (var i = 0; i < list_arr.length; i++) {
+              list_arr[i].coverImgList = arr_update(list_arr[i].coverImgList, 3);
+            }
+            arr_ac = list_arr;
+            layui.laytpl($("#tp_list_tuo").html()).render(list_arr, function (html) {
+              $("#list_tuo").html(html);
+              // llw.bindEvent("navEvent",".channel-item")
+            });
+          } else {
+            layui.laytpl($("#tp_list_tuo").html()).render([], function (html) {
+              // llw.bindEvent("navEvent",".channel-item")
+            });
+          }
+
+          // }
+        }, function (err) {
+
+        })
+    }
+
+    // 关注
+    function gz(toUserId, ithis, type) {
+      if (llw.isLogin) {
+        data = {
+          toLlh: toUserId,
+          llh: llw.getCookie("llh"),
+        }
+        // 关注
+        if (type == 1) {
+          llw.api.ws("friends.attention.add", data, function (rs) { //请求名,数据,回调方法,
+            if (rs.data.respCode != 0) return
+            var num = parseInt(ithis);
+            $(".GZ_list_button_one").eq(num).hide();
+            $(".GZ_list_button_two").eq(num).show();
+          }, function (err) {
+            console.log(err)
+          })
+        } else {
+          // 取消关注
+          llw.api.ws("friends.attention.delete", data, function (rs) { //请求名,数据,回调方法,
+            if (rs.data.respCode != 0) return
+            var num = parseInt(ithis);
+            $(".GZ_list_button_one").eq(num).show();
+            $(".GZ_list_button_two").eq(num).hide();
+          }, function (err) {
+            console.log(err)
+          })
+        }
+
+      } else {
+        llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+
+      }
+    }
+
+    function arr_update(arr, index) {
+      var aarr = [];
+      for (i = 0; i < arr.length; i++)
+        if (i < index) {
+          aarr[i] = arr[i];
+        }
+      return aarr;
+    }
+
+    function sasas() {
+      $('#lbt').attr("src", LBT_arr[lbt_num].img);
+      if (lbt_num == LBT_arr.length - 1) {
+        lbt_num = 0;
+      } else {
+        lbt_num = lbt_num + 1;
+      }
+    }
+    var lbt_num = 0;
+    function asasa(index) {
+      $('#lbt').attr("src", LBT_arr[index].img);
+      lbt_num = index + 1;
+    }
+    $(".header_div_left").mouseover(function () {
+      $(".mc_div").show();
+    })
+
+    $(".header_div_left").mouseout(function () {
+      $(".mc_div").hide();
+    })
+
+    $(".header_div_left_XZ").mouseover(function () {
+      $(".mc_div_XZ").show();
+    })
+
+    $(".header_div_left_XZ").mouseout(function () {
+      $(".mc_div_XZ").hide();
+    })
+
+    utils.rightmue()
+    getPlList();
+    user_Land()
+    function user_Land() {
+      llw.Login();
+      llh = llw.getCookie('llh');
+      if (llw.isLogin) {
+        $(".outer_div_div").hide();
+        $(".outer_div_div_DL").show();
+        // $(".header_div_right").eq(2).hide();
+        // $(".header_div_right").eq(3).hide();
+        $(".header_div_right").eq(2).show();
+        $(".header_div_right").eq(3).show();
+        leftMenu()
+        user_count();
+        data = {
+          llh: llh,
+          selectLlh: llh
+        }
+        llw.api.ws("friend.user.count.get", data, function (rs) { //请求名,数据,回调方法,  
+          $("#user_name").html(rs.data.respData.nickName);
+          $(".outer_div_div_DL_img img").attr("src", rs.data.respData.headIcon);
+          $(".header_div_img").attr("src", rs.data.respData.headIcon);
+        }, function (err) {
+          $(".outer_div_div_DL").hide();
+          $(".outer_div_div").show();
+        })
+      } else {
+        $(".outer_div_div_DL").hide();
+        $(".outer_div_div").show();
+
+      }
+    }
+    $(".outer_div_div_DL_img img").click(function () {
+      window.open((llw.istest?"":"/llh-bs/")+'static/index-pc/index-personal-Article.html?llh=' + llh);
+    })
+    $(".outer_div_div_DL_name p").click(function () {
+      window.open((llw.istest?"":"/llh-bs/")+'static/index-pc/index-personal-Article.html?llh=' + llh);
+    })
+
+    $("#Article_Release").click(function () {
+      var that = this;
+      if (!llw.isLogin) {
+        $(".mc_wdl").show();
+        return;
+      }
+      var title = $("#Article_title").val();
+      if (title.length < 5) {
+        layer.msg("标题不少于5个汉字");
+        return
+      }
+      if (Article_img.length == 0) {
+          Article_type = 0;
+      }
+      var contenttext = $("#dds").text().trim()
+      var content = $("#dds").html()
+      if (contenttext.length === 0) {
+        layer.msg("文章内容不能为空");
+        return
+      }
+      var data = {
+        id: "",
+        title: title,
+        author: "",
+        contentUrl: "",
+        coversType: Article_type,
+        covers: Article_img.join(";"),
+        file: "",
+        originalType: 1,
+        content: content
+      };
+      llw.api.article("addMongoOriginal", data, function (rs) { //请求名,数据,回调方法,
+        $("#Article_title").val("");
+        $("#dds").html("");
+        $("#input_div_Article_div_buttom_ul").empty();
+        var aa = " ";
+        var d = "共" + aa + 0 + aa + "张，还能上传" + aa + 1 + aa + "张"
+        $("#Article_p").text(d);
+        $(".yes").eq(2).hide()
+        Article_img=[];
+        layer.msg("发布成功");
+      }, function (err) {
+        layer.msg("发布失败");
+
+      })
+    }
+
+    )
+    img_type()
+    function img_type() {
+
+      $.ajax({
+        url: llw.api.options.articleurl + "/llh/article/queryImgType.jspx",
+        dataType: 'json',
+        type: 'post',
+        success: function (resp) {
+          layui.laytpl($("#tp_radio_list").html()).render(resp.respData, function (html) {
+            $("#radio_list_a").html(html);
+          });
+        },
+        error: function (err) {
+        }
+      });
+    }
+
+    var imgs_type = "";
+    function list_img_type(index) {
+      imgs_type = $(".layui-icon").eq(index).val();
+      if (imgs_type != "") {
+        $(".yes").eq(1).show()
+      } else {
+        $(".yes").eq(1).hide()
+      }
+      ifimg();
+    }
+
+
+    var ssss_arr = [];
+
+    $("#imgs_title").click(function () {
+      if (!llw.isLogin) {
+        llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+
+      }
+    })
+
+    $("#Article_title").click(function () {
+      if (!llw.isLogin) {
+        llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+
+      }
+    })
+
+    $("#dds").click(function () {
+      // if (!llw.isLogin) {
+      //   llw.showLogin("body");
+      //   utils.letDivCenter(".mc_wdl");;
+
+      // }
+    })
+
+    $("#Dvideo_title").click(function () {
+      if (!llw.isLogin) {
+        llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+
+      }
+    })
+
+
+    $("#imgs_Release").click(function () {
+      var that = this;
+            if (!llw.isLogin) {
+        llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+         return
+      }
+      if (llh == "") {
+        debugger  
+        $.ajax({
+          url: llw.api.options.articleurl + "/llh/llhOrg/info.jspx",
+          dataType: 'json',
+          type: 'post',
+          success: function (resp) {
+            user_Land();
+            img_type();
+          },
+          error: function (err) {
+            $(".mc_wdl").show();
+            return;
+          }
+        });
+      }
+      var title = $("#imgs_title").val();
+      if (ssss_arr.length == 0) {
+        layer.msg("请上传图片");
+        return;
+      }
+      if (imgs_type.length == 0) {
+        layer.msg("请选择分类");  
+        return;
+      }
+      if(imgs_title_text == ""){
+        layer.msg("请输入标题");  
+        return;
+      }
+      var covers = Article_img;
+      if (Article_img.length == "") {
+        var coversType = 0;
+      } else {
+        var coversType = 1;
+      }
+      var data = {
+        id: "",
+        location: "",
+        covers: ssss_arr.join(';'),
+        file: "",
+        title: title,
+        address: "",
+        classifications: imgs_type,
+        originalType: 2
+      };
+      llw.api.article("addMongoOriginal", data, function (rs) { //请求名,数据,回调方法,
+        $("#file_two").val("");
+        $("#imgs_title").val("");
+        img_type();
+        $("#input_div_imgs_div_buttom_ul").empty();
+        ssss_arr = [];
+        var aa = " ";
+        var d = "共" + aa + 0 + aa + "张，还能上传" + aa + 9 + aa + "张"
+        $("#text_p").text(d);
+        $(".yes").eq(0).hide()
+        $(".yes").eq(1).hide()
+
+        layer.msg("上传成功");
+
+      }, function (err) {
+
+      })
+    }
+
+    )
+
+    $("#video_Release").click(function () {
+      if (!llw.isLogin) {
+        $(".mc_wdl").show();
+        return;
+      }
+      if (video_name == "") {
+        layer.msg("请上传视频");
+        return
+      }
+      if (!$(".input_div_video_div_buttom_ul img")[0]) {
+        layer.msg("请填写封面");
+        return
+      }
+      var ssss = $(".input_div_video_div_buttom_ul img")[0].src;
+      var that = this;
+
+      var title = $("#video_title").val();
+      if (title.length < 5) {
+        layer.msg("标题不少于5个汉字");
+        return
+      } var covers = Article_img;
+      if (Article_img.length == "") {
+        var coversType = 0;
+      } else {
+        var coversType = 1;
+      }
+      var content = $("#video_title").val();
+      var data = {
+        videoUrl: video_name,
+        file: "",
+        covers: ssss,
+        title: title,
+        content: $("#video_content").val(),
+        tag: Label_data_arr.join(','),
+      };
+      $.ajax({
+        url: llw.api.options.articleurl + "/llh/llhVideo/save.jspx",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        success: function (resp) {
+          video_name = "";
+          $("#input_div_video_div_buttom_ul").empty();
+          $("#video_content").val("");
+          $("#video_title").val("");
+          $("#Label_ul").empty();
+          $(".yes").eq(3).hide()
+          $(".yes").eq(4).hide()
+          $(".yes").eq(5).hide()
+          $(".yes").eq(6).hide()
+          layer.msg("发布成功");
+        },
+        error: function (err) {
+        }
+      });
+    }
+    )
+    function Label_list(data) {
+      // data=[
+      //    "测试111",
+      //    "测试121",
+      //    "测试131",
+      //    "测试141",
+      //    "测试111",
+      //    "测试121",
+      //    "测试131",
+      //    "测试141"
+      // ]
+      if (data.length > 0) {
+        $(".yes").eq(6).show()
+      } else {
+        $(".yes").eq(6).hide()
+      }
+      layui.laytpl($("#tp_Label_list").html()).render(data, function (html) {
+        $(".Label_li_right").show();
+        $("#Label_ul").html(html);
+        $(".Label_li_right").click(function () {
+
+          Label_data_arr = arr_delete_index(Label_data_arr, $(".Label_li_right").index(this));
+          Label_list(Label_data_arr);
+        })
+      });
+    }
+    Label_data_arr = [];
+
+    $("#Label_text").bind("keydown", function (e) {
+      var theEvent = e || window.event;
+      var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+      if (code == 13) {
+        //回车执行查询
+        Label_data_arr.push($("#Label_text").val().replace(/[\r\n]/g, ""));
+        $("#Label_text").val("");
+        Label_list(Label_data_arr);
+      }
+    });
+
+    $("#qx").click(function () {
+      $(".mc_wdl").hide();
+    })
+
+
+
+
+
+
+    function img_sc(img) {
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          ssss_arr.push(resp.respData.src);
+          $("#file_two").val("");
+          img_cg()
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+        }
+      });
+    }
+
+
+
+    function Article_img_sc(img) {
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          $("#input_div_Article_div_buttom_ul").append("<li class='input_div_Article_div_buttom_ul'><div class='img_del2' style='display: flex;'>x</div><img src=\"" + resp.respData.src + "\" /> </li>");
+          Article_img.push(resp.respData.src)
+          ifArticle()
+          $("#Article_input").val("");
+          $(".img_del2").click(function () {
+            debugger
+            var num = $(".img_del2").index(this);
+            $("#input_div_Article_div_buttom_ul li").eq(num).remove()
+            Article_img.splice(num,1)
+            $(".yes").eq(2).hide();
+            $("#Article_input").val("");
+            ifArticle()
+            Article_img_cg();
+          })
+
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+        }
+      });
+    }
+
+
+
+    function video_img_sc(img) {
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          $("#input_div_video_div_buttom_ul").prepend("<li class='input_div_video_div_buttom_ul'><div class='img_del3' style='display: flex;'>x</div><img src=\"" + resp.respData.src + "\" /> </li>");
+          $("#file_c").val("");
+          $(".img_del3").click(function () {
+            $("#input_div_video_div_buttom_ul").html("")
+            $("#video_p").text("共0张，还能上传1张");
+            $(".yes").eq(4).hide();
+            $("#file_c").val("");
+          })
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+        }
+
+      });
+    }
+
+
+    var bodyMain = document.getElementById('dds');
+
+    //禁止粘贴
+    bodyMain.onpaste = function () {
+      return false;
+    }
+
+    utils._pasteHandle()
+
+    $("#file_three").change(function (re) {
+      var file = this.files[0];
+             var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }  
+      if (window.FileReader) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          var formData = new FormData();
+          formData.append('file', $("#file_three")[0].files[0]);  /*获取上传的图片对象*/
+          var si = $("#file_three")[0].files[0].size;
+          var ze = si / (1024 * 1024 * 1024);
+          if (ze >= 1) {
+            layer.msg("此视频超过1G");
+            return
+          }
+          video_sc(formData);
+        }
+      }
+    })
+
+    var video_name = "";  //长视频URL
+    function video_sc(img) {
+      $(".myloading").show()
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          $(".myloading").hide()
+          var html = '<span class="video-div" ><div class="img_del4" style="display: flex;">x</div><video src="' + resp.respData.src + '" controls="controls"></video></span>'
+          $(".videoBox_div_bottom_left_a_top").eq(0).append(html);
+          video_name = resp.respData.src;
+          $(".yes").eq(3).show()
+          $(".img_del4").click(function () {
+            $(".video-div").remove()
+            $(".yes").eq(3).hide();
+            video_name = "";
+            $("#file_three").val("")
+          })
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+          $(".myloading").hide()
+        }
+      });
+
+    }
+
+    // 用户信息详情
+    var attentionCount = "";
+    function user_count() {
+      data = {
+        llh: llh,
+        selectLlh: llh,
+      }
+      llw.api.ws("friend.user.count.get", data, function (rs) { //请求名,数据,回调方法,
+        attentionCount = rs.data.respData.attentionCount;
+        if (rs.data.respData.userType == 4) {
+          $(".show-video").show();
+        } else {
+          $(".show-video").hide();
+        }
+      }, function (err) {
+        console.log(err)
+      })
+    }
+    
+    var Article_type=1
+    $(".setTitle_type div").click(function(){
+      var num =  $(".setTitle_type div").index(this)
+      debugger
+      if(num == 0){
+        Article_type =1;
+      }else if(num == 1){
+        Article_type=2
+      }else if(num == 2) {
+        Article_type=3
+      }
+      var a = [0,1,2];
+      if(num ==1){
+        uploadImgTitle=3
+        var d = "共" + " " + 0 + " " + "张，还能上传" + " " + uploadImgTitle + " " + "张"
+         $("#Article_p").text(d);
+      }else{
+        uploadImgTitle=1
+        var d = "共" + " " + 0 + " " + "张，还能上传" + " " + uploadImgTitle + " " + "张"
+         $("#Article_p").text(d);
+      }
+      $("#input_div_Article_div_buttom_ul").html("")
+      $(".yes").eq(2).hide();
+      Dvideo_name = "";
+      $("#Article_input").val("")
+      var file = $("#Article_input");
+      file.val("")
+      Article_img=[];
+      a.forEach(function(item){
+        if(item==num){
+          $(".setTitle_type div").eq(item).css("border","1px solid #208eda")
+        }else{
+          $(".setTitle_type div").eq(item).css("border","1px solid #ccc")
+        }
+      });
+    })
+
+    // 作者推荐关注
+    getAttentionList()
+    function getAttentionList() {
+      var that = this;
+      var data = {
+        llh: llw.getCookie("llh"),
+        pageNo: pageNo,
+        pageSize: "20",
+        itemId: ''
+      };
+      data.channel = 14; // 不同的频道 数值不同
+      llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+        if (rs.data.success) {
+          var list_arr = rs.data.respData.list;
+          arr_ac = list_arr;
+          layui.laytpl($("#tp_imgs").html()).render(list_arr, function (html) {
+            $("#imgs").html(html);
+            $(".GZ_list_button_one").click(function () {
+              gz($(this).attr("id"), $(this).attr("index"), 1, $(this));
+            })
+            $(".GZ_list_button_two").click(function () {
+              gz($(this).attr("id"), $(this).attr("index"), 2, $(this));
+            })
+          });
+        } else {
+          layui.laytpl($("#tp_imgs").html()).render([], function (html) {
+            // llw.bindEvent("navEvent",".channel-item")
+          });
+        }
+
+        // }
+      }, function (err) {
+
+      })
+    }
+
+
+    $("#article").click(function () {
+      window.open((llw.istest?"":"/llh-bs/")+'static/index-pc/index-personal-Article.html?llh=' + llw.getCookie('llh'));
+
+    })
+
+    function arr_delete_index(arr, index) {
+      var arraz = [];
+      var num = 0;
+      for (var i = 0; i < arr.length; i++) {
+        if (i == index) {
+          num = num + 1;
+        } else {
+          arraz[i - num] = arr[i];
+        }
+      }
+      return arraz;
+    }
+
+    //短视频-上传视频
+    $("#DVideo").click(function (e) {
+      $(".click_xs").hide();
+      $(".videoBox_div_bottom_left_a_top").show();//显示
+      e.stopPropagation()
+    })
+
+
+    $("#Dfile_three").change(function (re) {
+      var file = this.files[0];
+             var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.mp4' && pathf != '.rmvb' && pathf != '.avi' && pathf != '.ts'){
+        layer.msg("只能上传.mp4 .rmvb .avi. .ts类型的文件!"); 
+                return;  
+            }  
+      if (window.FileReader) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          var formData = new FormData();
+          formData.append('file', $("#Dfile_three")[0].files[0]);  /*获取上传的图片对象*/
+          var si = $("#Dfile_three")[0].files[0].size;
+          var ze = si / (1024 * 1024 * 1024);
+          if (ze >= 1) {
+            layer.msg("此视频超过1G");
+            return
+          }
+          Dvideo_sc(formData);
+        }
+      }
+    })
+    var Dvideo_name = "";  //短视频URL
+    function Dvideo_sc(img) {
+      $(".myloading").show()
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          $(".myloading").hide()
+          var html = '<span class="Dvideo-div" ><div class="img_del5" style="display: flex;z-index:100">x</div><video src="' + resp.respData.src + '" controls="controls"></video></span>'
+          $(".videoBox_div_bottom_left_a_top").eq(1).append(html);
+          Dvideo_name = resp.respData.src;
+          ifDvideo()
+          $(".yes").eq(7).show()
+          $(".img_del5").click(function () {
+            $(".Dvideo-div").remove()
+            $(".yes").eq(7).hide();
+            Dvideo_name = "";
+            $("#file_three").val("")
+            var file = $("#Dfile_three");
+            ifDvideo()
+            file.val("")
+            // file.after(file.clone().val(""));
+            // file.remove()
+          })
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+          $(".myloading").hide()
+        }
+      });
+    }
+
+    //短视频系列-设置封面
+    $("#DSP_video_type").click(function (e) {
+      $(".click_xs").hide();
+      $(".video_div_b").show();//显示
+      e.stopPropagation()
+    })
+    $("#file_D").change(function (re) {
+      var b = $(".input_div_video_div_buttom_ul").length + 1;
+      if (b <= 1) {
+        var file = this.files[0];
+         var last_len=file.name.lastIndexOf(".");
+       var len = file.name.length;
+       var pathf = file.name.substring(last_len,len);
+       if (pathf != '.jpg' && pathf != '.png' && pathf != '.jpeg' && pathf != '.gif'){
+        layer.msg("只能上传.jpg  .png  .jpeg  .gif类型的文件!"); 
+                return;  
+            }   
+
+        if (window.FileReader) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function (e) {
+            var formData = new FormData();
+            formData.append('file', $("#file_D")[0].files[0]);  /*获取上传的图片对象*/
+            Dvideo_img_sc(formData);
+          }
+        }
+        var c = 1 - b;
+        var aa = " ";
+        var d = "共" + aa + b + aa + "张，还能上传" + aa + c + aa + "张"
+        if (b > 0) {
+          $(".yes").eq(8).show();
+        } else {
+          $(".yes").eq(8).hide();
+        }
+        $("#Dvideo_p").text(d);
+      } else {
+        layer.msg("最多上传"+1+"张封面");
+      }
+    })
+
+    function Dvideo_img_sc(img) {
+      data = img;
+      $.ajax({
+        url: llw.api.options.articleurl + "//file/appUploadFile.jspx?relativePath=llh/article",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (resp) {
+          $("#input_div_Dvideo_div_buttom_ul").prepend("<li class='input_div_video_div_buttom_ul'><div class='img_del3' style='display: flex;'>x</div><img src=\"" + resp.respData.src + "\" /> </li>");
+          $("#file_D").val("");
+        ifDvideo();
+          $(".img_del3").click(function () {
+            $("#input_div_Dvideo_div_buttom_ul").html("")
+            $("#Dvideo_p").text("共0张，还能上传1张");
+            $(".yes").eq(8).hide();
+            $("#file_D").val("");
+            ifDvideo();
+          })
+        },
+        error: function (err) {
+          layer.msg("上传失败");
+        }
+      });
+
+    }
+    //短视频系列-设置分类
+    $.ajax({
+      url: llw.api.options.articleurl + "//llh/shortVideo/categoryList.jspx",
+      dataType: 'json',
+      type: 'post',
+      success: function (resp) {
+        layui.laytpl($("#tp_radio_list2").html()).render(resp.respData, function (html) {
+          $("#radio_list_b").html(html);
+        });
+      },
+      error: function (err) {
+        console.log(err);
+
+      }
+    });
+
+    $("#SP_Dvideo_jj").click(function (e) {
+      $(".click_xs").hide();
+      $(".video_div_c").show();//显示
+      e.stopPropagation()
+    })
+
+    var imgs_type2 = "";
+    function list_img_type2(index) {
+      imgs_type2 = $(".layui-icon2").eq(index).val();
+      ifDvideo()
+      if (imgs_type2 != "") {
+        $(".yes").eq(9).show()
+      } else {
+        $(".yes").eq(9).hide()
+      }
+    }
+
+    $("#Dvideo_Release").click(function () {
+      if (!llw.isLogin) {
+        $(".mc_wdl").show();
+        return;
+      }
+      var title = $("#Dvideo_title").val();
+      if (Dvideo_name == "") {
+        layer.msg("请上传视频");
+        return
+      }
+      if (imgs_type2.length == 0) {
+        layer.msg("请选择分类");
+        return;
+      }
+      if (title.length < 5) {
+        layer.msg("标题不少于5个汉字");
+        return
+      }
+      if (!$(".input_div_video_div_buttom_ul img")[0]) {
+        layer.msg("请填写封面");
+        return
+      }
+      var ssss = $(".input_div_video_div_buttom_ul img")[0].src;
+      var that = this;
+
+      var title = $("#Dvideo_title").val();
+      if (!title) {
+        layer.msg("请输入标题");
+        return;
+      }
+      var content = $("#Dvideo_title").val();
+      var data = {
+        href: Dvideo_name,
+        file: "",
+        image_url: ssss,
+        title: title
+      };
+      $.ajax({
+        url: llw.api.options.articleurl + "/llh/shortVideo/save.jspx",
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        success: function (resp) {
+          Dvideo_name = "";
+          $("#input_div_Dvideo_div_buttom_ul").empty();
+          $("#Dvideo_title").val("");
+          layer.msg("发布成功");
+          $(".yes").eq(9).hide()
+          $(".yes").eq(8).hide()
+          $(".yes").eq(7).hide()
+
+        },
+        error: function (err) {
+        }
+      });
+    })
+
+    $("#tcdl").click(function () {
+      llw.delCookie("llh");
+      llw.delCookie("token");
+    })
+// $("#article").click(function(){
+//   window.open('./index-personal-Article.html?llh='+ llw.getCookie('llh'));
+
+// })
+function text_num(text){
+    if(!text){
+      return text
+    }
+    var arrEntities={'lt':'<','gt':'>','nbsp':'','amp':'&','quot':'"','ldquo':'"','nb':'"'}; 
+    text= text.replace(/&(lt|gt|nbsp|amp|quot|ldquo|nb);/ig,function(all,t){return arrEntities[t];}); 
+    var k=0;
+    var j=0;
+    
+    for(var i=0;i<text.length;i++){
+         if(text[i] == "<"){
+          k=k+1
+         }
+         if(text[i] == ">"){
+          j=j+1
+         }
+    }
+    if(k > j){
+      text=text+">";
+    }
+
+    text=text.replace(/<\/?.+?>/g, "");
+    var text2=""
+
+     if(text.length <= 150){
+       return text;
+     }else{
+       for(var i=0;i<149;i++){
+        text2=text2+text[i];
+       }
+       text2=text2+"...";
+       return text2;
+     }
+}
+function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
+}
+  </script>
+
+</body>
+
+</html>
