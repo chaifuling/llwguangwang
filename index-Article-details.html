@@ -787,6 +787,8 @@
           function (err) {}
         );
       }
+      tuijian()
+      function tuijian(){
       llw.api.ws(
         "info.headlines.get",
         {
@@ -799,8 +801,6 @@
         function (rs) {
           debugger
           if(rs.data){
-
-          
           if (rs.data.respData) {
             layui
               .laytpl($("#tp_list_tuo").html())
@@ -814,14 +814,14 @@
               });
           }
         }else{
-          $(".pane-module2").hide();
-          $(".WZXQ_center_bottom").hide();
+          tuijian()
         }
         },
         function (err) {
           $(".pane-module2").hide();
         }
       );
+    }
       $.ajax({
         url: "sss.php",
         dataType: "json",
@@ -1000,7 +1000,9 @@
           dataType: "json",
           type: "POST",
           success: function (resp) {
-            PL_num=resp.data.list.length;
+            if(resp.data){
+              PL_num=resp.data.list.length;
+            }
             $("#pl_loading").hide();
             if (resp.message == "没有更多评论了") {
               $(".PL_null_div").show();
