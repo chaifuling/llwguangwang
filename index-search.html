@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <script src="./js/lib/layui/layui.all.js"></script>
+    <script src="./js/lib/mock.min.js"></script>
+    <script src="./js/mockdata/index.data.js"></script>
+    <script src="./js/llwhelp.js"></script>
+    <script src="./js/utils.js"></script>
+    <title>【老来网】不负年华，再出发</title>
+  </head>
+  <body>
+    <script id="tp_list_one" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}
+      {{#       if(item.cateId != "a"){  }}
+        <li>
+         <div class="list_one_li_div_max">
+          <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank">
+           <div class="list_one_li_div_img">
+             <img class="list_one_li_div_img_img" src="{{item.photo}}"/>
+
+             <!-- <img class="list_one_li_div_img_v" src="images/矢量智能对象.png"/> -->
+
+            </div>
+          </a>
+           <div class="list_one_li_div_text">
+            <div class="list_one_li_div_text_top"><p>{{text1(item.nickName)}}</p></div>
+            <div class="list_one_li_div_text_bottom">
+         {{#   if(item.introduce != undefined){     }}    
+                <p>{{item.introduce}}</p>
+          {{#       }      }}   
+            </div>
+           </div>
+           <div class="list_one_li_div_button">
+            {{#   if(item.isRelation != "fllow"){     }}
+            <button class="list_b_gz" lid="{{item.llh}}">+ 关注</button><div>
+             <button class="list_b_qxgz" lid="{{item.llh}}" style="display:none;">取消关注</button>
+
+             {{#         }else{ }}
+             <button class="list_b_gz" lid="{{item.llh}}" style="display:none;">+ 关注</button>
+             <button class="list_b_qxgz" lid="{{item.llh}}" >取消关注</button>
+             {{#       }   }}
+           </div>
+         </div>
+        </li>
+        {{#       }   }}
+      {{#  }); }}
+    </script>
+    <script id="tp_list_two" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}
+
+      {{#  if(item.content!= undefined){       }}
+
+      <li onclick="listVideoClick({{item.contentId}})">
+        <div class="single-mode">
+          <div class="single-mode-title"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-lbox">
+            <div   class="img-wrap"> <img src="{{item.videoThumbCovers}}"/>  </div> 
+            <div class="center_list_b_top_sc"><img src="./images/btn.png" /></div>
+
+          </div>
+          <div class="single-mode-div" >
+          <div class="single-mode-div-top"><p ></p></div>
+        </div>
+          <div class="single-mode-div-bottom">
+            {{# if(item.tags){ }}
+            <div class="single-tags">{{item.tags}}</div> 
+            {{# } }}
+            <div class="single-mode-div-bottom-b" > 
+              {{# if(item.userType==1||item.userType==6){}}
+                    <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                    {{# } }}
+                    {{# if(item.userType==4){}}
+                    <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                    {{# } }}
+              <img  src="{{item.content.headIcon}}" /></div>
+            <div class="single-mode-div-bottom-name" ><a href="#"  >{{text1(item.content.nickName)}}</a></div>
+            <div class="single-mode-div-bottom-time" >
+              {{#      if(item.videoAddTime != undefined){        }}
+              <a href="#">发布于{{isdate(item.videoAddTime)}}</a>
+              {{#    }    }}
+            </div>
+          </div>
+          <div class="">
+          <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/sc222.png" /></div>
+          <div class="single-mode-div-bottom-right_div_two"><p>{{(item.viewNum)?item.viewNum:0}}</p></div>
+          <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div> -->
+          <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/dz.png"/></div>
+          <div class="single-mode-div-bottom-right_div_two"><p>{{(item.likeNum)?item.likeNum:0}}</p></div> -->
+          <!-- <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div>
+          <div class="single-mode-div-bottom-right_div_one"><img src="images/xx.png"/></div>
+          <div class="single-mode-div-bottom-right_div_two"><p>{{(item.fakeViewNum)?item.fakeViewNum:0}}</p></div> -->
+          </div>
+
+          </div>
+          </div>
+      </li>
+      {{#  }else{        }}
+      <li onclick="listVideoClick({{item.contentId}})">
+        <div class="single-mode">
+          <div class="single-mode-title"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-lbox">
+            <a  href="./index-Article-details.html?llh={{item.user?item.user.llh:''}}&&id={{item.contentId}}" target="_blank" class="img-wrap"> <img src="{{item.videoThumbCovers}}"/>  </a> 
+            <div class="center_list_b_top_sc"><img src="./images/btn.png" /></div>
+
+          </div>
+          <div class="single-mode-div" >
+          <div class="single-mode-div-top"><p ></p></div>
+        </div>
+          <div class="single-mode-div-bottom">
+            {{# if(item.tags){ }}
+            <div class="single-tags">{{item.tags}}</div> 
+            {{# } }}
+            {{# if(item.user != undefined){      }}
+            <div class="single-mode-div-bottom-b" > 
+              {{# if(item.userType==1||item.userType==6){}}
+                    <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                    {{# } }}
+                    {{# if(item.userType==4){}}
+                    <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                    {{# } }}
+              <img  src="{{item.user.headIcon}}" /></div>
+            {{#  } }}
+            <div class="single-mode-div-bottom-name" ><a href="#"  >
+              {{#       if( item.nickName&&item.user.nickName != undefined){         }}
+              {{item.user == undefined?text1(item.nickName):text1(item.user.nickName)}}
+              {{#    }else{    }}
+              该作者已注销
+              {{#    }    }}
+
+            </a></div>
+            <div class="single-mode-div-bottom-time" >
+              {{#      if(item.videoAddTime != undefined){        }}
+              <a href="#">发布于{{isdate(item.videoAddTime)}}</a>
+              {{#    }    }}
+            </div>
+            <div class="">
+              <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/sc222.png" /></div>
+              <div class="single-mode-div-bottom-right_div_two"><p>{{(item.viewNum)?item.viewNum:0}}</p></div>
+              <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div> -->
+              <!-- <div class="single-mode-div-bottom-right_div_one"><img src="images/dz.png"/></div>
+              <div class="single-mode-div-bottom-right_div_two"><p>{{(item.likeNum)?item.likeNum:0}}</p></div> -->
+              <!-- <div class="single-mode-div-bottom-right_div_three"><div class="vertical"></div></div>
+              <div class="single-mode-div-bottom-right_div_one"><img src="images/xx.png"/></div>
+              <div class="single-mode-div-bottom-right_div_two"><p>{{(item.fakeViewNum)?item.fakeViewNum:0}}</p></div> -->
+              </div>
+          </div>
+         
+
+          </div>
+          </div>
+      </li>
+
+      {{#   }  }}
+      {{#  }); }}
+    </script>
+    <script id="tp_list_three_a" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}
+      {{#       if(item.cateId != "a"){  }}
+        <li>
+         <div class="list_one_li_div_max">
+          <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank">
+           <div class="list_one_li_div_img">
+             <img class="list_one_li_div_img_img" src="{{item.photo}}"/>
+
+             <!-- <img class="list_one_li_div_img_v" src="images/矢量智能对象.png"/> -->
+
+            </div>
+          </a>
+           <div class="list_one_li_div_text">
+            <div class="list_one_li_div_text_top"><p>{{item.nickName}}</p></div>
+            <div class="list_one_li_div_text_bottom">
+         {{#   if(item.introduce != undefined){     }}    
+                <p>{{item.introduce}}</p>
+          {{#       }      }}   
+            </div>
+           </div>
+           <div class="list_one_li_div_button">
+             {{#   if(item.isRelation != "fllow"){     }}
+            <button class="list_a_gz" lid="{{item.llh}}">+ 关注</button><div>
+             <button class="list_a_qxgz" lid="{{item.llh}}" style="display:none;">取消关注</button>
+
+             {{#         }else{ }}
+             <button class="list_a_gz" lid="{{item.llh}}" style="display:none;">+ 关注</button>
+             <button class="list_a_qxgz" lid="{{item.llh}}" >取消关注</button>
+             {{#       }   }}
+           </div>
+         </div>
+        </li>
+        {{#       }   }}
+      {{#  }); }}
+    </script>
+    <script id="tp_list_three_b" type="text/html">
+      {{#  layui.each(d, function(index, item){ }}  
+
+      {{# if(item.originalType == 1){ }}   
+      {{#    if(item.coverImgList.length>= 1){  }}
+      <li>
+        <div style="cursor:pointer">
+          <div class="single-mode">
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+         <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+            <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
+    
+         </div>
+          <div class="single-mode-div" >
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+            <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+          </div>
+        </div>
+      </div>           
+    
+          <div class="single-mode-div-bottom">  
+            {{# if(item.tags){ }}
+              <div class="single-tags">{{item.tags}}</div> 
+            {{# } }}
+              {{#   if(item.headIcon  !=  undefined) {                  }}
+              <div class="single-mode-div-bottom-b" > 
+                <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                  {{# if(item.userType==1||item.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.headIcon}}" />
+                </a>
+              </div> 
+              {{#    }          }}
+            <div class="single-mode-div-bottom-name" >
+              {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+              <a href="#"  >该作者已注销</a>
+              {{#     }else {            }}
+              {{#     if(item.nickName) {  }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{text1(item.nickName)}}</a>
+              {{#     }else{           }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+              {{#     }          }}
+              {{#     }                  }}
+    
+            </div>
+            <div class="single-mode-div-bottom-time" >
+              {{#       if(item.createTimeStr != undefined){   }}
+              <a href="#">发布于{{item.createTimeStr}}</a>
+            {{#  } }}
+            </div>
+          </div>    
+      </li>             
+      {{#    }else{        }}
+      <li>
+        <div style="cursor:pointer">
+        <div class="single-mode">
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-div_b" >
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
+            <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+          </div>
+        </div>
+      </div>           
+    
+          <div class="single-mode-div-bottom">
+            {{# if(item.tags){ }}
+            <div class="single-tags">{{item.tags}}</div> 
+          {{# } }}
+              {{#   if(item.headIcon  !=  undefined) {                  }}
+              <div class="single-mode-div-bottom-b" > 
+                <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                      {{# if(item.userType==1||item.userType==6){}}
+                      <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                      {{# } }}
+                      {{# if(item.userType==4){}}
+                      <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                      {{# } }}
+                      <img  src="{{item.headIcon}}" />
+                    </a>
+              </div> 
+              {{#    }          }}
+           
+            <div class="single-mode-div-bottom-name" >
+              {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+              <a href="#"  >该作者已注销</a>
+              {{#     }else {            }}
+              {{#     if(item.nickName) {  }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{text1(item.nickName)}}</a>
+              {{#     }else{           }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.source}}</a>
+              {{#     }          }}
+              {{#     }                  }}
+    
+            </div>
+            <div class="single-mode-div-bottom-time" >
+              {{#       if(item.createTimeStr != undefined){   }}
+              <a href="#">发布于{{item.createTimeStr}}</a>
+            {{#  } }}
+            </div>
+          
+          </div>
+          </div>    
+      </li>               
+      {{#    }   }}
+    
+      {{# }else if(item.originalType == 2){ }}
+    
+      <li>
+        <div style="cursor:pointer">
+    
+        <div class="single-mode">
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-div_b" >
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+              {{#  layui.each(item.coverImgList, function(index, items){ }}
+              <img style="background: url({{items}});"class="imgs" alt="">
+              {{#  }); }}
+          </div>
+        </div>
+      </div>           
+    
+          <div class="single-mode-div-bottom">
+            {{# if(item.tags){ }}
+            <div class="single-tags">{{item.tags}}</div> 
+            {{# } }}
+              {{#   if(item.headIcon  !=  undefined) {                  }}
+              <div class="single-mode-div-bottom-b" > 
+                <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                  {{# if(item.userType==1||item.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.headIcon}}" />
+                </a>
+              </div> 
+              {{#    }          }}
+           
+            <div class="single-mode-div-bottom-name" >
+              {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+              <a href="#"  >该作者已注销</a>
+              {{#     }else {            }}
+              {{#     if(item.nickName) {  }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{text1(item.nickName)}}</a>
+              {{#     }else{           }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+              {{#     }          }}
+              {{#     }                  }}
+    
+            </div>
+            <div class="single-mode-div-bottom-time" >
+              {{#       if(item.createTimeStr != undefined){   }}
+              <a href="#">发布于{{item.createTimeStr}}</a>
+            {{#  } }}
+            </div>
+          
+          </div>
+          </div>    
+      </li>                      
+    
+    
+      {{# }else if(item.originalType == 3){ }}
+      <li>
+        <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+        <div style="cursor:pointer">
+          <div class="single-mode">
+          <div class="single-mode-title" ><p>{{text1(item.title)}}</p></div>
+         <div class="single-mode-lbox">
+          
+          {{#  layui.each(item.coverImgList, function(index, items){ }}
+            <img style="background: url({{items}});"class="imgs" alt="">
+            <div class="center_list_b_top_mc22"><img src="./images/btn.png"></div>
+          {{#  }); }}
+         </div>
+          <div class="single-mode-div" >
+          <div class="single-mode-div-top">
+            <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
+          </div>
+        </div>
+      </div>           
+    
+          <div class="single-mode-div-bottom">  
+            {{# if(item.tags){ }}
+              <div class="single-tags">{{item.tags}}</div> 
+            {{# } }}
+              {{#   if(item.headIcon  !=  undefined) {                  }}
+              <div class="single-mode-div-bottom-b" > 
+                <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
+                  {{# if(item.userType==1||item.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.headIcon}}" />
+                </a>
+              </div> 
+              {{#    }          }}
+            <div class="single-mode-div-bottom-name" >
+              {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+              <a href="#"  >该作者已注销</a>
+              {{#     }else {            }}
+              {{#     if(item.nickName) {  }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{text1(item.nickName)}}</a>
+              {{#     }else{           }}
+              <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
+              {{#     }          }}
+              {{#     }                  }}
+    
+            </div>
+            <div class="single-mode-div-bottom-time" >
+              {{#       if(item.createTimeStr != undefined){   }}
+              <a href="#">发布于{{item.createTimeStr}}</a>
+            {{#  } }}
+            </div>
+          </div>   
+        </a>  
+      </li> 
+    
+      {{#   }      }}
+    
+      {{#  }); }}
+    </script>
+    <div class="header">
+      <div class="header_div_left_XZ">下载APP
+        <span class="mc_div_title_red"></span>
+        <div class="mc_div_XZ" >
+          <div class="mc_div_title">老来网APP下载</div>
+          <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+          <div class="input_div_imgs_top" style="display: block;"></div>
+              </div>
+      
+    
+      </div>
+      <div class="header_div_left"><a >微信公众号</a>
+        <div class="mc_div" >
+          <div class="mc_div_title">微信公众号：老来网APP</div>
+          <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+          <div class="input_div_imgs_top" style="display: block;"></div>
+              </div>
+      </div>
+      <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
+      <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+      <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
+      <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div>
+      <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
+      <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+        <img class="header_div_img" src=""/></a>
+      </div>
+     </div>
+    <div class="bodyer">
+      <div class="containera">
+        <div class="contenta container_left">
+          <div class="body_left_div">
+          <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+        </div>
+        </div>
+        <div class="contenta container_center">
+          <div class="bui-left index-content_two">
+            <div class="searchbox_div">
+              <div class="searchbox">
+                <input
+                  id="input_aaa"
+                  placeholder="请输入要搜索的内容"
+                  type="text"
+                />
+              </div>
+              <div class="searchbox_input">
+                <button id="sousuo">搜索</button>
+              </div>
+            </div>
+            <div class="center_list">
+              <ul class="center_list_ul">
+                <li class="center_list_li list_true">
+                  <span>综合</span>
+                  <div class="center_list_li_div">
+                    <div class="center_list_li_div_top_top">
+                      <ul id="list_three_a"></ul>
+                      <i class="center_list_li_div_top_top_div" style="display: none;">
+                        <button id="button_a">查看更多</button>
+                      </div>
+                    </i>
+                    <div class="center_list_li_div_top_bottom">
+                      <ul id="list_three_b"></ul>
+                    </div>
+                  </div>
+                </li>
+                <!-- <li class="center_list_li">
+                  <span>视频</span>
+                  <div class="center_list_li_div">
+                    <ul id="list_two"></ul>
+                  </div>
+                </li> -->
+                <li class="center_list_li">
+                  <span>用户</span>
+                  <div class="center_list_li_div">
+                    <ul id="list_one"></ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="contenta container_right"></div>
+        <div class="clearx"></div>
+      </div>
+    </div>
+    <script>
+      var cd = ''
+      var $ = layui.$
+            var llh =llw.getCookie('llh');
+      var searchWord=getQueryVariable("id");
+      shouci()
+      function shouci(){
+        $(".center_list_li_div").eq(0).show();
+        loadSearch()
+        if(getQueryVariable("id")){
+          $("#input_aaa").val(getQueryVariable("id"));
+        }
+      
+      }
+     function listVideoClick(id){
+      window.open('./index-video-details.html?id='+id)
+     }
+//       $("#input_aaa").bind("keydown",function(e){
+// 　　var theEvent = e || window.event;
+// 　　var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+// 　　 if (code == 13) {
+// 　　//回车执行查询
+// searchWord.push($("#input_aaa").val().replace(/[\r\n]/g,""))　　;
+// user_list_a();
+// user_list_b();
+// zh_list();
+// video_list();
+// }
+// });
+
+$("#sousuo").click(function(){
+  searchWord=$("#input_aaa").val();
+  if(searchWord == ""){
+    layer.msg("请输入查询内容");
+  return
+  }
+  loadSearch()
+})
+
+function loadSearch (){
+  user_list_a_pageNo=1;
+  user_list_b_pageNo=1
+  zh_list_pageNo=1;
+  video_list_pageNo=1
+
+  user_list_a(1);
+  user_list_b(1);
+  zh_list(1);
+  video_list(1);
+}
+
+      $('.center_list_li').find('span').on('click', function() {
+          $(this)
+            .parent()
+            .siblings()
+            .find('div')
+            .hide()
+          $(this)
+            .siblings()
+            .show()
+          $(this)
+            .siblings()
+            .find('div')
+            .show()
+          $('.center_list_li').removeClass('list_true')
+          $(this)
+            .parent()
+            .addClass('list_true')
+          cd = $(this)
+            .parent()
+            .index()
+        })
+
+
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1)
+        // console.log(window.location.search)
+        var vars = query.split('&')
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=')
+          if (pair[0] == variable) {
+            return decodeURIComponent(pair[1])
+          }
+        }
+        return false
+      }
+  
+
+      $('#button_a').click(function() {
+        user_list_a_pageNo=user_list_a_pageNo+1;
+        user_list_a(0);
+      })
+      var bodyCH = $(window)
+
+      function arr_update(arr,index){
+  var aarr = [];
+       for(i=0;i<arr.length;i++)
+       if(i<index){
+         aarr[i]=arr[i];
+       }
+       return aarr;
+}
+
+
+
+
+
+
+
+
+
+function isdate(date){
+            var d= new Date(date);
+            var y=d.getFullYear();
+            var m=d.getMonth()+1;
+            var d=d.getDate() ;
+            return y+"-"+m+"-"+d;
+           }
+
+
+      bodyCH.scroll(function(e) {
+        if ( $(window).scrollTop() + $(window).height() >=$(document).height()-1 ) {
+          if (cd == 0) {
+            zh_list_pageNo=zh_list_pageNo+1;
+            zh_list(0)
+          } else if (cd == 1) {
+            video_list_pageNo=video_list_pageNo+1
+            video_list(0);
+          } else if (cd == 2) {
+            user_list_b_pageNo=user_list_b_pageNo+1;
+            user_list_b(0)
+          }
+        }
+        if($(window).scrollTop() > 40){
+          $(".body_left_div").addClass("body_left_div_div");
+        }
+        if($(window).scrollTop() <= 40){
+          $(".body_left_div").removeClass("body_left_div_div");
+        }
+      })
+
+      //搜索用户
+      var user_list_a_pageNo=1;
+
+    function user_list_a(type1){
+      data={
+        pageNo: user_list_a_pageNo,
+        llh: llw.getCookie('llh'),
+        pageSize: "5",
+        searchWord:searchWord
+    }
+      llw.api.ws3("llw.users.list.get",data,function(rs){ //请求名,数据,回调方法,
+
+      if(rs.data.respData&&rs.data.respData.length >= 5){
+        $(".center_list_li_div_top_top_div").show()
+      }else{
+        $(".center_list_li_div_top_top_div").hide()
+      }
+      if(!!rs.data.respData){
+        layui.laytpl($('#tp_list_three_a').html()).render(rs.data.respData, function(html) {
+        if(type1 == 0){
+          $('#list_three_a').append(html)
+        }else{
+          $('#list_three_a').html(html)
+        }
+        $(".list_a_gz").click(function(){
+          if(llw.isLogin){
+          var id=$(this).addClass("list_a_gz").attr("lid");
+          var num =($(".list_a_gz").index(this));
+          $(this).addClass("list_a_gz").hide();
+          $(".list_a_qxgz").eq(num).show();
+
+         gz(id,num,1)
+          }else{
+             llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+              
+          }
+        })
+        $(".list_a_qxgz").click(function(){
+          if(llw.isLogin){
+          var id=$(this).addClass("list_a_qxgz").attr("lid");
+          var num =($(".list_a_qxgz").index(this));
+          $(".list_a_gz").eq(num).show();
+          $(this).addClass("list_a_qxgz").hide();
+         qxgz(id,num,1)
+        }else{
+             llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+              
+          }
+        })
+        })
+      }else{
+        $('#list_three_a').html('')
+      }
+
+        },function(err){
+         console.log(err)
+        })
+}
+// 搜索用户二
+var user_list_b_pageNo=1
+        function user_list_b(type1){
+          data={
+            pageNo: user_list_b_pageNo,
+            llh: llw.getCookie('llh'),
+            pageSize: "10",
+            searchWord:searchWord
+        }
+          llw.api.ws3("llw.users.list.get",data,function(rs){ //请求名,数据,回调方法,
+          layui.laytpl($('#tp_list_one').html()).render(rs.data.respData, function(html) {
+            if(type1 == 0){
+              $('#list_one').append(html)
+            }else{
+              $('#list_one').html(html)
+            }
+           $(".list_b_gz").click(function(){
+             if(llw.isLogin){
+              var id=$(this).addClass("list_b_gz").attr("lid");
+              var num =($(".list_b_gz").index(this));
+              $(this).addClass("list_b_gz").hide();
+              $(".list_b_qxgz").eq(num).show();
+              gz(id,num,1)
+             }else{
+               llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+              
+             }
+        })
+        $(".list_b_qxgz").click(function(){
+          if(llw.isLogin){
+          var id=$(this).addClass("list_b_qxgz").attr("lid");
+          var num =($(".list_b_qxgz").index(this));
+          $(".list_b_gz").eq(num).show();
+          $(this).addClass("list_b_qxgz").hide();
+         qxgz(id,num,1)
+          }else{
+             llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+            
+          }
+        })
+            })
+            },function(err){
+           console.log(err)
+          })
+        }
+
+      //综合
+      var arr_ac=[];
+      var zh_list_pageNo=1;
+      
+        function zh_list(type){
+          data={
+            searchType: "",
+            pageNo: zh_list_pageNo,
+            llh: llw.getCookie('llh'),
+            pageSize: "10",
+            keyword: searchWord
+        }
+          llw.api.ws("info.headlines.search",data,function(rs){ //请求名,数据,回调方法,
+  if(!rs.data.respData.list) return
+              var list_arr=rs.data.respData.list;
+                    for(var i=0;i<list_arr.length;i++){
+                      if(list_arr[i].content != undefined){
+                      list_arr[i].content=JSON.parse(list_arr[i].content);
+                    }
+                      if(list_arr[i].coverImgList != ""){
+                      list_arr[i].coverImgList=arr_update(list_arr[i].coverImgList,4);
+                    }
+                    }   
+                    arr_ac=list_arr;
+
+          layui.laytpl($('#tp_list_three_b').html()).render(list_arr, function(html) {
+            if(type == 0){
+              $('#list_three_b').append(html)
+            }else{
+              $('#list_three_b').html(html)
+            }
+            })
+            },function(err){
+           console.log(err)
+          })
+        }
+
+      //视频
+      var video_list_pageNo=1
+      video_list(0)
+        function video_list(type){
+          data={
+            searchType: "cms_video",
+            pageNo: video_list_pageNo,
+            llh: llw.getCookie('llh'),
+            pageSize: "10",
+            keyword: searchWord
+        }
+          llw.api.ws("info.headlines.search",data,function(rs){ //请求名,数据,回调方法,
+                   var list_arr2=rs.data.respData.list;
+                    for(var i=0;i<list_arr2.length;i++){
+                      if(list_arr2[i].content != undefined){
+                      list_arr2[i].content=JSON.parse(list_arr2[i].content);
+                    }
+                    }   
+    layui.laytpl($('#tp_list_two').html()).render(list_arr2, function(html) {
+      if(type == 0){
+        $('#list_two').append(html)
+      }else{
+        $('#list_two').html(html)
+      }
+            })
+            },function(err){
+           console.log(err)
+          })
+        }
+
+  // 关注
+function gz(toUserId,ithis,type){
+  data={
+    toLlh:toUserId,
+    llh:llw.getCookie('llh'),
+  }
+
+          llw.api.ws("friends.attention.add",data,function(rs){ //请求名,数据,回调方法,
+
+        },function(err){
+          console.log(err)
+        })  }
+
+
+// 取消关注
+function qxgz(toUserId,ithis,type){
+    data={
+      toLlh:toUserId,
+    llh:llw.getCookie('llh'),
+  }
+
+          llw.api.ws("friends.attention.delete",data,function(rs){ //请求名,数据,回调方法,
+
+        },function(err){
+          console.log(err)
+        })  }
+
+
+
+$(".header_div_left").mouseover(function(){
+  $(".mc_div").show();
+})
+
+$(".header_div_left").mouseout(function(){
+ $(".mc_div").hide();
+})
+
+$(".header_div_left_XZ").mouseover(function(){
+  $(".mc_div_XZ").show();
+})
+
+$(".header_div_left_XZ").mouseout(function(){
+ $(".mc_div_XZ").hide();
+})
+user_Land() 
+var llh=""
+function user_Land(){
+  llw.Login();
+  if(llw.isLogin){
+    $(".header_div_right").eq(2).hide();
+    $(".header_div_right").eq(3).hide();
+    $(".header_div_right").eq(4).show();
+    $(".header_div_right").eq(5).show();
+    llh =llw.getCookie('llh');
+    data={
+    llh:llh,
+    selectLlh: llh
+  }
+  llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  
+    $("#user_name").html(rs.data.respData.nickName);
+    $(".outer_div_div_DL_img img").attr("src", rs.data.respData.headIcon);
+    $(".header_div_img").attr("src", rs.data.respData.headIcon);
+         },function(err){
+         $(".outer_div_div_DL").hide();   
+    $(".outer_div_div").show();  
+   })
+      }else{
+    $(".header_div_right").eq(2).show();
+    $(".header_div_right").eq(3).show();
+    $(".header_div_right").eq(4).hide();
+    $(".header_div_right").eq(5).hide();
+  }
+}
+
+
+function text1(text){
+  if(!text){
+    text="";
+  }
+  return text.replace(/<\/?.+?>/g, "");
+}
+function text_num(text){
+    if(!text){
+      return text
+    }
+    var arrEntities={'lt':'<','gt':'>','nbsp':'','amp':'&','quot':'"','ldquo':'"','nb':'"'}; 
+    text= text.replace(/&(lt|gt|nbsp|amp|quot|ldquo|nb);/ig,function(all,t){return arrEntities[t];}); 
+    var k=0;
+    var j=0;
+    for(var i=0;i<text.length;i++){
+         if(text[i] == "<"){
+          k=k+1
+         }
+         if(text[i] == ">"){
+          j=j+1
+         }
+    }
+    if(k > j){
+      text=text+">";
+    }
+
+    text=text.replace(/<\/?.+?>/g, "");
+    var text2=""
+
+     if(text.length <= 150){
+       return text;
+     }else{
+       for(var i=0;i<149;i++){
+        text2=text2+text[i];
+       }
+       text2=text2+"...";
+       return text2;
+     }
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="老来网，一个基于社区提供公共服务、头条资讯、在线直播、线上课堂、社交活动等综合性服务的平台">
+    <meta name="keywords" content="老来网,老来网头条,老来网APP,社保认证,养老金,健康资讯,退休,养生,娱乐,视频,直播,老人交友,社区服务,老人购物,在线课堂,老年大学">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" Keywords="1111">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/lib/layui/layui.all.js"></script>
+    <script src="./js/lib/mock.min.js"></script>
+    <script src="./js/mockdata/index.data.js"></script>
+    <script src="./js/llwhelp.js"></script>
+    <script src="./js/utils.js"></script>
+    <title>【老来网】不负年华，再出发</title>
+</head>
+<body>
+  <script id="tp_nav" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="{{item.url}}">
+      <li class="channel-item menus {{item.id==7?'mast':''}}" data-id="{{item.id}}">
+        {{item.channelName}}
+      </li>
+    </a> 
+    {{#  }); }}
+</script>
+
+<script id="tp_right_list_ul" type="text/html">
+  {{#  layui.each(d.list, function(index, item){ }}
+<li class="right_list_li">
+    <div class="right_list_li_div" style="{{index==4? 'border-bottom:0':'border-bottom: 1px solid rgba(232, 232, 232)'}}">
+      <p class="right_list_li_div_top">{{item.text}}</p>
+      <p class="right_list_li_div_bottom">{{item.time}}</p>
+    </div>
+  </li>
+    
+  {{#  }); }}
+  {{#  if(d.list.length === 0){ }}
+    无数据
+  {{#  } }}  
+</script>
+<script id="tp_HDXQ_list_a" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}
+  <li class="HDXQ_list_a_li">
+   <img src="{{item}}"/>
+  </li>
+  {{#  }); }}
+
+</script>
+<!-- 遮罩层 -->
+<div style="display: none;" id='mask'></div>
+<div class="header">
+  <div class="activity_cjhd_div" style="display: none;">
+    <div class="activity_cjhd_div_top">
+      <div class="activity_cjhd_div_top_left">参加活动</div>
+      <div class="activity_cjhd_div_top_right"><button id="activity_cjhd_button">x</button></div>
+    </div>
+    <div class="activity_cjhd_div_center">
+      <div class="activity_cjhd_div_center_top">活动感受</div>
+      <div class="activity_cjhd_div_center_bottom">
+        <div class="activity_cjhd_text"> <textarea id="cjhd_text"></textarea></div>
+        <div class="activity_cjhd_button">
+          <div class="title-bottom_left_img" style="display: block;">
+            <img src="images/img.png">
+            <div class="title-bottom_left_img_span" style="display: block;">
+              <button class="activity_title-bottom_left_img_span_button" id="button_img">
+                <p class="activity_cjhd_p">上传图片</p>
+              </button></div>
+            <div class="pl_input_div_imgs" style="display: none;">
+              <div class="input_div_imgs_div_top" style="display: block;"><p>本地上传</p></div>
+              <div class="input_div_imgs_div_center" style="display: block;"><p id="text_p">共&nbsp;0&nbsp;张，还能上传&nbsp;9&nbsp;张</p></div>
+              <div class="input_div_imgs_div_buttom" style="display: block;"> 
+                <ul id="input_div_imgs_div_buttom_ul">
+
+                </ul>
+
+                <div class="input_div_imgs_div_buttom_li_one" style="display: block;">                                         
+                  <div class="input_div_imgs_div_buttom_li_one_div" style="display: block;"><img src="images/tj.png">
+                    <label for="file_two" class="label_file_two"> &nbsp;&nbsp;&nbsp;&nbsp;                             
+                      <input id="file_two" type="file" name="filea" accept="video/*" style="display:none;">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="input_div_imgs_top" style="display: block;"></div>
+            </div>
+            
+            <div class="videoBox_div_bottom_left_a" style="display: block;">
+              <a id="Video">
+                <div class="videoBox_div_bottom_left_a_img" style="display: block;"><img src="images/TK.png"></div>
+                <div class="videoBox_div_bottom_left_div" style="display: block;"><p>添加视频</p></div>
+                <div class="hd_videoBox_div_bottom_left_a_top" style="display: none;">
+                  <span class="myloading" style="display: none;">
+                    <div class="content">
+                        <img src="./images/loading-1.gif" />
+                    </div>
+                  </span>
+                  <div class="videoBox_div_bottom_left_a_top_top" style="display: block;"></div>
+                  <div class="videoBox_div_bottom_left_a_top_top_top" style="display: block;"><p>上传视频（横版视频）</p></div>
+                  <div class="videoBox_div_bottom_left_a_top_top_center" style="display: block;"><p>发布的视频将展示在PC端视频栏目和个人中心</p></div>
+                  <div class="videoBox_div_bottom_left_a_top_top_bottom" style="display: block;">
+                    <div class="videoBox_div_bottom_left_a_top_top_bottom_div" style="display: block;">
+                    <div class="videoBox_div_bottom_left_a_top_top_bottom_div_left" style="display: block;">  
+                      <img src="images/GX26.png" style="margin: 0;">
+                      <label for="file_three" class="label_file_three"> &nbsp;&nbsp;&nbsp;&nbsp;                             
+                        <input id="file_three" type="file" accept="video/*" name="filea" style="display:none;">
+                      </label>
+                       </div>
+                      <div class="videoBox_div_bottom_left_a_top_top_bottom_right" style="display: block;">
+                        <p>大小不超8G，建议720P及以上分辨率</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+         
+         
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="activity_cjhd_div_bottom">
+      <div class="activity_cjhd_div_bottom_b1"><button onclick="campaign()">确定</button></div>
+      <div class="activity_cjhd_div_bottom_b2"><button>取消</button></div>
+    </div>
+  </div>
+  <div class="header_div_left_XZ">下载APP
+    <span class="mc_div_title_red"></span>
+    <div class="mc_div_XZ" >
+      <div class="mc_div_title">老来网APP下载</div>
+      <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+      <div class="input_div_imgs_top" style="display: block;"></div>
+          </div>
+  </div>
+  <div class="header_div_left"><a >微信公众号</a>
+    <div class="mc_div" >
+      <div class="mc_div_title">微信公众号：老来网APP</div>
+      <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+      <div class="input_div_imgs_top" style="display: block;"></div>
+          </div>
+  </div>
+  <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
+  <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div>
+  <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+    <img class="header_div_img" src=""/></a>
+  </div>
+ </div>
+    <div  class="bodyer">
+      <div></div>
+        <div class="container container_detail">
+            <div  class="content container_left">
+              <div class="body_left_div">
+                <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+                <ul id="nav">
+                
+                </ul>
+              </div>
+            </div>
+            <div  class="content container_center">
+    
+                <div class="HDXQ_list_div">
+                  <div  class="HD_list_div_left"><img src=""/>
+                    <div class="HD_list_div_left_P" style="display: none;">已报名</div>
+                    <div class="HD_list_div_left_div" style="display: none;">活动结束</div>
+                  </div>
+                  <div class="HD_list_div_right" style="margin-left: 20px;">
+                    <div class="HD_list_div_right_title"><p>分享2020年的愿望，拥抱希望开始新的一年!</p></div>
+                    <div class="HDXQ_list_div_right_p">
+                     <p>活动时间</p>
+                     <p id="time">2019-10-10  9:00~2019-12-12 9:00</p>
+                    </div>
+                    <div class="HD_list_div_right_div_p ">
+                   <p class="HD_list_div_right_div_p_a">参加方式：线上活动</p>
+                   <p class="HD_list_div_right_div_p_b">活动类型：其他</p>
+                   <p class="HD_list_div_right_div_p_c">主办方：老来网</p>
+                    </div>
+                    <div class="HD_list_div_right_button">
+                      <div class="HD_list_div_right_button_left">
+                        <button class="HD_list_type0" style="line-height: 34px;border-radius: 5px;">立即参加</button>
+                        <button class="HD_list_type1" style="display: none;">已参加</button>
+                        <button class="HD_list_type2" style="display: none;">活动结束</button>
+                      </div>
+                      <div class="HD_list_div_right_button_right" style="line-height: 34px;">
+                        <button onclick="chatClick()" style="border-radius: 5px;">进入群聊</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               <div class="HDXQ_count">
+                 <p>已有299人参加</p>
+               </div>
+               <div class="HDXQ_list_a_div">
+                 <ul id="HDXQ_list_a"></ul>
+                 <span class="HDXQ_list_a_div_span"></span>
+               </div>
+               <div class="HDXQ_center_div">
+                 <div class="HDXQ_center_div_title">活动规则</div>
+                 <div class="HDXQ_center_div_text">
+                   <p></p>
+                 </div>
+               </div>
+               <div class="HDXQ_bottom_div">
+                <div class="HDXQ_center_div_title">参与人数</div>
+                <div class="HDXQ_bottom_div_text">
+                 
+                </div>
+               </div>
+               </div>
+
+            <div  class="content container_right">
+            <div class="right_div right_div_details">
+              <div class="HDXQ_right_top">
+              <div  class="HDXQ_right_list_title">
+                <p>最热活动</p>
+              </div >
+              <div class="right_list_div">
+                <ul id="right_list_ul"></ul>
+              </div>
+            </div>
+            <!-- <div class="right-iframe-img right-iframe-img-details">
+              <img  src="images/QQ截图20181217141157.png"/></div>
+            </div> -->
+              <!-- <div class="right-iframe-img" style="margin-top: 20px;"> 
+              <div class="right-iframe-img_left"><img id="lbt" src=""/></div>
+              <div class="right-iframe-img_right">
+                <div class="right-iframe-img_right_top"><img  src="images/JT1.png"/></div>
+                <div class="right-iframe-img_right_bottom">
+                  <ui id="LBT_list"></ui>
+                </div>
+              </div>
+              </div> -->
+            </div>
+            <div class="clearx">
+
+            </div>
+        </div>
+    </div>
+      <!-- 进入群聊 -->
+      <div style="display: none;" class="chat">
+        <div class="chat-title">
+          <div>进入聊群</div>
+          <img onclick="chatBut()" src="images/取消 (3).png"/>
+        </div>
+       <div class="chat-con">
+        <div class="chat-con-title">说明：为了方便您在线聊天，请在老来网APP上进行操作</div>
+        <div class="chat-con-operation">
+         <div>
+           <p>1、老来网app下载地址</p>
+           <img src="./images/erweima.png"/>
+           <span>若已下载请忽略本步骤</span>
+         </div>
+         <div style="width: 38%;"> 
+           <p>2、扫码查看活动详情</p>
+           <img  src="./images/erweima2.png"/>
+           <span>打开老来网App进入”首页“，点击页面右上角 的“+”打开“扫一扫”扫描上方二维码</span>
+         </div>
+         <div style="width: 35%;">
+           <p>3、点击进入聊群</p>
+           <img style="margin-bottom: 20px;" src="./images/xiagnqing.png"/>
+           <span>注：若无此按钮请先点击页面下方 的“参加活动”先参加活动</span>
+         </div>
+        </div>
+       </div>
+       <div class="chat-but" onclick="chatBut()">知道了</div>
+      </div>
+
+    <script id="tp_LBT_list" type="text/html">
+      {{#   layui.each(d.list.img_list, function(index,item){ }} 
+      <li lid={{d.list.lid}} class="LBT_list_li">
+        <div class="LBT_list_div">
+          <button class="LBT_list_div_bt" onclick="asasa({{index}})" ></button>
+        </div>
+    </li>  
+      {{#  }); }}
+      {{#  if(d.list.length === 0){ }}
+        无数据
+      {{#  } }}  
+     
+    </script>
+          <!-- 评论 -->
+    <script id="comment_list" type="text/html">
+       {{#  layui.each(d.momentsList, function(index,item){ }}
+         <div class="HDXQ_bottom_div_text_comment">
+           <div class="HDXQ_bottom_div_text_comment_top">
+             <img class="headIcon" src="{{item.userInfo.headIcon}}">
+             <div class="comment">
+               <div class="comment_top">
+                 <div class="comment_top_left">
+                   <div class="title">{{item.userInfo.nickName}}</div>
+                   <div class="date">{{item.userInfo.timeDesc}}</div>
+                 </div>
+                 {{# if(item.momentsInfo.isLiked!=1){ }}
+                 <div onclick="likeClick({{item.momentsId}},{{index}})" class="comment_top_right likeComment">
+                   <img src="./images/DZ (7).png">
+                   <div>点赞</div>
+                 </div>
+                 {{# }else{ }}
+                 <div  onclick="cancelLikeClick({{item.momentsId}},{{index}})" class="comment_top_right cancelComment">
+                  <img src="./images/DZ (2).png">
+                  <div>点赞</div>
+                </div>
+                {{# } }}
+               </div>
+               <div class="content">{{item.title}}</div>
+               <div class="comment-but">
+                 <span onclick="commentBut({{item.momentsId}},{{index}})">回复</span>
+                 {{# if(!!item.commentsInfo){ }}
+                  <span class="pack-up-comment"  onclick='packUpComment({{index}})' style="display:none;">收起回复</span>
+                  <span class="shut-comment"  onclick='shutComment({{index}})'>{{item.commentsInfo.list.length}}条回复</span>
+                 {{# }else{ }}
+                 <span class="pack-up-comment"  onclick='packUpComment({{index}})' style="display:none;">收起回复</span>
+                 <span class="shut-comment"  onclick='shutComment({{index}})' style="display:none;">0条回复</span>
+                 {{#      }  }}
+               </div>
+               {{# if(!!item.commentsInfo){ }}
+              <div style="display:none;" class="below-list">
+                {{# layui.each(item.commentsInfo.list, function(i,value){ }}
+                  <div class="below">
+                    <img class="headIcon" src="{{value.headIcon}}">
+                    <div style="flex: 1;">
+                      <div class="comment_top_left">
+                        <div style="flex: 1;">
+                            <div class="title">{{value.name}}</div>
+                          <!-- <span class="title">用户xx<span style="margin:0 5px;font-size: 14px;">回复</span>@{{item.userInfo.nickName}}</span>
+                          <span class="date">24tian</span> -->
+                        </div>
+                        {{# if(value.isLiked!=1){ }}
+                        <div onclick="likeClick({{value.momentsId}},{{i}})" class="comment_top_right likeComment">
+                          <img src="./images/DZ (7).png">
+                          <div>点赞</div>
+                        </div>
+                        {{# }else{ }}
+                        <div  onclick="cancelLikeClick({{value.momentsId}},{{i}})" class="comment_top_right cancelComment">
+                         <img src="./images/DZ (3).png">
+                         <div>点赞</div>
+                       </div>
+                       {{# } }}
+                      </div>
+                      <div class="content">{{value.comment}}</div>
+                  </div>
+                </div>
+                {{# }); }}
+              </div>
+              {{# }else{ }}
+              <div style="display:none;" class="below-list"> </ div>
+              {{#    }  }}
+              <!-- 回复列表 -->
+             
+             </div>
+           </div>
+          
+         </div>
+        {{#  }); }}
+        <div style="display:none" class="replyComment">
+          <textarea id="textarea-value"/>
+          <button onclick="replyComment()">回复评论</button>
+        </div>
+    </script>
+    <script>
+       
+      var $=layui.$; 
+      var cd="";
+      var llh =llw.getCookie('llh');
+      var bodyCH=$(window);
+      function sasas(){
+        $('#lbt').attr("src",LBT_arr[lbt_num].img);
+        if(lbt_num == LBT_arr.length-1){
+          lbt_num=0;
+        }else{
+          lbt_num=lbt_num+1;
+        }
+        if($(window).scrollTop() > 40){
+          $(".body_left_div").addClass("body_left_div_div");
+        }
+        if($(window).scrollTop() <= 40){
+          $(".body_left_div").removeClass("body_left_div_div");
+        }
+      }
+      // 参加活动
+      function campaign(){
+        console.log('ee')
+      }
+      // 进入聊群
+      function  chatClick(){
+        $(".chat").show();
+        $('#mask').show();
+      }
+      function chatBut(){
+        $(".chat").hide();
+        $('#mask').hide();
+      }
+      var lbt_num=0;
+      function asasa(index){
+        $('#lbt').attr("src",LBT_arr[index].img);
+        lbt_num=index+1;
+      }
+      $.ajax({
+        url: "LBT_list.php",         
+        dataType: 'json',
+        type: 'post',
+        success: function (resp) {   
+          LBT_arr=resp.list.img_list;
+          layui.laytpl($("#tp_LBT_list").html()).render(resp, function(html){
+              $("#LBT_list").html(html);
+              setInterval("sasas()",5000);
+              // llw.bindEvent("navEvent",".channel-item")
+          });
+        },
+        error: function (err) {
+        }
+      }); 
+      $("#right_list_button_one").click(function(){
+        list_d();
+      })
+      leftMenu2();
+      function leftMenu2() {
+        var that=this; 
+        var data={  
+          llh: ""
+         };
+
+        llw.api.ws("info.channel.get",data,function(rs){ //请求名,数据,回调方法,  
+        if(rs.data.respData){
+          var arr_sas=rs.data.respData.channelList;
+        var list_arr=[
+        {id:"1",url:"./index-follow.html"},
+    {id:"5",url:"#"},
+    {id:"6",url:"./index-Hotspot.html"},
+    {id:"11",url:"./index-video-list.html"},
+    {id:"10",url:"./index-Original.html"},
+    {id:"9",url:"./index-Healthy.html"},
+    {id:"12",url:"./index-Study.html"},
+    {id:"7",url:"./index-activity-list.html"},   
+    {id:"13",url:"#"}    
+        ] 
+        for (let index = 0; index < arr_sas.length; index++) {
+         var element = arr_sas[index];
+         arr_sas=arr_sas.filter(item=>(item.id!==13&&item.id!==7))
+          for (var j=0;j<list_arr.length;j++) {
+           if(element.id==list_arr[j].id){
+             element.url=list_arr[j].url;
+           }             
+          }        
+        }
+         
+          layui.laytpl($("#tp_nav").html()).render(rs.data.respData.channelList, function(html){
+            $("#nav").html(html);
+            $("#nav").on('click', ".menus", function (e) {
+              $(this).addClass("mast").siblings().removeClass("mast");           
+   
+              getPlList()
+            })
+          });
+        }
+   
+        },function(err){
+          console.log(err)
+        })
+      }
+      // $.ajax({
+      //     url: "nav.php",         
+      //     dataType: 'json',
+      //     type: 'post',
+      //     success: function (resp) {     
+                       
+      //       layui.laytpl($("#tp_nav").html()).render(resp, function(html){
+      //           $("#nav").html(html);
+      //       });
+      //     },
+      //     error: function (err) {
+           
+      //     }
+      // });
+      $(".center_list_one_li").find("span").on("click",function(){
+       $(this).parent().siblings().find("div").hide();
+       $(this).siblings().show();
+       $(this).siblings().find("div").show();
+       $(".center_list_one_li").removeClass("center_list_one_li_click");
+       $(this).parent().addClass("center_list_one_li_click");
+       cd=$(this).parent().index();
+      });
+
+      list_d();
+     function list_d(){
+      $.ajax({
+          url: "right_list_ul.php",         
+          dataType: 'json',
+          type: 'post',
+          success: function (resp) {         
+            layui.laytpl($("#tp_right_list_ul").html()).render(resp, function(html){
+                $("#right_list_ul").append(html);
+            });
+          },
+          error: function (err) {
+           
+          }
+      });
+     }
+     $(".HDXQ_list_a_button").click(function(){
+      HDXQ_list_a();  
+     })
+ 
+
+     $(".header_div_left").mouseover(function(){
+  $(".mc_div").show();
+})
+
+$(".header_div_left").mouseout(function(){
+ $(".mc_div").hide();
+})
+
+$(".header_div_left_XZ").mouseover(function(){
+  $(".mc_div_XZ").show();
+})
+
+$(".header_div_left_XZ").mouseout(function(){
+ $(".mc_div_XZ").hide();
+})
+ var urlId = window.location.search.slice(1)
+//  点赞
+function likeClick(id,index){
+  if(llw.isLogin){
+    llw.api.ws('friend.common.like.add',{
+    "likeId": id,
+		"llh": llw.getCookie('llh'),
+		"likeType": "momentsId"
+  },function(rs){
+    if(rs.data.respCode===0){
+      comment()
+    }
+    console.log(rs)
+  })
+  }else{
+     llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+    
+  }
+
+}
+function cancelLikeClick(id,index){
+  if(llw.isLogin){
+  llw.api.ws('friend.common.like.del',{
+    "likeId": id,
+		"llh": llw.getCookie('llh'),
+		"likeType": "momentsId"
+  },function(rs){
+    if(rs.data.respCode===0){
+      comment()
+    }
+    console.log(rs)
+  })
+}else{
+     llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+    
+  }
+}
+var commentButId;
+// 点击回复
+function commentBut(id,i){
+    $(".replyComment").show()
+    commentButId=id
+}
+// 回复评论
+function replyComment(){
+  console.log( !!$('#textarea-value').val())
+ var textareaValue= $('#textarea-value').val()
+ if(!!textareaValue&&textareaValue.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length != 0){
+   llw.api.ws('friend.moments.comment.add',{
+		"contentId": commentButId,
+		"commentType": "momentsId",
+		"replyId": null,
+		"llh": llw.getCookie('llh'),
+		"content": textareaValue,
+   },function(res){
+     if(res.data.respCode==0){
+      comment();
+      $('#textarea-value').val('')
+     }
+     console.log(res)
+   })
+ }
+}
+// 活动详情
+gzzzz()
+function gzzzz(){
+  
+  data={
+    llh:llw.getCookie('llh'),
+    activityId:urlId,
+    pageNo:1,
+    pageSize:1
+  }
+  
+   llw.api.ws("friend.activity.info.get",data,function(rs){ //请求名,数据,回调方法,
+    var item =rs.data.respData;
+    console.log(item);
+    $(".HD_list_div_right_title p").text(item.activityName);
+    $("#time").text(item.startTime+"~"+item.endTime);
+    if(item.activityType == 0){
+      $(".HD_list_div_right_div_p_a").text("参加方式：线上活动");
+    }else{
+      $(".HD_list_div_right_div_p_a").text("参加方式：线下活动");
+    } 
+      $(".HDXQ_count p").text("已有"+item.peopleCount+"人参加"); 
+      $(".HDXQ_center_div_text p").html(item.rule);
+      $(".HD_list_div_right_div_p_c").text("主办方："+item.unit);
+      $(".HD_list_div_left img").attr("src",item.listCover);
+      if(item.buttonStatus =="活动结束"){
+      $(".HD_list_type2").show();
+      $(".HD_list_div_left_div").show();
+      $(".HD_list_type0").hide();
+      $(".HD_list_type1").hide();
+      }else{
+        if(item.commonInfo.isSigned == 0){
+          $(".HD_list_type0").show();
+          $(".HD_list_type1").hide();
+          $(".HD_list_type2").hide();
+          $(".HD_list_div_left_P").hide();
+        }else{
+          $(".HD_list_type0").hide();
+          $(".HD_list_type1").show();
+          $(".HD_list_type2").hide();
+          $(".HD_list_div_left_P").show();
+        }
+      }
+      layui.laytpl($("#tp_HDXQ_list_a").html()).render(item.headIcons, function(html){
+                $("#HDXQ_list_a").html(html);
+            });
+        },function(err){
+          console.log(err)
+        })
+}
+
+
+// 评论
+comment()
+function comment(){
+  llw.api.ws('friend.activity.detail.get',{
+    "activityId":urlId,
+		"pageNo": 1,
+		"pageSize": 10,
+    "llh": llw.getCookie('llh')||''
+  },function(res){
+    console.log(res.data.respData)
+    layui.laytpl($('#comment_list').html()).render(res.data.respData,function(html){
+      $(".HDXQ_bottom_div_text").html(html);
+    })
+  })
+}
+// 收起评论
+
+user_Land()
+function user_Land(){
+  llw.Login();
+  llh =llw.getCookie('llh');
+  if(llw.isLogin){
+    $(".outer_div_div").hide();
+    $(".outer_div_div_DL").show();
+    $(".header_div_right").eq(2).hide();
+    $(".header_div_right").eq(3).hide();
+    $(".header_div_right").eq(4).show();
+    $(".header_div_right").eq(5).show();
+    data={
+    llh:llh,
+    selectLlh: llh
+  }
+  llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  
+    $("#user_name").html(rs.data.respData.nickName);
+    $(".outer_div_div_DL_img img").attr("src", rs.data.respData.headIcon);
+    $(".header_div_img").attr("src", rs.data.respData.headIcon);
+         },function(err){
+   }) 
+      }else{
+    $(".outer_div_div_DL").hide();   
+    $(".outer_div_div").show();  
+    
+  }
+}
+$(".outer_div_div_DL_img img").click(function(){
+  window.open('./index-personal-Article.html?llh='+llh);
+})
+function packUpComment(index){
+  $(".pack-up-comment").eq(index).hide();
+ $('.shut-comment').eq(index).show()
+ $('.below-list').eq(index).hide()
+}
+//展开评论
+function shutComment(index){
+  console.log(index)
+ $('.pack-up-comment').eq(index).show()
+ $('.shut-comment').eq(index).hide()
+ $('.below-list').eq(index).show()
+}
+//个人主页基本信息 
+function ceshi2(){
+  data={
+    llh:llw.getCookie('llh')
+  }
+          llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,
+            console.log(err)
+        },function(err){
+          console.log(err)
+        })
+}
+
+//个人主页列表 
+function ceshi3(){
+  data={
+    llh:llw.getCookie('llh'),
+    pageNo:1,
+    pageSize:10
+  }
+          llw.api.ws("friend.user.moments.list.get",data,function(rs){ //请求名,数据,回调方法,
+            console.log(err)
+        },function(err){
+          console.log(err)
+        })
+}
+
+//cookie取值
+function cokie(){
+  $.cookie('token');
+}
+
+//显示上传视频显示，隐藏
+var Video_div=false;
+$("#Video").click(function(){
+  img_div=false
+  $(".pl_input_div_imgs").hide();//隐藏
+   if(!Video_div){
+   $(".hd_videoBox_div_bottom_left_a_top").show();//显示
+   Video_div=true;
+   }else{
+   $(".hd_videoBox_div_bottom_left_a_top").hide();//隐藏
+   Video_div=false;
+   }
+})
+
+//上传图片显示，隐藏
+var img_div=false;
+$("#button_img").click(function(){
+  $(".hd_videoBox_div_bottom_left_a_top").hide();//隐藏
+  Video_div=false
+   if(!img_div){
+   $(".pl_input_div_imgs").show();//显示
+
+   img_div=true;
+   }else{
+   $(".pl_input_div_imgs").hide();//隐藏
+   img_div=false;
+   }
+})
+//图片显示
+$("#file_two").change(function(re){
+  var b=$(".input_div_imgs_div_buttom_li").length+1;
+  if(b<=9){
+  var file=this.files[0];
+  if(window.FileReader){
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload=function(e){
+  var formData=new FormData();
+  formData.append('file', $("#file_two")[0].files[0]);  /*获取上传的图片对象*/
+ img_sc(formData);
+                    }
+                }
+         var c=9-b;
+         var aa=" ";
+         var d="共"+aa+b+aa+"张，还能上传"+aa+c+aa+"张"
+         $("#text_p").text(d);
+        }else{
+          layer.msg("已经9张照片");
+        }
+        })
+
+// 图片上传服务器
+function img_sc(img){
+  data=img;
+  $.ajax({
+      url:llw.api.options.articleurl+"//file/appUploadFile.jspx?relativePath=llh/article",
+      data:data,
+      dataType:'json',
+      type:'post',
+      processData: false,//用于对data参数进行序列化处理 这里必须false
+      contentType: false, //必须
+      success: function (resp){
+        $("#input_div_imgs_div_buttom_ul").prepend("<li class='input_div_imgs_div_buttom_li'><img src=\""+resp.respData.src+"\" /> </li>");
+      },
+        error:function(err){ 
+          layer.msg("上传失败");
+             }
+      });
+}
+
+$("#file_three").change(function(re){
+          var file=this.files[0];
+          if(window.FileReader){
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload=function(e){
+                      var formData=new FormData();
+                    formData.append('file', $("#file_three")[0].files[0]);  /*获取上传的图片对象*/
+                    var si=$("#file_three")[0].files[0].size;
+                    var ze=si/(1024 * 1024 * 1024);
+                    if(ze >= 1){
+                      layer.msg("此视频超过1G");
+                      return
+                    }
+                    video_sc(formData);
+                    }
+                }
+        })
+
+var video_name="";  //长视频URL
+        function video_sc(img){
+          $(".myloading").show()
+  data=img;
+  $.ajax({
+      url:llw.api.options.articleurl+"//file/appUploadFile.jspx?relativePath=llh/article",
+      data:data,
+      dataType:'json',
+      type:'post',
+      processData: false,//用于对data参数进行序列化处理 这里必须false
+      contentType: false, //必须
+      success: function (resp){
+        $(".myloading").hide()
+        var html='<span class="video-div" ><div class="img_del4" style="display: flex;">x</div><video src="'+resp.respData.src+'" ></video></span>'
+        $(".hd_videoBox_div_bottom_left_a_top").eq(0).append(html);
+        video_name=resp.respData.src;
+        $(".img_del4").click(function(){
+          $(".video-div").remove()
+          video_name="";
+          $("#file_three").val("")
+        })
+      },
+        error:function(err){ 
+          layer.msg("上传失败");
+          $(".myloading").hide()
+             }
+      });
+
+    }
+//点击参加活动弹框取消按钮
+    $(".activity_cjhd_div_bottom_b2 button").click(function(){
+      $(".activity_cjhd_div").hide();
+      $(".pl_input_div_imgs").hide();//隐藏
+      $(".hd_videoBox_div_bottom_left_a_top").hide();//隐藏
+    })
+//点击参加活动弹窗X
+$("#activity_cjhd_button").click(function(){
+      $(".activity_cjhd_div").hide();
+      $(".pl_input_div_imgs").hide();//隐藏
+      $(".hd_videoBox_div_bottom_left_a_top").hide();//隐藏
+      $('#mask').hide();
+    })
+//点击立即参加按钮
+$(".HD_list_type0").click(function(){
+  $('#mask').show();
+  $(".activity_cjhd_div").show();
+})
+   
+//活动评论列表
+function hd_pl(){
+  data={
+    llh:llh,
+    activityId:62,
+    pageNo:1,
+    pageSize:1
+  }
+          llw.api.ws("friend.activity.detail.get",data,function(rs){ //请求名,数据,回调方法,
+        },function(err){
+          console.log(err)
+        })
+}
+
+// 查询个人主页基本信息
+function user_count(){
+  data={
+    selectLlh: llh,
+    llh:llh,
+  }
+          llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,
+
+        },function(err){
+          console.log(err)
+        })
+
+}
+</script>
+</body>
+</html>

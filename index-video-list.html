@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="老来网，一个基于社区提供公共服务、头条资讯、在线直播、线上课堂、社交活动等综合性服务的平台">
+    <meta name="keywords" content="老来网,老来网头条,老来网APP,社保认证,养老金,健康资讯,退休,养生,娱乐,视频,直播,老人交友,社区服务,老人购物,在线课堂,老年大学">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <script src="./js/lib/layui.all.js"></script>
+    <script src="./js/lib/mock.min.js"></script>
+    <script src="./js/mockdata/index.data.js"></script>
+    <script src="./js/llwhelp.js"></script>
+    <script src="./js/utils.js"></script>
+    <title>【老来网】不负年华，再出发</title>
+</head>
+<body>
+  <script id="tp_nav" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="{{item.url}}">
+      <li class="channel-item menus {{item.id==11?'mast':''}}" data-id="{{item.id}}">
+        {{item.channelName}}
+      </li>
+    </a> 
+    {{#  }); }}
+</script>
+
+<script id="tp_list_tuo" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}  
+  {{# if(index<5){ }}  
+  {{#  if((index+1)==d.length){   }}
+    <li  class="list_tuo_li">
+      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','11')"> 
+      <div  class="list_tuo_li_a_div" >
+        {{# if(item.coversType!=0){ }}
+        <img src="{{item.coverImgList[0]}}"/>
+        {{#  }   }}
+      </div>
+      <div  class="list_tuo_li_a_divtwo" >
+      <p>{{item.title}}<p>
+      </div>
+    </div>            
+        </li> 
+  {{#  }else{  }}
+    <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
+      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','11')"> 
+      <div class="list_tuo_li_a_div" >
+        {{# if(item.coversType!=0){ }}
+        <img src="{{item.coverImgList[0]}}"/>
+        {{#  }   }}
+      </div>
+      <div class="list_tuo_li_a_divtwo">
+      <p >{{item.title}}<p>
+       
+      </div>
+    </div>            
+        </li> 
+   {{#   }   }}
+   {{#   }   }}
+
+  {{#  }); }}
+  {{#  if(d.length === 0){ }}
+    无数据
+  {{#  } }}   
+</script>
+
+  <script id="tp_sss" type="text/html">
+
+
+    {{#  layui.each(d.list, function(index, item){ }}
+    {{#  if(index != 1){ }}
+    
+    <li>
+      <div style="width:50% ;height:62px ;padding-right:13px;float:left;">
+       <div style="width:100%;height:32px;float:right"><img style="height:36px;width:36px;border-radius:50%; float:right" src="{{item.imga}}" /></div> 
+       <div style="text-align:center;width:36px;height:36px;float:right;padding-top:5px;font-size:12px; color:#777">{{item.name}}</div> 
+      </div>       
+  </li> 
+    {{#  }else{ }}
+ 
+    <li>
+      <div style="width:50% ;height:62px; padding-left:13px;float:left;">
+       <div style="width:100%;height:32px;float:left"><img style="height:36px;width:36px;border-radius:50%; float:left" src="{{item.imga}}" /></div> 
+       <div style="text-align:center;width:36px;height:36px;float:left;padding-top:5px;font-size:12px;color:#777">{{item.name}}</div> 
+      </div>       
+  </li>  
+    {{# } }}  
+      
+    {{#  }); }}
+    {{#  if(d.list.length === 0){ }}
+      无数据
+    {{#  } }}  
+   
+</script>
+<script id="tp_imgs" type="text/html">
+  {{#   layui.each(d, function(index,item){ }}
+  {{# if(index<5){ }}
+  {{#  if(index==0){   }}
+  <li class="one_list_three_li">
+  <div class="list_three_li_left">
+    <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+      <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+    </a>
+  </div>
+    <div class="list_three_li_center">
+      <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+      <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+    </div>
+    <div class="list_three_li_center_right">
+      <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+      <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+    </div>
+  </li>
+  
+  {{#  }else{ }}
+  {{#  if(!((index+1)==(d.length))){ }}
+  <li  class="list_three_li" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
+    <div class="list_three_li_left">
+      <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+        <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+      </a>
+    </div>
+      <div class="list_three_li_center">
+        <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+        <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+      </div>
+      <div class="list_three_li_center_right">
+        <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+        <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+      </div>
+    </li>  
+    {{#  }else{ }}
+    <li class="max_list_three_li">
+      <div class="list_three_li_left">
+        <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+          <div class="list_three_li_bottom"><img src="images/矢量智能对象.png"></div>
+        </a>
+      </div>
+        <div class="list_three_li_center">
+          <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+          <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
+        </div>
+        <div class="list_three_li_center_right">
+          <button class="GZ_list_button_one" index="{{index}}" id="{{item.llh}}">关注</button>
+          <button class="GZ_list_button_two" id="{{item.llh}}" index="{{index}}" style="display:none">已关注</button>
+        </div>
+      </li>
+    {{# } }}  
+    {{# } }}  
+    {{# } }}  
+    {{#  }); }}
+    {{#  if(d.length === 0){ }}
+      无数据
+    {{#  } }}  
+  </script>
+<script id="tp_ugcBox_tab_current" type="text/html">
+  {{#  layui.each(d.list)                                }}
+</script>
+<script id="tp_SP_list" type="text/html">
+  {{#  layui.each(d, function(index, item){ }}
+ <li class="center_list_b_li">
+  <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+   <div class="center_list_b_top"><img src ="{{item.coverImgList}}" /> <div class="center_list_b_top_mc"><img src="./images/btn.png" /></div></div>
+   <div class="center_list_b_center"><p>{{item.title}}</p></div>
+   <div class="center_list_b_bottom">
+    
+      {{#   if(item.headIcon  !=  undefined) {                  }}
+      <div class="center_list_b_bottom_a"> 
+      <img  src="{{item.headIcon}}" />
+    </div> 
+      {{#    }          }}
+     <div class="center_list_b_bottom_b">
+       
+      {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+      <a href="#"  >该作者已注销</a>
+      {{#     }else {            }}
+      {{#     if(item.nickName) {  }}
+      <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+      {{#     }else{           }}
+      <a href="#"  >{{item.source}}</a>
+      {{#     }          }}
+      {{#     }                  }}
+    
+    </div>
+     <div class="center_list_b_bottom_right">
+     <div class="center_list_b_bottom_c"><img src="images/播放 (6).png"/></div>
+     <div class="center_list_b_bottom_d"><a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank"><p>{{(item.fakeViewNum)?item.fakeViewNum:0}}</p></a></div>
+     <!-- <div class="center_list_b_bottom_e"><img src="images/组 3@2x.png"/></div>
+     <div class="center_list_b_bottom_f"><p>{{item.viewNum? item.viewNum:0}}</p></div> -->
+     </div>
+   </div>
+  </a>
+ </li>
+    
+  {{#  }); }}
+  {{#  if(d.length === 0){ }}
+    无数据
+  {{#  } }}  
+</script>
+<script id="tp_LBT_list" type="text/html">
+  {{#   layui.each(d.list.img_list, function(index,item){ }} 
+  <li lid={{d.list.lid}} class="LBT_list_li">
+    <div class="LBT_list_div">
+      <button class="LBT_list_div_bt" onclick="asasa({{index}})" ></button>
+    </div>
+</li>  
+  {{#  }); }}
+  {{#  if(d.list.length === 0){ }}
+    无数据
+  {{#  } }}  
+ 
+
+</script>
+<div class="header">
+  <div class="header_div_left_XZ">下载APP
+    <span class="mc_div_title_red"></span>
+    <div class="mc_div_XZ" >
+      <div class="mc_div_title">老来网APP下载</div>
+      <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+      <div class="input_div_imgs_top" style="display: block;"></div>
+          </div>
+  
+
+  </div>
+  <div class="header_div_left"><a >微信公众号</a>
+    <div class="mc_div" >
+      <div class="mc_div_title">微信公众号：老来网APP</div>
+      <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+      <div class="input_div_imgs_top" style="display: block;"></div>
+          </div>
+  </div>
+  <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
+  <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
+  <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+    <img class="header_div_img" src=""/></a>
+  </div>
+ </div>
+    <div  class="bodyer">
+        <div class="containera">
+            <div  class="contenta container_left">
+              <div class="body_left_div">
+                <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+                <ul id="nav">
+                
+                </ul>
+            </div>
+          </div>
+            <div  class="contenta container_center">
+                <div class="bui-left index-content">
+                  <div class="searchbox_div"  >
+                    <div class="searchbox" >
+                      <input  id="input_aaa"placeholder="请输入要搜索的内容" type="text"  />
+                    </div>
+                    <div class="searchbox_input"   >
+                      <button id="seachBtn">搜索</button>
+                    </div>
+                    </div>
+                    <div class="ugcBox "></div>
+                   
+                    <ul id="SP_list">
+
+                    </ul>
+                </div>
+                <div class="loading-list">
+                  <!-- <img src='./images/shuaxin.png' /> -->
+                  <img src="./images/shuaxin.png" />
+                  <div>正在加载中</div>
+                </div>
+                
+            </div>
+            <div  class="contenta container_right">
+
+              <div class="outer" >
+               <div class="outer_div" >
+                  <div class="outer_div_div" >
+                    <div class="outer_div_div_p"><p>
+                      登录后可以保存您的浏览喜好、评论、收藏，并与APP同步，更可发布文章、美图
+                    </p></div>
+                    <div class="outer_div_div_button">
+                      <button ><a class="index_a" onclick="llw.toHerf('/common/login.html?type=topWeb')"  target="_blank">登录</a></button>
+                    </div>
+                    <div class="outer_div_div_button_bottom">
+                      <button ><a class="index_a" href="http://dev.laolai.com:85/llh-bs/common/register.html"  target="_blank">注册</a></button>
+                    </div>
+                  </div>
+                  <div class="outer_div_div_DL"  style="    display:none ">
+                    <div class="outer_div_div_DL_img"><img src=""/></div>
+                    <div class="outer_div_div_DL_name"><p id="user_name"></p></div>
+                    <div class="outer_div_div_DL_button"><button id="article">进入个人中心</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pane-module">
+              <div class="pane-module_title" >大家都在看</div>
+              <ul id="list_tuo">
+
+              </ul>
+              </div>
+              <!-- <div class="right-iframe-img"  >
+                <div class="right-iframe-img_left"><img id="lbt" src=""/></div>
+                <div class="right-iframe-img_right">
+                  <div class="right-iframe-img_right_top"><img  src="images/JT1.png"/></div>
+                  <div class="right-iframe-img_right_bottom">
+                    <ui id="LBT_list"></ui>
+                  </div>
+                </div> -->
+              <div class="list_three">
+                <div class="pane-module_title">作者推荐</div>
+              <ul id="imgs" >
+                
+              </ul>
+              </div>
+              <div class="list_rights">
+              </div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="clearx">
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+       
+      var $=layui.$; 
+      var bodyCH=$(window);
+      var llh ;
+      $('#file').change(function(rs){
+
+        var file=this.files[0];
+        if(window.FileReader){
+                    //创建用来读取此文件的对象
+                    var reader = new FileReader();
+                    //使用该对象读取file文件
+                    reader.readAsDataURL(file);
+                    //读取文件成功后执行的方法函数
+                    reader.onload=function(e){
+                      
+                        //的base64编码格式的地址
+                        // $('#imgshow').get(0).src = e.target.result;
+                      
+                        document.execCommand('inserthtml', false, `<img src=${e.target.result} style='width:100px;height:100px'>`);
+                    }
+                }
+ 
+        })
+   
+      var llws={
+         bindEvent:function(event,o){            
+               this[event].bind($(o))();     
+         },
+         navEvent:function(){             
+            this.mouseover(function(){
+                $(this).addClass("hover")
+            }).mouseout(function(){
+                $(this).removeClass("hover")
+            })
+         }         
+      }
+      leftMenu2();
+      function leftMenu2() {
+        var that=this; 
+        var data={  
+          llh: ""
+         };
+
+        llw.api.ws("info.channel.get",data,function(rs){ //请求名,数据,回调方法,  
+         var arr_sas=rs.data.respData.channelList;
+         arr_sas=arr_sas.filter(item=>item.id!==13);
+        var list_arr=[
+          {id:"1",url:"./index-follow.html"},
+          {id:"5",url:"../../index-pc.html"},
+          {id:"6",url:"./index-Hotspot.html"},
+          {id:"11",url:"#"},
+          {id:"10",url:"./index-Original.html"},
+          {id:"9",url:"./index-Healthy.html"},
+          {id:"12",url:"./index-Study.html"},
+          {id:"7",url:"./index-activity-list.html"},   
+          {id:"13",url:"#"}   
+        ] 
+        for (let index = 0; index < arr_sas.length; index++) {
+         var element = arr_sas[index];
+         arr_sas=arr_sas.filter(item=>(item.id!==13&&item.id!==7))
+          for (var j=0;j<list_arr.length;j++) {
+           if(element.id==list_arr[j].id){
+             element.url=list_arr[j].url;
+           }             
+          }        
+        }
+         
+          layui.laytpl($("#tp_nav").html()).render(arr_sas, function(html){
+            $("#nav").html(html);
+            llws.bindEvent("navEvent",".channel-item")
+            $("#nav").on('click', ".menus", function (e) {
+              $(this).addClass("mast").siblings().removeClass("mast");           
+   
+              getPlList()
+            })
+          });
+        },function(err){
+          console.log(err)
+        })
+      } 
+      $.ajax({
+          url: "sss.php",         
+          dataType: 'json',
+          type: 'post',
+          success: function (resp) {          
+            layui.laytpl($("#tp_sss").html()).render(resp, function(html){
+                $("#sss").html(html);
+                // llw.bindEvent("navEvent",".channel-item")
+            });
+          },
+          error: function (err) {
+           
+          }
+      });  
+      var LBT_arr=[];
+$.ajax({
+  url: "LBT_list.php",         
+  dataType: 'json',
+  type: 'post',
+  success: function (resp) {   
+    LBT_arr=resp.list.img_list;
+    layui.laytpl($("#tp_LBT_list").html()).render(resp, function(html){
+        $("#LBT_list").html(html);
+        setInterval("sasas()",5000);
+        // llw.bindEvent("navEvent",".channel-item")
+    });
+  },
+  error: function (err) {
+  }
+});     
+// 作者推荐关注
+getAttentionList()
+function getAttentionList () {
+             var that=this; 
+           var data={  
+              llh: llw.getCookie("llh"),
+              pageNo: pageNo,
+              pageSize: "20" ,
+              itemId:''        
+            };
+  data.channel= 14; // 不同的频道 数值不同
+      llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
+                  if(rs.data.success) {
+                    var list_arr=rs.data.respData.list;
+                    arr_ac=list_arr;  
+            layui.laytpl($("#tp_imgs").html()).render(list_arr, function(html){
+           $("#imgs").html(html);
+           $(".GZ_list_button_one").click(function(){
+            gz($(this).attr("id"),$(this).attr("index"),1,$(this));
+            })
+            $(".GZ_list_button_two").click(function(){
+            gz($(this).attr("id"),$(this).attr("index"),2,$(this));
+            })
+        });
+                  } else {
+                    layui.laytpl($("#tp_imgs").html()).render([], function(html){
+                // llw.bindEvent("navEvent",".channel-item")
+            });
+                  }
+
+                  // }
+            },function(err){
+               
+            })
+}
+
+  // 关注
+  function gz(toUserId,ithis,type){
+  if(llw.isLogin){
+  data={
+    toLlh:toUserId,
+    llh:llw.getCookie("llh"),
+  }
+  // 关注
+  if(type==1){
+    llw.api.ws("friends.attention.add",data,function(rs){ //请求名,数据,回调方法,
+        if(rs.data.respCode!=0) return
+        var num=parseInt(ithis);
+        $(".GZ_list_button_one").eq(num).hide();
+        $(".GZ_list_button_two").eq(num).show();
+    },function(err){
+      console.log(err)
+    })  
+  }else{
+    // 取消关注
+    llw.api.ws("friends.attention.delete",data,function(rs){ //请求名,数据,回调方法,
+        if(rs.data.respCode!=0) return
+        var num=parseInt(ithis);
+        $(".GZ_list_button_one").eq(num).show();
+        $(".GZ_list_button_two").eq(num).hide();
+    },function(err){
+      console.log(err)
+    })  
+  }
+         
+    }else{
+     llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+    
+  }
+} 
+      
+      function getlist(){
+        $.ajax({
+          url: "list-video.php",         
+          dataType: 'json',
+          type: 'post',
+          success: function (resp) {     //回调       
+            // debugger
+            layui.laytpl($("#tp_SP_list").html()).render(resp, function(html){
+                $("#SP_list").append(html);
+                // llw.bindEvent("navEvent",".channel-item")
+            });
+          },
+          error: function (err) {               //请求出错时使用
+           
+          }
+      }); 
+
+      }
+
+      getAllSeeList()
+function getAllSeeList () {
+             var that=this; 
+           var data={  
+              llh: "123",
+              pageNo: pageNo,
+              pageSize: "20" ,
+              itemId:''        
+            };
+  data.channel= 20, // 不同的频道 数值不同
+      llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
+                  if(rs.data.success) {
+                    var list_arr=rs.data.respData.list;
+                    for(var i=0;i<list_arr.length;i++){
+                      list_arr[i].coverImgList=arr_update(list_arr[i].coverImgList,3);
+                    }   
+                    arr_ac=list_arr;  
+                    layui.laytpl($("#tp_list_tuo").html()).render(list_arr, function(html){
+                $("#list_tuo").html(html);
+                // llw.bindEvent("navEvent",".channel-item")
+            });
+                  } else {
+                    layui.laytpl($("#tp_list_tuo").html()).render([], function(html){
+                // llw.bindEvent("navEvent",".channel-item")
+            });
+                  }
+
+                  // }
+            },function(err){
+               
+            })
+}
+function sasas(){
+  $('#lbt').attr("src",LBT_arr[lbt_num].img);
+  if(lbt_num == LBT_arr.length-1){
+    lbt_num=0;
+  }else{
+    lbt_num=lbt_num+1;
+  }
+}
+var lbt_num=0;
+function asasa(index){
+  $('#lbt').attr("src",LBT_arr[index].img);
+  lbt_num=index+1;
+}
+function arr_update(arr,index){
+  var aarr = [];
+       for(i=0;i<arr.length;i++)
+       if(i<index){
+         aarr[i]=arr[i];
+       }
+       return aarr;
+}
+utils.rightmue()
+      function current_li(){
+        $.ajax({
+          url: "ugcBox_tab_current.php",         
+          dataType: 'json',
+          type: 'post',
+          success: function (resp) {     //回调       
+            layui.laytpl($("#tp_ugcBox_tab_current").html()).render(resp, function(html){
+              
+                $("#ugcBox_tab_current").html(html);//替换原来上面的元素
+            });
+          },
+          error: function (err) {              
+           
+          }
+      }); 
+    }
+    var pageNo=1;
+    var channel=23;
+    var arr_ac=[];
+    var llh=""
+        function getPlList() {
+           var that=this; 
+           var data={  
+              llh: llw.getCookie("llh")||"123",
+              pageNo: pageNo,
+              channel: channel, // 不同的频道 数值不同
+              pageSize: "20",
+              itemId:''         
+            };
+            llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
+                  if(rs.data.success) {
+                    current= true
+                    var list_arr=rs.data.respData.list;
+                    for(var i=0;i<list_arr.length;i++){
+                      if(list_arr[i].content){
+                      list_arr[i].content=JSON.parse(list_arr[i].content);
+                    }
+                    }   
+                    arr_ac=list_arr;
+                    $('.loading-list').hide()                
+                    layui.laytpl($("#tp_SP_list").html()).render(list_arr, function(html){
+                      $("#SP_list").append(html);
+                      pageNo=pageNo+1;
+                    });
+                  } else {
+                    layui.laytpl($("#tp_SP_list").html()).render([], function(html){
+                      console.log(html)
+                      $("#SP_list").append(html);
+                      pageNo=pageNo+1;
+                    });
+                  }
+
+                  // }
+            },function(err){
+               
+            })
+}
+var current = true  
+bodyCH.scroll(function(e) {
+if (current&&$(window).scrollTop() + $(window).height() >= $(document).height()-10) {
+  $('.loading-list').show()  
+  getPlList();
+  current=false 
+}
+if($(window).scrollTop() > 40){
+          $(".body_left_div").addClass("body_left_div_div");
+        }
+        if($(window).scrollTop() <= 40){
+          $(".body_left_div").removeClass("body_left_div_div");
+        }
+});
+
+$("#article").click(function(){
+  window.open('./index-personal-Article.html?llh='+ llw.getCookie('llh'));
+
+})
+
+$(".header_div_left").mouseover(function(){
+  $(".mc_div").show();
+})
+
+$(".header_div_left").mouseout(function(){
+ $(".mc_div").hide();
+})
+
+$(".header_div_left_XZ").mouseover(function(){
+  $(".mc_div_XZ").show();
+})
+
+$(".header_div_left_XZ").mouseout(function(){
+ $(".mc_div_XZ").hide();
+})
+
+
+user_Land()
+      function user_Land(){
+        llw.Login();
+        llh =llw.getCookie('llh');
+        if(llw.isLogin){
+          $(".outer_div_div").hide();
+      $(".outer_div_div_DL").show();
+    // $(".header_div_right").eq(2).hide();
+    // $(".header_div_right").eq(3).hide();
+    $(".header_div_right").eq(2).show();
+    $(".header_div_right").eq(3).show();
+    getPlList() 
+    data={
+    llh:llh,
+    selectLlh: llh
+  }
+  llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  
+    $("#user_name").html(rs.data.respData.nickName);
+    $(".outer_div_div_DL_img img").attr("src", rs.data.respData.headIcon);
+    $(".header_div_img").attr("src", rs.data.respData.headIcon);
+         },function(err){
+         $(".outer_div_div_DL").hide();   
+    $(".outer_div_div").show();  
+   }) 
+        }else{
+          $(".outer_div_div_DL").hide();   
+          $(".outer_div_div").show();
+          getPlList()  
+      }
+}
+$(".outer_div_div_DL_img img").click(function(){
+  window.open('./index-personal-Article.html?llh='+llh);
+})
+$(".outer_div_div_DL_name p").click(function(){
+  window.open('./index-personal-Article.html?llh='+llh);
+})
+
+$('#input_aaa').focus(function(){
+        $('#input_aaa').addClass('input_aaa')
+      })
+      $('#input_aaa').blur(function(){
+        $('#input_aaa').removeClass('input_aaa')
+      })
+// 搜索
+$('#seachBtn').click(function(){
+        if ($("#input_aaa").val() === '') {
+          return alert('搜索内容不能为空');
+        } else {
+          window.location.href = './index-search.html?id='+ $("#input_aaa").val()
+        }
+      })
+    </script>
+
+</body>
+</html>

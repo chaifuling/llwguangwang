@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    <meta name="description" content="老来网，一个基于社区提供公共服务、头条资讯、在线直播、线上课堂、社交活动等综合性服务的平台">
+    <meta name="keywords" content="老来网,老来网头条,老来网APP,社保认证,养老金,健康资讯,退休,养生,娱乐,视频,直播,老人交友,社区服务,老人购物,在线课堂,老年大学">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="./js/lib/layui/layui.all.js"></script>
+  <script src="./js/lib/mock.min.js"></script>
+  <script src="./js/mockdata/index.data.js"></script>
+  <script src="./js/lib/qrcode.min.js"></script>
+  <script src="./js/llwhelp.js"></script>
+    <script src="./js/utils.js"></script>
+    <title>【老来网】不负年华，再出发</title>
+</head>
+
+<body>
+  <script id="tp_SP_right_list" type="text/html">
+              {{#  layui.each(d.list, function(index, item){ }}
+    <li id={{item.contentId}} onclick=asss({{index}})>
+      <a  class="SP_right_list_li" href="./index-video-details.html?id={{item.contentId}}"> 
+      <div class="SP_right_list_li_img"><img src="{{item.coverImgList}}"/></div>
+      <div class="SP_right_list_li_text"><p id="{{item.contentId+1}}">{{item.title}}</p></div>
+      </a>
+    </li>
+              
+            {{#  }); }}
+            {{#  if(d.list.length === 0){ }}
+              无数据
+            {{#  } }}  
+  </script>
+
+
+  <script id="tp_PL_list" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+  <li>
+    <div class="PL_list_top">
+      <div class="PL_list_user_img"><img src="{{item.headIcon}}"/></div>
+      <div class="PL_list_user_name">{{item.userName}}</div>
+      <div class="PL_list_time">{{item.time}}</div>
+      <div class="PL_list_like">
+        {{#       if(item.commnetCount == 0){        }}
+        <div class="PL_list_like_left" lid="{{item.id}}"><img  src="./images/DZ (7).png" /></div>
+        <div class="PL_list_like_left_qx" lid="{{item.id}}"  style="display:none"><img  src="./images/DZ (3).png" /></div>
+        {{#       }else{              }}
+        <div class="PL_list_like_left" lid="{{item.id}}" style="display:none"><img  src="./images/DZ (7).png" /></div>
+        <div class="PL_list_like_left_qx" lid="{{item.id}}" ><img  src="./images/DZ (3).png" /></div>
+        {{#         }          }}
+        <div class="PL_list_like_right"> 点赞</div>
+      </div>
+
+    </div>
+    <div class="PL_list_text">{{item.comment}}</div>
+    <div class="PL_list_bottom">
+      <div class="PL_list_bottom_hf"><button class="p_PL_hf" >回复</button></div>
+      {{#      if(item.commentTimes !=0){     }}
+      <div class="PL_list_bottom_sqhf"><button class="PL_shouqi">收起回复</button></div>
+      <div class="PL_list_bottom_zkhf" style="    display: none;"><button class="PL_zhankai">{{item.commentTimes}}条回复</button></div>
+      {{#       }else{ }}
+      <div class="PL_list_bottom_sqhf" style="    display: none;"><button class="PL_shouqi">收起回复</button></div>
+      <div class="PL_list_bottom_zkhf" ><button class="PL_zhankai">{{item.commentTimes}}条回复</button></div>
+      {{#      }     }}
+    </div>
+
+
+    <div class="p_PL_text" style=" display:none">
+      <div class="PL_text_top">
+       <textarea placeholder="发表下我的看法" class="t_pl_text"></textarea>               </div>
+      <div class="PL_text_bottom">
+        <div class="PL_text_bottom_left"></div>
+        <div class="PL_text_bottom_right"><button class="p_PL_text_bottom_right_pl" lid="{{item.id}}">提交评论</button></div>
+      </div>
+    </div>
+
+
+    <ul class="PL_list_li_ul">
+      {{#  layui.each(item.commentList, function(indexs, items){ }}
+      <li class="PL_list_li_ul_li">
+      <div class="PL_list_top">
+        <div class="PL_list_user_img"><img src="{{item.headIcon}}"/></div>
+        <div class="PL_list_user_name">{{items.userName}}</div>
+{{#  console.log(items.linkCommentDto)  }}
+{{# if(items.linkCommentDto != null){      }}
+<div class="PL_list_user_hf_text">回复</div>
+<div class="PL_list_user_hf_username">@{{items.linkCommentDto.userName}}</div>
+{{#        }            }}
+        <div class="PL_list_time">{{items.time}}</div>
+        <!-- <div class="PL_list_like">
+          <div class="PL_list_like_left"><img  src="./images/DZ (3).png" /></div>
+          <div class="PL_list_like_right"> 点赞</div>
+        </div> -->
+      </div>
+      <div class="PL_list_text">{{items.comment}}</div>
+      <div class="PL_list_bottom">
+        <div class="PL_list_bottom_hf"><button class="xp_pl_hl" lid= "{{items.userId}}">回复</button></div>
+      </div>
+      <div class="xp_PL_text" style=" display:none">
+        <div class="PL_text_top">
+         <textarea placeholder="发表下我的看法" class="xt_pl_text"></textarea>               </div>
+        <div class="PL_text_bottom">
+          <div class="PL_text_bottom_left">回复 @ {{items.userName}}</div>
+          <div class="PL_text_bottom_right"><button class="xp_PL_text_bottom_right_pl" lid="{{items.id}}">提交评论</button></div>
+        </div>
+      </div>
+    </li>
+      {{#  }); }}
+
+    </ul>
+    <div class="PL_list_hr"></div>
+  </li>
+      
+    {{#  }); }}
+
+</script>
+
+  <div class="video_header">
+    <div class="header_div_left_XZ"><a href="#" target="_blank">下载APP</a>
+      <span class="mc_div_title_red"></span>
+      <div class="mc_div_XZ">
+        <div class="mc_div_title">老来网APP下载</div>
+        <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+
+
+    </div>
+    <div class="header_div_left"><a>微信公众号</a>
+      <div class="mc_div">
+        <div class="mc_div_title">微信公众号：老来网APP</div>
+        <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+    </div>
+    <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
+  <div class="header_div_right"><a onclick="llw.toHerf('/common/login.html?type=topWeb')"  target="_blank">登录</a></div>
+  <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+    <img class="header_div_img" src=""/></a>
+  </div>
+  </div>
+  <div class="SP_container">
+    <div class="SP_by">
+      <div class="SP_by_div">
+        <div class="SP_by_div_left">
+          <div class="SP_by_div_left_top">
+            <video muted="muted" autoplay="autoplay" id="video_a" src="" controls="controls"></video>
+
+          </div>
+          <div class="SP_by_div_left_button">
+            <div class="SP_by_div_left_button_left">
+              <p>螺丝刀：吉姆修好了订书机</p>
+            </div>
+            <div class="SP_by_div_left_button_right">
+              <div class="SP_top_bottom">
+                <button id="video_dz">
+                  <div class="video_WZXQ_top_bottom_img"><img src="images/video-dz.png"></div>
+                  <div class="SP_top_bottom_p">
+                    <p>点赞</p>
+                    </divclass="WZXQ_top_bottom_img">
+                  </div>
+                </button>
+                <button id="video_ydz" style="display: none;">
+                  <div class="video_WZXQ_top_bottom_img"><img src="images/video-dz2.png"></div>
+                  <div class="SP_top_bottom_p">
+                    <p>点赞</p>
+                    </divclass="WZXQ_top_bottom_img">
+                  </div>
+                </button>
+                <button id="video_sc">
+                  <div class="video_WZXQ_top_bottom_img"><img src="images/video-sc.png"></div>
+                  <div class="SP_top_bottom_p">
+                    <p>收藏</p>
+                  </div>
+                </button>
+                <button id="video_qxsc">
+                  <div class="video_WZXQ_top_bottom_img"><img src="images/video-sc2.png"></div>
+                  <div class="SP_top_bottom_p">
+                    <p>收藏</p>
+                  </div>
+                </button>
+                <div id="wx">
+                  <div class="video_WZXQ_top_bottom_img"><img style="width:24px;height: 20px;" src="images/WX.png"></div>
+                  <div class="SP_top_bottom_p">
+                    <p>微信</p>
+                  </div>
+                </div>
+                <div id="pyq">
+                  <div class="video_WZXQ_top_bottom_img"><img src="images/WXPYQ (2).png"></div>
+                  <div class="SP_top_bottom_p_max SP_top_bottom_p">
+                    <p>朋友圈</p>
+                  </div>
+                </div>
+                <div class="wx-hover_wx position-wx position-video-wx">
+                  <div>打开微信使用“扫一扫”，扫描下方二维码，点击右上角“…”即可转发给好友</div>
+                  <div id="qrcode"></div>
+                </div>
+                <div class="wx-hover_wx position-pyq position-video-pyq">
+                  <div>打开微信使用“扫一扫”，扫描下方二维码，点击右上角“…”即可转发到朋友圈</div>
+                  <div id="qrcodes"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="SP_by_div_right">
+          <div class="SP_by_div_right_top">
+            <div class="SP_by_div_right_left">接下来自动播放</div>
+            <div class="SP_by_div_right_right">
+              <button id="SP_button_a">开启</button>
+              <div class="SP_by_div_right_right_div"></div>
+            </div>
+          </div>
+          <div class="SP_by_div_right_bottom">
+            <ul id="SP_right_list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="SP_bottom_div">
+
+      <div class="SP_bottom_div_left"><img src="" /></div>
+
+      <div class="SP_bottom_div_center">
+        <div class="SP_bottom_div_center_top">
+          <p>少儿杂货铺</p>
+        </div>
+        <div class="SP_bottom_div_center_bottom">
+          <div class="SP_bottom_div_center_bottom_left">
+            <p>发布于 2019-12-31</p>
+          </div>
+          <div class="SP_bottom_div_center_bottom_right">
+            <p>2000次播放</p>
+          </div>
+        </div>
+      </div>
+      <div class="SP_bottom_div_right">
+        <button id="video_gz" style="display: none;">+ 关注</button>
+        <button id="video_qxgz" style="display: none;">已关注</button>
+      </div>
+
+    </div>
+    <div class="video">
+      <div class="PL_div">
+        <div class="PL_title">
+          <p>参与评论</p>
+        </div>
+        <div class="PL_text">
+          <div class="PL_text_top">
+            <textarea placeholder="发表下我的看法" id="pl_text"></textarea> </div>
+          <div class="PL_text_bottom">
+            <div class="PL_text_bottom_left"><a href="#">登录</a>
+              <p>后可参与评论</p>
+            </div>
+            <div class="PL_text_bottom_right"><button id="PL_text_bottom_right_pl">提交评论</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="PL_list">
+        <div class="PL_list_title">评论区</div>
+        <div class="PL_text_a">
+          <ul id="PL_list_ul"></ul>
+          <div class="PL_null_div" style="display: none;">
+            <div class="PL_null_div_top"><img src="images/评论.png" /></div>
+            <div class="PL_null_div_bottom">
+              <p>暂无评论，快来抢个沙发！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+
+      var $ = layui.$;
+      var llh = llw.getCookie('llh')
+      var bodyCH = $(window);
+      var arr = [];
+      var num = "";
+      hei()
+      function hei(){
+        var ght= document.documentElement.clientHeight-94;
+        var videoHeight=ght-76;
+        $(".SP_by_div_left_top").css("height",videoHeight+"px");
+        $(".SP_by_div_right").css("max-height",videoHeight+"px");
+      }
+
+      var button_type = true;
+      $('#SP_button_a').click(function () {
+        debugger
+        if (button_type) {
+          $('#SP_button_a').text("关闭");
+          $('#SP_button_a').css("text-align", "right");
+          $('#SP_button_a').css("background-color", "#999999");
+          $('.SP_by_div_right_right_div').css("right", "45px");
+          button_type = false;
+        } else {
+          $('#SP_button_a').text("开启");
+          $('#SP_button_a').css("text-align", "left");
+          $('#SP_button_a').css("background-color", "#ff374a")
+          $('.SP_by_div_right_right_div').css("right", "2px");
+          button_type = true;
+        }
+
+      })
+
+
+
+      // 获取推荐视频列表
+      var list_arr=[];
+      function getVideoList () {
+        var data = {
+          "pageNo": 1,
+		      "channel": "13",
+		      "llh": llw.getCookie("llh"),
+		      "pageSize": 10,
+		      "artTitle": "",
+          itemId:''
+        };
+        llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+           list_arr =  rs.data.respData ;
+          layui.laytpl($("#tp_SP_right_list").html()).render(list_arr, function (html) {
+              $("#SP_right_list").html(html)
+              num = 1;
+            });
+          
+        }, function (err) {
+
+        })
+      }
+
+      $('#video_a').bind("ended", function () {
+        if (button_type) {
+          if (num == 10) {
+            SP_list();
+          } else {
+            $('#video_a').attr("src", list_arr.list[num].videoUrl);
+            num = num + 1;
+          }
+
+        }
+      });
+
+      
+      function asss(index) {
+        var bl = "";
+        for (var i = 0; i < arr.length; i++) {
+          if ([i] == index) {
+            bl = arr[i].url;
+            break;
+          }
+        }
+        $('#video_a').attr("src", bl);
+        num = index + 1;
+      }
+
+      // 查询视频相关信息
+      var z_llh = "";
+
+      function WZ_text() {
+        var that = this;
+        var data = {
+
+          llh: llw.getCookie('llh'),
+          id: getQueryVariable("id"),
+        };
+        llw.api.ws("original.content.detail", data, function (rs) { //请求名,数据,回调方法,
+          var item = rs.data.respData[0].original;
+          var user = rs.data.respData[0].user;
+          if(item.jumpUrl){
+            qrcode.makeCode(item.jumpUrl); 
+            qrcodes.makeCode(item.jumpUrl);
+          }
+          $("#video_a").attr("src", item.videoUrl)
+          $(".SP_by_div_left_button_left p").text(item.title);
+          $(".SP_bottom_div_left img").attr("src", user.headIcon);
+          $(".SP_bottom_div_center_top p").text(user.nickName);
+          $(".SP_bottom_div_center_bottom_left p").text("发布于 " + isdate(item.auditTime))
+          $(".SP_bottom_div_center_bottom_right p").text(item.reads + "次播放");
+          z_llh = user.llh;
+          user_list_a(z_llh);
+          if (item.attention_flag == 0) {
+            $("#video_gz").hide();
+            $("#video_qxgz").show();
+          } else {
+            $("#video_gz").show();
+            $("#video_qxgz").hide();
+          }
+          if (rs.data.respData[0].original.isLiked == 0) {
+            $("#video_dz").show();
+            $("#video_ydz").hide();
+          } else {
+            $("#video_dz").hide();
+            $("#video_ydz").show();
+          }
+          if (rs.data.respData[0].original.isCollectioned == 0) {
+            $("#video_sc").show();
+            $("#video_qxsc").hide();
+          } else {
+            $("#video_sc").hide();
+            $("#video_qxsc").show();
+          }
+        }, function (err) {
+
+        })
+      }
+      // 获取url 参数
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1)
+        // console.log(window.location.search)
+        var vars = query.split('&')
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=')
+          if (pair[0] == variable) {
+            return pair[1]
+          }
+        }
+        return false
+      }
+
+      // 时间戳转换年月日
+      function isdate(date) {
+        var d = new Date(date);
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var d = d.getDate();
+        return y + "-" + m + "-" + d;
+      }
+
+      // 点赞
+
+      $("#video_dz").click(function () {
+        data = {
+          llh: llh,
+          likeId: getQueryVariable("id"),
+          likeType: "originalId"
+        }
+
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/likeIt.jspx",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            layer.msg("点赞成功");
+            $("#video_dz").hide();
+            $("#video_ydz").show();
+          },
+          error: function (err) {
+
+          }
+        })
+      })
+
+      // 取消点赞
+      $("#video_ydz").click(function () {
+        data = {
+          llh: llh,
+          likeId: getQueryVariable("id"),
+          likeType: "artId",
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/unLikeIt.jspx",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            $("#video_dz").show();
+            $("#video_ydz").hide();
+
+          },
+          error: function (err) {
+
+          }
+        })
+
+      })
+
+
+      //收藏 
+      $("#video_sc").click(function () {
+        data = {
+          llh: llh,
+          artId: getQueryVariable("id"),
+          type: "originalId",
+          collectToggle: 1
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/collect.jspx",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            $("#video_sc").hide();
+            $("#video_qxsc").show()
+            layer.msg("收藏成功");
+          },
+          error: function (err) {
+            //  alert(err);
+            typeof errorCallback != "undefined" && errorCallback(err);
+          }
+        });
+      })
+      // 取消收藏
+      $("#video_qxsc").click(function () {
+        data = {
+          llh: llh,
+          artId: getQueryVariable("id"),
+          type: "originalId",
+          collectToggle: 0
+
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/collect.jspx",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            $("#video_sc").show();
+            $("#video_qxsc").hide();
+            layer.msg("取消收藏成功");
+          },
+          error: function (err) {
+            //  alert(err);
+            typeof errorCallback != "undefined" && errorCallback(err);
+          }
+        });
+      })
+
+      // 关注
+      $("#video_gz").click(function () {
+        if (llw.isLogin) {
+          data = {
+            toLlh: z_llh,
+            llh: llw.getCookie('llh'),
+          }
+          llw.api.ws("friends.attention.add", data, function (rs) { //请求名,数据,回调方法,
+            layer.msg("关注成功");
+            $("#video_gz").hide();
+            $("#video_qxgz").show();
+          }, function (err) {
+            layer.msg("关注失败");
+          })
+        } else {
+           llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+          $('html , body').animate({ scrollTop: 0 }, 'slow');
+        }
+      })
+
+          // 设置参数方式
+    var qrcode = new QRCode('qrcode', {
+      text: "老来网",
+      width: 256,
+      height: 256,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // 使用 API
+    qrcode.clear();
+   
+
+    var qrcodes = new QRCode('qrcodes', {
+      text: "老来网",
+      width: 256,
+      height: 256,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // 使用 API
+    qrcode.clear();
+
+
+      // 取消关注
+      $("#video_qxgz").click(function () {
+        if (llw.isLogin) {
+          data = {
+            toLlh: z_llh,
+            llh: llw.getCookie('llh'),
+          }
+          llw.api.ws("friends.attention.delete", data, function (rs) { //请求名,数据,回调方法,
+            $("#video_qxgz").hide();
+            $("#video_gz").show();
+            layer.msg("取消关注成功");
+          }, function (err) {
+            layer.msg("取消关注失败");
+          })
+        } else {
+           llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+          $('html , body').animate({ scrollTop: 0 }, 'slow');
+        }
+      });
+
+      //评论列表
+      function pl() {
+        var data = {
+          artId: getQueryVariable("id"),
+          llh: llw.getCookie('llh'),
+          pageNum: 1,
+          pageSize: 20,
+          commentType: 'originalId'
+        };
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/getHotCommentList.jspx",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            if (resp.message == "没有更多评论了") {
+              $(".PL_null_div").show();
+              return;
+            } else {
+              $(".PL_null_div").hide();
+            }
+            layui.laytpl($("#tp_PL_list").html()).render(resp.data.list, function (html) {
+              $("#PL_list_ul").html(html);
+
+              $(".PL_shouqi").click(function () {
+                var num = $(".PL_shouqi").index(this);
+
+                $(".PL_shouqi").eq(num).parent().parent().parent().find("ul").hide();
+                $(".PL_list_bottom_sqhf").eq(num).hide();
+                $(".PL_list_bottom_zkhf").eq(num).show();
+              })
+              $(".PL_zhankai").click(function () {
+                var num = $(".PL_zhankai").index(this);
+                $(".PL_zhankai").eq(num).parent().parent().parent().find("ul").show();
+                $(".PL_list_bottom_sqhf").eq(num).show();
+                $(".PL_list_bottom_zkhf").eq(num).hide();
+              })
+              //点击评论回复
+              $(".p_PL_hf").click(function () {
+                var num = $(".p_PL_hf").index(this);
+                $(".p_PL_hf").parent().parent().parent().find(".p_PL_text").hide();
+                $(".p_PL_hf").eq(num).parent().parent().parent().find(".p_PL_text").show();
+                $(".xp_PL_text").hide();
+              })
+              //回复评论
+              $(".p_PL_text_bottom_right_pl").click(function () {
+                if (llw.isLogin) {
+                  var num = $(".p_PL_text_bottom_right_pl").index(this);
+                  var id = $(".p_PL_text_bottom_right_pl").eq(num).attr("lid");
+                  var text = $(".t_pl_text").eq(num).val();
+                  if (text == "") {
+                    layer.msg("请输入评论内容");
+                    return
+                  }
+                  PL_reply(id, text);
+                } else {
+                   llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+                  $('html , body').animate({ scrollTop: 0 }, 'slow');
+                }
+              })
+              //点击 回复评论人的回复
+              $(".xp_pl_hl").click(function () {
+                var num = $(".xp_pl_hl").index(this);
+                $(".xp_pl_hl").parent().parent().parent().find(".xp_PL_text").hide();
+                $(".p_PL_text").hide();
+                $(".PL_list_li_ul_li").eq(num).find(".xp_PL_text").show();
+              })
+              //回复 回复评论
+              $(".xp_PL_text_bottom_right_pl").click(function () {
+                if (llw.isLogin) {
+                  var num = $(".xp_PL_text_bottom_right_pl").index(this);
+                  var id = $(".xp_PL_text_bottom_right_pl").eq(num).attr("lid");
+                  var text = $(".xt_pl_text").eq(num).val();
+                  if (text == "") {
+                    layer.msg("请输入评论内容");
+                    return
+                  }
+                  reply_PL_reply(id, text)
+                } else {
+                   llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+                  $('html , body').animate({ scrollTop: 0 }, 'slow');
+                }
+              })
+              // 评论点赞 
+              $(".PL_list_like_left").click(function () {
+                if (llw.isLogin) {
+                  var num = $(".PL_list_like_left").index(this);
+                  var id = $(".PL_list_like_left").eq(num).attr("lid");
+                  data = {
+                    llh: llh,
+                    likeId: id,
+                    likeType: "commentId"
+                  }
+                  $.ajax({
+                    url: llw.api.options.bsurl+"/info/web/likeIt.jspx",
+                    data: data,
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function (resp) {
+                      $(".PL_list_like_left").eq(num).hide();
+                      $(".PL_list_like_left_qx").eq(num).show();
+                      layer.msg("点赞成功");
+
+                    },
+                    error: function (err) {
+
+                    }
+
+                  })
+                } else {
+                   llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+                  $('html , body').animate({ scrollTop: 0 }, 'slow');
+                }
+
+              })
+              // 评论取消点赞
+              $(".PL_list_like_left_qx").click(function () {
+                if (llw.isLogin) {
+                var num = $(".PL_list_like_left_qx").index(this);
+                var id = $(".PL_list_like_left_qx").eq(num).attr("lid");
+                data = {
+                  llh: llh,
+                  likeId: id,
+                  likeType: "commentId",
+                }
+                $.ajax({
+                  url: llw.api.options.bsurl+"/info/web/unLikeIt.jspx",
+                  data: data,
+                  dataType: 'json',
+                  type: 'POST',
+                  success: function (resp) {
+                    $(".PL_list_like_left").eq(num).show();
+                    $(".PL_list_like_left_qx").eq(num).hide();
+                  },
+                  error: function (err) {
+
+                  }
+                })
+              } else {
+                   llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+                  $('html , body').animate({ scrollTop: 0 }, 'slow');
+                }
+              })
+              // 点击展开更多
+              $(".PL_bottom_ckgd").click(function(){
+            addnum+=1;
+            pl();
+          })
+
+            });
+          },
+          error: function (err) {
+            //  alert(err);
+          }
+        });
+
+      }
+
+
+      user_Land()
+      function user_Land() {
+        debugger
+        llw.Login();
+        WZ_text();
+        getVideoList();
+        if (llw.isLogin) {
+          $(".PL_text_bottom_left").hide();
+          $(".outer_div_div").hide();
+          $(".outer_div_div_DL").show();
+          $(".header_div_right").eq(2).hide();
+          $(".header_div_right").eq(3).hide();
+          $(".header_div_right").eq(4).show();
+          $(".header_div_right").eq(5).show();
+          pl();
+          data={
+    llh:llh,
+    selectLlh: llh
+  }
+  llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  
+    $("#user_name").html(rs.data.respData.nickName);
+    $(".outer_div_div_DL_img img").attr("src", rs.data.respData.headIcon);
+    $(".header_div_img").attr("src", rs.data.respData.headIcon);
+         },function(err){
+         $(".outer_div_div_DL").hide();   
+    $(".outer_div_div").show();  
+   }) 
+        } else {
+          $(".outer_div_div_DL").hide();
+          $(".outer_div_div").show();
+          $(".PL_text_bottom_left").show();
+          pl();
+
+        }
+      }
+
+      $(".header_div_left").mouseover(function () {
+        $(".mc_div").show();
+      })
+
+      $(".header_div_left").mouseout(function () {
+        $(".mc_div").hide();
+      })
+
+      $(".header_div_left_XZ").mouseover(function () {
+        $(".mc_div_XZ").show();
+      })
+
+      $(".header_div_left_XZ").mouseout(function () {
+        $(".mc_div_XZ").hide();
+      })
+
+
+      // 评论  
+      $("#PL_text_bottom_right_pl").click(function () {
+        if (!llw.isLogin) {
+           llw.showLogin("body");
+                utils.letDivCenter(".mc_wdl");;
+          // $('html , body').animate({ scrollTop: 0 }, 'slow');
+          return
+        }
+        if (llw.getCookie('llh') == "") {
+          $(".mc_wdl").show();
+          return
+        }
+        var tewt = $("#pl_text").val();
+        if (tewt == "") {
+          layer.msg("请输入评论内容");
+          return
+        }
+        data = {
+          originalId: getQueryVariable("id"),
+          llh: llw.getCookie('llh'),
+          comment: tewt,
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/comment.jspx ",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            typeof successCallback != "undefined" && successCallback(resp);
+            $("#pl_text").val("");
+            pl();
+          },
+          error: function (err) {
+            //  alert(err);
+            typeof errorCallback != "undefined" && errorCallback(err);
+          }
+        });
+      })
+
+      //评论回复
+      function PL_reply(id, text) {
+        data = {
+          originalId: getQueryVariable("id"),
+          llh: llw.getCookie('llh'),
+          comment: text,
+          linkCommentId: id
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/reply.jspx ",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            pl();
+          },
+          error: function (err) {
+            //  alert(err);
+            typeof errorCallback != "undefined" && errorCallback(err);
+          }
+        });
+      }
+      $("#wx").mouseover(function () {
+        $(".position-video-wx").show();
+      })
+      $("#wx").mouseout(function () {
+        $(".position-video-wx").hide();
+      })
+      $("#pyq").mouseover(function () {
+        $(".position-video-pyq").show();
+      })
+      $("#pyq").mouseout(function () {
+        $(".position-video-pyq").hide();
+      })
+
+      //回复评论回复
+      function reply_PL_reply(id, text) {
+        data = {
+          originalId: getQueryVariable("id"),
+          llh: llw.getCookie('llh'),
+          comment: text,
+          linkCommentId: id
+        }
+        $.ajax({
+          url: llw.api.options.bsurl+"/info/web/reply.jspx ",
+          data: data,
+          dataType: 'json',
+          type: 'POST',
+          success: function (resp) {
+            pl();
+          },
+          error: function (err) {
+            //  alert(err);
+            typeof errorCallback != "undefined" && errorCallback(err);
+          }
+        });
+      }
+      //搜索用户是否已关注
+      function user_list_a(z_llh) {
+        data = {
+          pageNo: 1,
+          llh: llw.getCookie('llh'),
+          pageSize: "1",
+          searchWord: z_llh
+        }
+        llw.api.ws3("llw.users.list.get", data, function (rs) { //请求名,数据,回调方法,
+          if (rs.data.respData.length > 0 && rs.data.respData[0].isRelation == "fllow") {
+            $("#video_gz").hide();
+            $("#video_qxgz").show();
+          } else {
+            $("#video_gz").show();
+            $("#video_qxgz").hide();
+          }
+        }, function (err) {
+          console.log(err)
+        })
+      }
+    </script>
+
+</body>
+
+</html>
