@@ -67,8 +67,8 @@
         cval +
         ";expires=" +
         exp.toGMTString() +
-        (window.location.host == "www.laolai.show"
-          ? "; path=/llh-bspre"
+        (window.location.host == "www.laolai.com"
+          ? "; path=/"
           : "; path=/llh-bs");
     return true;
   };
