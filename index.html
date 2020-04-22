@@ -381,12 +381,12 @@
   {{#  if(index==0){   }}
   <li class="one_list_three_li">
   <div class="list_three_li_left">
-    <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+    <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
       <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
     </a>
   </div>
     <div class="list_three_li_center">
-      <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+      <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
       <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
     </div>
     <div class="list_three_li_center_right">
@@ -399,12 +399,12 @@
   {{#  if(!((index+1)==(d.length))){ }}
   <li  class="list_three_li" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
     <div class="list_three_li_left">
-      <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+      <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
         <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
       </a>
     </div>
       <div class="list_three_li_center">
-        <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+        <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
         <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
       </div>
       <div class="list_three_li_center_right">
@@ -415,12 +415,12 @@
     {{#  }else{ }}
     <li class="max_list_three_li">
       <div class="list_three_li_left">
-        <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
+        <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank"  class="list_three_li_left_div" ><img class="list_three_li_left_img"  src="{{item.headIcon}}"/>
           <div class="list_three_li_bottom"><img src="./static/index-pc/images/矢量智能对象.png"></div>
         </a>
       </div>
         <div class="list_three_li_center">
-          <a href="./index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
+          <a href="{{(llw.istest?'':'/llh-bs')}}/static/index-pc/index-personal-Article.html?llh={{item.llh}}" target="_blank" class="list_three_li_center_top"><p>{{item.nick}}</p></a>
           <div class="list_three_li_center_bottom"><p>{{item.introduce?item.introduce:""}}</p></div>
         </div>
         <div class="list_three_li_center_right">
