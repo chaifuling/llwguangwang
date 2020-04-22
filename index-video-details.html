@@ -442,7 +442,11 @@
           likeId: getQueryVariable("id"),
           likeType: "originalId"
         }
-
+        if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
+        }
         $.ajax({
           url: llw.api.options.bsurl+"/info/web/likeIt.jspx",
           data: data,
@@ -465,6 +469,11 @@
           llh: llh,
           likeId: getQueryVariable("id"),
           likeType: "artId",
+        }
+        if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
         }
         $.ajax({
           url: llw.api.options.bsurl+"/info/web/unLikeIt.jspx",
@@ -492,6 +501,11 @@
           type: "originalId",
           collectToggle: 1
         }
+        if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
+        }
         $.ajax({
           url: llw.api.options.bsurl+"/info/web/collect.jspx",
           data: data,
@@ -517,6 +531,11 @@
           collectToggle: 0
 
         }
+        if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
+        }
         $.ajax({
           url: llw.api.options.bsurl+"/info/web/collect.jspx",
           data: data,
@@ -541,6 +560,11 @@
             toLlh: z_llh,
             llh: llw.getCookie('llh'),
           }
+          if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
+        }
           llw.api.ws("friends.attention.add", data, function (rs) { //请求名,数据,回调方法,
             layer.msg("关注成功");
             $("#video_gz").hide();
@@ -589,6 +613,11 @@
             toLlh: z_llh,
             llh: llw.getCookie('llh'),
           }
+          if (!llw.isLogin) {
+          llw.showLogin("body");
+        utils.letDivCenter(".mc_wdl");;
+        return
+        }
           llw.api.ws("friends.attention.delete", data, function (rs) { //请求名,数据,回调方法,
             $("#video_qxgz").hide();
             $("#video_gz").show();
@@ -661,7 +690,6 @@
                 } else {
                    llw.showLogin("body");
                 utils.letDivCenter(".mc_wdl");;
-                  $('html , body').animate({ scrollTop: 0 }, 'slow');
                 }
               })
               //点击 回复评论人的回复
@@ -685,7 +713,6 @@
                 } else {
                    llw.showLogin("body");
                 utils.letDivCenter(".mc_wdl");;
-                  $('html , body').animate({ scrollTop: 0 }, 'slow');
                 }
               })
               // 评论点赞 
@@ -717,7 +744,6 @@
                 } else {
                    llw.showLogin("body");
                 utils.letDivCenter(".mc_wdl");;
-                  $('html , body').animate({ scrollTop: 0 }, 'slow');
                 }
 
               })
@@ -747,7 +773,6 @@
               } else {
                    llw.showLogin("body");
                 utils.letDivCenter(".mc_wdl");;
-                  $('html , body').animate({ scrollTop: 0 }, 'slow');
                 }
               })
               // 点击展开更多

@@ -156,10 +156,11 @@
     }
   };
   _llw.prototype.showLogin = function (element) {
+    var imgurl =window.location.href.indexOf('index-pc.html')!=-1?"./static/index-pc/images/tishi.png":"./images/tishi.png"
     var loginDome = `
     <div id="mask" class="mask" style="display: none;"></div>
     <div class="mc_wdl" style="display:bolck "><div class="tologin"><span>
-      <img src="./static/index-pc/images/tishi.png"></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >
+      <img src=${imgurl}></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >
       <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>`;
     $(element).append(loginDome);
     $("textarea").blur();
