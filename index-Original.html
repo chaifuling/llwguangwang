@@ -860,7 +860,6 @@ function gz(toUserId,ithis,type){
       getAllSeeList()
       function getAllSeeList(){
         
-            if(pageNo!=1) return
           var datas = {
           llh: "123",
           pageNo: pageNo,
@@ -869,6 +868,7 @@ function gz(toUserId,ithis,type){
         };
           datas.channel = 20, // 不同的频道 数值不同
           llw.api.ws("info.headlines.get", datas, function (rs) { //请求名,数据,回调方法,
+            debugger
             if(!rs.data){
               if(rs.readyState == 4){
                 getAllSeeList();

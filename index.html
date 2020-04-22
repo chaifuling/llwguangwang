@@ -1649,7 +1649,7 @@ function ifDvideo(){
       }
     });
 
-   
+    getAllSeeList()
     function getAllSeeList() {
       var that = this;
       var data = {
@@ -1659,6 +1659,7 @@ function ifDvideo(){
       };
       data.channel = 20, // 不同的频道 数值不同
         llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+          debugger
           if(!rs.data){
               if(rs.readyState == 4){
                 getAllSeeList();
