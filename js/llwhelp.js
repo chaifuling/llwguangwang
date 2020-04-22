@@ -533,7 +533,7 @@ llw.Login = function () {
 llw.istest = window.location.host === "www.laolai.show" ? true : false;
 llw.api.options.articleurl =
   (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llh-bs" : "/llh-bspre");
+  (!llw.istest ? "/llh-bs" : "/");
 llw.api.options.bsurl =
   (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
   (!llw.istest ? "/llw-bs" : "/llw-bs-pc");
