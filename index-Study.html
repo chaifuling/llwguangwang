@@ -684,12 +684,7 @@
               }
             }
             if (rs.data.success) {
-              var list_arr = rs.data.respData.list;
-              for (var i = 0; i < list_arr.length; i++) {
-                list_arr[i].coverImgList = arr_update(list_arr[i].coverImgList, 3);
-              }
-              arr_ac = list_arr;
-              layui.laytpl($("#tp_list_tuo").html()).render(list_arr, function (html) {
+              layui.laytpl($("#tp_list_tuo").html()).render(rs.data.respData, function (html) {
                 $("#list_tuo").html(html);
                 // llw.bindEvent("navEvent",".channel-item")
               });

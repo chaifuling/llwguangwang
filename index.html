@@ -1140,6 +1140,7 @@ function ifDvideo(){
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function (e) {
+          $('#file').val("")
           document.execCommand('inserthtml', false, `<img src=${e.target.result} style='width:100px;height:100px'>`);
         }
       }
@@ -1176,9 +1177,12 @@ function ifDvideo(){
             contentType: false, //必须
             success: function (resp) {
               document.execCommand('inserthtml', false, `&nbsp;<video controls="controls"  name="media"  src=${resp.respData.src}></video>&nbsp;`);
+              layer.msg("上传成功");
+              $("#fileVideo").val("")
             },
             error: function (err) {
               layer.msg("上传失败");
+              $("#fileVideo").val("")
             }
           });
 

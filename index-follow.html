@@ -120,7 +120,7 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
      <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
         <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
 
@@ -511,9 +511,11 @@
       var bodyCH=$(window);
       var llh =llw.getCookie('llh');
       bodyCH.scroll(function(e) {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()-1) {
           if(zzpageNo != 1){
-            getPlList();
+            if(getPlList_jiazai){
+              getPlList();
+            }
           }
         }
         if($(window).scrollTop() > 40){
@@ -871,7 +873,9 @@ function asasa(index){
   lbt_num=index+1;
 }
 var arr_ac=[];
+var getPlList_jiazai=true;
     function getPlList() {
+  getPlList_jiazai=false;
            var that=this; 
            var data={  
               llh: llh,
@@ -881,7 +885,11 @@ var arr_ac=[];
             };
             data.channel=21;
             llw.api.ws("attention.content.find",data,function(rs){ //请求名,数据,回调方法,
-            getAllSeeList()
+                if(!rs.data){
+                      if(rs.readyState == 4){
+                        getPlList();
+                      }
+                    }
                   if(rs.data.success) {
                     var list_arr=rs.data.respData;
                     for(var i=0;i<list_arr.length;i++){
@@ -900,20 +908,23 @@ var arr_ac=[];
                     layui.laytpl($("#tp_list").html()).render(list_arr, function(html){
                       $("#list").append(html);
                       zzpageNo=zzpageNo+1;
+                      getPlList_jiazai=true;
                     });
                   } else {
                     layui.laytpl($("#tp_list").html()).render([], function(html){
                       console.log(html)
                       $("#list").append(html);
+                      getPlList_jiazai=true;
                     });
                   }
 
                   // }
             },function(err){
-                  getAllSeeList()
+               getPlList_jiazai=true;
             })
 }
 // 大家都在看
+getAllSeeList()
 function getAllSeeList () {
              var that=this; 
            var data={  
@@ -924,6 +935,11 @@ function getAllSeeList () {
             };
   data.channel= 20, // 不同的频道 数值不同
       llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
+    if(!rs.data){
+                if(rs.readyState == 4){
+                  getAllSeeList();
+                }
+              }
             if(rs.data.respData){
               layui.laytpl($("#tp_list_tuo").html()).render(rs.data.respData, function(html){
                   $("#list_tuo").html(html);
