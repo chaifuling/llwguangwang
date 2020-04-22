@@ -101,12 +101,22 @@
   };
 
   _llw.prototype.toHerf = function (adress) {
+    debugger
     var _a = document.createElement("a");
+    var backUrl=window.location.href
+    var XbackUrl=""
+    for(var i=0;i<window.location.href.length;i++){
+      if(backUrl[i] == "&"){
+        XbackUrl=XbackUrl+ "*"
+      }else{
+        XbackUrl=XbackUrl+backUrl[i]
+      }
+    }
     _a.setAttribute(
       "href",
-      (!llw.istest ? "/llh-bs" : "/") +
-      adress +
-        `&backUrl=${window.location.href}`
+      (!llw.istest ? "/llh-bs" : "/llh-bspre") +
+        adress +
+        `&backUrl=${XbackUrl}`
     );
     _a.setAttribute("id", "startTelMedicine");
     // 防止反复添加
@@ -523,7 +533,7 @@ llw.Login = function () {
 llw.istest = window.location.host === "www.laolai.show" ? true : false;
 llw.api.options.articleurl =
   (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llh-bs" : "/");
+  (!llw.istest ? "/llh-bs" : "/llh-bspre");
 llw.api.options.bsurl =
   (llw.istest ? "http://www.laolai.show" : "http://dev.laolai.com:85") +
   (!llw.istest ? "/llw-bs" : "/llw-bs-pc");

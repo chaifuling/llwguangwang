@@ -218,6 +218,8 @@ ul {
   margin-right: 10px;
   border-radius: 5px;
   color: #EF4141;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .single-mode-div-top p {
   font-size: 14px;
@@ -5320,4 +5322,17 @@ button{
   height: 100px;
   width: 100px;
   margin-top: 11px;
+}
+.img_load{
+  height: 103px;
+  width: 160px;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 20;
+  color: #fff;
+  position: absolute;
+  right: 5px;
+  top: 54px;
+  text-align: center;
+  line-height: 103px;
+  font-size: 18px;
 }

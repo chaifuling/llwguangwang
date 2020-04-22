@@ -61,7 +61,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -109,7 +109,7 @@
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
       {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -157,16 +157,24 @@
       <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
       <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
-          {{#  layui.each(item.coverImgList, function(index, items){ }}
-          <img style="background: url({{items}});"class="imgs" alt="">
-          {{#  }); }}
+        {{#  layui.each(item.coverImgList, function(index, items){ }}
+        {{#   if(index <= 3){      }}
+        <img style="background: url({{items}});"class="imgs" alt="">
+        {{#     }   }}
+
+      
+
+        {{#  }); }}
+        {{#  if(item.img_num >0){  }}
+        <div class="img_load">+{{item.img_num}}</div>
+        {{#   }  }} 
       </div>
     </div>
   </div>           
 
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
-        <div class="single-tags">{{item.tags}}</div> 
+        <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -227,7 +235,7 @@
 
       <div class="single-mode-div-bottom">  
         {{# if(item.tags){ }}
-          <div class="single-tags">{{item.tags}}</div> 
+          <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
           {{#   if(item.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
@@ -273,7 +281,7 @@
       {{# if(index<5){ }}  
       {{#  if((index+1)==d.length){   }}
         <li  class="list_tuo_li">
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','10')"> 
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','10',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img  src="{{item.coverImgList}}" />
@@ -286,7 +294,7 @@
             </li> 
       {{#  }else{  }}
         <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','10')"> 
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','10',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"> 
           <div class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img  src="{{item.coverImgList}}" />
@@ -423,11 +431,11 @@
       </div>
     </div>
     <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
-    <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+    <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
     <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
     <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
     <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
-    <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+    <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index.html')" >
       <img class="header_div_img" src=""/></a>
     </div>
   </div>
@@ -446,7 +454,7 @@
     <div class="containera">
       <div class="contenta container_left">
         <div class="body_left_div">
-          <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+          <a href="index.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
           <ul id="nav">
 
           </ul>
@@ -588,7 +596,7 @@
           arr_sas = arr_sas.filter(item => item.id !== 13)
           var list_arr = [
             { id: "1", url: "./index-follow.html" },
-            { id: "5", url: "../../index-pc.html" },
+            { id: "5", url: "./index.html" },
             { id: "6", url: "./index-Hotspot.html" },
             { id: "11", url: "./index-video-list.html" },
             { id: "10", url: "#" },
@@ -811,6 +819,11 @@ function gz(toUserId,ithis,type){
         };
         data.channel = 10, // 不同的频道 数值不同
           llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
+            if(!rs.data){
+              if(rs.readyState == 4){
+                getPlList();
+              }
+            }
             if (rs.data.success) {
               current=true
               var list_arr = rs.data.respData.list;
@@ -818,12 +831,14 @@ function gz(toUserId,ithis,type){
                 if (list_arr[i].content) {
                   list_arr[i].content = JSON.parse(list_arr[i].content);
                 }
+                list_arr[i].img_num = list_arr[i].coverImgList.length-4;
                 list_arr[i].coverImgList = arr_update(list_arr[i].coverImgList, 4);
               }
               arr_ac = list_arr;
               $('.loading-list').hide()                      
               layui.laytpl($("#tp_list").html()).render(list_arr, function (html) {
                 $("#list").append(html);
+                
                 pageNo = pageNo + 1;
               });
             } else {
@@ -836,9 +851,15 @@ function gz(toUserId,ithis,type){
 
             // }
           }, function (err) {
-
+            
           })
-          if(pageNo!=1) return
+
+
+      }
+      getAllSeeList()
+      function getAllSeeList(){
+        
+            if(pageNo!=1) return
           var datas = {
           llh: "123",
           pageNo: pageNo,
@@ -847,6 +868,11 @@ function gz(toUserId,ithis,type){
         };
           datas.channel = 20, // 不同的频道 数值不同
           llw.api.ws("info.headlines.get", datas, function (rs) { //请求名,数据,回调方法,
+            if(!rs.data){
+              if(rs.readyState == 4){
+                getAllSeeList();
+              }
+            }
             if (rs.data.success) {
               var list_arr = rs.data.respData.list;
               for (var i = 0; i < list_arr.length; i++) {
@@ -867,7 +893,8 @@ function gz(toUserId,ithis,type){
           }, function (err) {
 
           })
-      }
+          }
+
 
       function isdate(date) {
         var d = new Date(date);
@@ -1071,6 +1098,20 @@ $(".outer_div_div_DL_name p").click(function(){
        text2=text2+"...";
        return text2;
      }
+}
+function tag_text(text){
+  if(!text){
+    return
+  }
+  var text2="";
+  var num=4;
+  if(text.length<4){
+    num=text.length;
+  }
+  for(var i=0;i<num;i++){
+    text2=text2+text[i]
+  }
+  return text2;
 }
     </script>
 

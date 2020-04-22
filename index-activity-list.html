@@ -33,7 +33,7 @@
       {{# if(index<5){}}
         <li  class="list_tuo_li" style="{{index==4? 'border-bottom:0':'border-bottom: 1px solid rgba(232, 232, 232)'}}">
           <div class="list_tuo_li_a"  
-          style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','4')">
+          style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','4',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img src="{{item.coverImgList[0]}}"/>
@@ -256,11 +256,11 @@
           </div>
   </div>
   <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
-  <div class="header_div_right"><a onclick="utils.toMyLlh('/index-pc.html')" >老来号认证</a></div>
+  <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
   <!-- <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
   <div class="header_div_right"><a onclick="llw.toHerf('/llh-bs/common/login.html?type=topWeb')"  target="_blank">登录</a></div> -->
   <div class="header_div_right" style="display: none;"><a><button onclick="utils.loginOut()" class="tcdl">退出登录</button></a></div>
-  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index-pc.html')" >
+  <div class="header_div_right" style="display: none;"><a  style="display: block;"  onclick="utils.toMyLlh('/index.html')" >
     <img class="header_div_img" src=""/></a>
   </div>
   </div>
@@ -269,7 +269,7 @@
         <div class="containera">
           <div  class="contenta container_left">
             <div class="body_left_div">
-              <a href="../../index-pc.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>
+              <a href="index.html"><img src="images/老来网logo组合.png" alt="老来网" /></a>           
                 <ul id="nav">
               
               </ul>
@@ -508,7 +508,7 @@ $('#seachBtn').click(function(){
           arr_sas=arr_sas.filter(item=>item.id!==13);
         var list_arr=[
           {id:"1",url:"./index-follow.html"},
-          {id:"5",url:"../../index-pc.html"},
+          {id:"5",url:"./index.html"},
           {id:"6",url:"./index-Hotspot.html"},
           {id:"11",url:"./index-video-list.html"},
           {id:"10",url:"./index-Original.html"},
