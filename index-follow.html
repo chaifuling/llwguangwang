@@ -136,27 +136,26 @@
         {{# if(item.tags){ }}
           <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
-          {{#   if(item.headIcon  !=  undefined) {                  }}
+          {{#   if(item.user.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
-              {{# if(item.userType==1||item.userType==6){}}
+              {{# if(item.user.userType==1||item.user.userType==6){}}
               <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
               {{# } }}
-              {{# if(item.userType==4){}}
+              {{# if(item.user.userType==4){}}
               <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
               {{# } }}
-              <img  src="{{item.headIcon}}" />
+              <img  src="{{item.user.headIcon}}" />
             </a>
           </div> 
           {{#    }          }}
         <div class="single-mode-div-bottom-name" >
-          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          {{#     if(item.user.nickName == undefined){                  }}
           <a href="#"  >该作者已注销</a>
           {{#     }else {            }}
           {{#     if(item.nickName) {  }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.user.nickName}}</a>
           {{#     }else{           }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
           {{#     }          }}
           {{#     }                  }}
 
@@ -184,28 +183,27 @@
         {{# if(item.tags){ }}
         <div class="single-tags">{{tag_text(item.tags)}}</div> 
       {{# } }}
-          {{#   if(item.headIcon  !=  undefined) {                  }}
+          {{#   if(item.user.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
-                  {{# if(item.userType==1||item.userType==6){}}
+                  {{# if(item.user.userType==1||item.user.userType==6){}}
                   <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
                   {{# } }}
-                  {{# if(item.userType==4){}}
+                  {{# if(item.user.userType==4){}}
                   <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
                   {{# } }}
-                  <img  src="{{item.headIcon}}" />
+                  <img  src="{{item.user.headIcon}}" />
                 </a>
           </div> 
           {{#    }          }}
        
         <div class="single-mode-div-bottom-name" >
-          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          {{#     if(item.user.nickName == undefined){                  }}
           <a href="#"  >该作者已注销</a>
           {{#     }else {            }}
-          {{#     if(item.nickName) {  }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     if(item.user) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.user.nickName}}</a>
           {{#     }else{           }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.source}}</a>
           {{#     }          }}
           {{#     }                  }}
 
@@ -248,29 +246,28 @@
       <div class="single-mode-div-bottom">
         {{# if(item.tags){ }}
         <div class="single-tags">{{tag_text(item.tags)}}</div> 
-        {{# } }}
-          {{#   if(item.headIcon  !=  undefined) {                  }}
+      {{# } }}
+          {{#   if(item.user.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
-              {{# if(item.userType==1||item.userType==6){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
-              {{# } }}
-              {{# if(item.userType==4){}}
-              <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
-              {{# } }}
-              <img  src="{{item.headIcon}}" />
-            </a>
+                  {{# if(item.user.userType==1||item.user.userType==6){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
+                  {{# } }}
+                  {{# if(item.user.userType==4){}}
+                  <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
+                  {{# } }}
+                  <img  src="{{item.user.headIcon}}" />
+                </a>
           </div> 
           {{#    }          }}
        
         <div class="single-mode-div-bottom-name" >
-          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          {{#     if(item.user.nickName == undefined){                  }}
           <a href="#"  >该作者已注销</a>
           {{#     }else {            }}
-          {{#     if(item.nickName) {  }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.nickName}}</a>
+          {{#     if(item.user) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.user.nickName}}</a>
           {{#     }else{           }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
           {{#     }          }}
           {{#     }                  }}
 
@@ -310,27 +307,26 @@
         {{# if(item.tags){ }}
           <div class="single-tags">{{tag_text(item.tags)}}</div> 
         {{# } }}
-          {{#   if(item.headIcon  !=  undefined) {                  }}
+          {{#   if(item.user.headIcon  !=  undefined) {                  }}
           <div class="single-mode-div-bottom-b" > 
             <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank">
-              {{# if(item.userType==1||item.userType==6){}}
+              {{# if(item.user.userType==1||item.user.userType==6){}}
               <img class="single-mode-div-bottom-b-v" src="./images/矢量智能对象.png">
               {{# } }}
-              {{# if(item.userType==4){}}
+              {{# if(item.user.userType==4){}}
               <img class="single-mode-div-bottom-b-v" src="./images/wan_vip.png">
               {{# } }}
-              <img  src="{{item.headIcon}}" />
+              <img  src="{{item.user.headIcon}}" />
             </a>
           </div> 
           {{#    }          }}
         <div class="single-mode-div-bottom-name" >
-          {{#     if(item.nickName == undefined && item.source == undefined ){                  }}
+          {{#     if(item.user.nickName == undefined && item.source == undefined ){                  }}
           <a href="#"  >该作者已注销</a>
           {{#     }else {            }}
-          {{#     if(item.nickName) {  }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.nickName}}</a>
+          {{#     if(item.user.nickName) {  }}
+          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank" >{{item.user.nickName}}</a>
           {{#     }else{           }}
-          <a href="./index-personal-Article.html?llh={{item.user?item.user.llh:''}}" target="_blank"  >{{item.source}}</a>
           {{#     }          }}
           {{#     }                  }}
 
