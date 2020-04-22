@@ -1381,7 +1381,7 @@ function ifDvideo(){
       if ($("#input_aaa").val() === '') {
         return layer.msg('搜索内容不能为空');
       } else {
-        window.location.href = './index-search.html?id=' + $("#input_aaa").val()
+        window.location.href = (llw.istest?"/":"/llh-bs/")+'static/index-pc/index-search.html?id=' + $("#input_aaa").val()
       }
     })
     //mast    
