@@ -39,6 +39,15 @@
   var _llw = function (opt) {
     _Init.call(this, opt);
   };
+  _llw.prototype.getIMie = function(){
+    if(localStorage.getItem("llw_userId")){
+      return localStorage.getItem("llw_userId")
+    }else{
+      var imie =_llw.prototype.getUid();
+      localStorage.setItem('llw_userId',imie);
+      return  imie;
+    }
+  }
   _llw.prototype.getApp = function (name) {
     var baseinfo = JSON.parse(localStorage.getItem("baseInfo"));
     var myvalue = baseinfo ? baseinfo[name] : "607672369039";
@@ -72,6 +81,19 @@
           ? "; path=/"
           : "; path=/llh-bs");
     return true;
+  };
+  _llw.prototype.getUid = function () {
+    function rand(len) {
+      var hex = "0123456789abcdef",
+        str = "",
+        index = 0;
+      for (len = len || 32; len > index; index++) {
+        str += hex.charAt(Math.ceil(1e8 * Math.random()) % hex.length);
+      }
+      return str;
+    }
+    var uuid = new Date().getTime() + "_" + rand();
+    return uuid;
   };
   _llw.prototype.getUrlParam = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -159,7 +181,9 @@
     var loginDome =
       '<div id="mask" class="mask" style="display: none;"></div>' +
       '<div class="mc_wdl" style="display:bolck "><div class="tologin"><span>' +
-      '<img src='+(imgs?"./images/tishi.png":"./static/index-pc/images/tishi.png")+'></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >' +
+      "<img src=" +
+      (imgs ? "./images/tishi.png" : "./static/index-pc/images/tishi.png") +
+      '></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >' +
       ' <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>';
     $(element).append(loginDome);
     $("textarea").blur();
@@ -390,7 +414,7 @@
     wsData: function () {
       return {
         head: {
-          imei: "7ccdd60b53f1b2c80a8db8e1e4fe4abc29793ccd",
+          imei:_llw.prototype.getIMie(),
           deviceType: "OPPO R11",
           clientType: "android",
           teminalVersion: "android_5.0.2",
@@ -538,6 +562,7 @@
 })(window);
 // 登录判断
 llw.Login = function () {
+  
   if (llw.getCookie("llh") && llw.getCookie("token")) {
     llw.isLogin = true;
   } else llw.isLogin = false;
