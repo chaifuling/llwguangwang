@@ -1141,7 +1141,7 @@ function ifDvideo(){
         reader.readAsDataURL(file);
         reader.onload = function (e) {
           $('#file').val("")
-          document.execCommand('inserthtml', false, `<img src=${e.target.result} style='width:100px;height:100px'>`);
+          document.execCommand('inserthtml', false, "<img src="+e.target.result+"style='width:100px;height:100px'>");
         }
       }
     })
@@ -1176,7 +1176,7 @@ function ifDvideo(){
             processData: false,//用于对data参数进行序列化处理 这里必须false
             contentType: false, //必须
             success: function (resp) {
-              document.execCommand('inserthtml', false, `&nbsp;<video controls="controls"  name="media"  src=${resp.respData.src}></video>&nbsp;`);
+              document.execCommand('inserthtml', false, '&nbsp;<video controls="controls"  name="media"  src='+resp.respData.src+'></video>&nbsp;');
               layer.msg("上传成功");
               $("#fileVideo").val("")
             },
@@ -1340,9 +1340,12 @@ function ifDvideo(){
         llh: llw.getCookie('llh')
       };
 
-      llw.api.ws("info.channel.get", data, function (rs) { //请求名,数据,回调方法,  
-        var arr_sas = rs.data.respData.channelList;
-        arr_sas = arr_sas.filter(item => item.id !== 13)
+      llw.api.ws("info.channel.get", data, function (rs) { //请求名,数据,回调方法, 
+        var arr_sas=[]
+        if(typeof(rs.data)!='undefined'){
+           arr_sas = rs.data.respData.channelList;
+} 
+        arr_sas = arr_sas.filter(function(item) {return item.id !== 13})
         var list_arr = [
           { id: "1", url: "./index-follow.html" },
           { id: "5", url: "#" },
@@ -1354,9 +1357,9 @@ function ifDvideo(){
           { id: "7", url: "./index-activity-list.html" },
           { id: "13", url: "#" }
         ]
-        for (let index = 0; index < arr_sas.length; index++) {
+        for (var index = 0; index < arr_sas.length; index++) {
           var element = arr_sas[index];
-          arr_sas = arr_sas.filter(item => (item.id !== 13 && item.id !== 7))
+          arr_sas = arr_sas.filter(function(item)  {return (item.id !== 13 && item.id !== 7)})
           for (var j = 0; j < list_arr.length; j++) {
             if (element.id == list_arr[j].id) {
               element.url = list_arr[j].url;
@@ -1658,8 +1661,7 @@ function ifDvideo(){
         itemId: ''
       };
       data.channel = 20, // 不同的频道 数值不同
-        llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
-          debugger
+        llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,  
           if(!rs.data){
               if(rs.readyState == 4){
                 getAllSeeList();

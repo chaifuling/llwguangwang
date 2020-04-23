@@ -16,7 +16,7 @@
     document.body.appendChild(_a);
     _a.click();
   };
-  _utils.prototype.indexArticleDetails = function (id, type, tab = "", llh) {
+  _utils.prototype.indexArticleDetails = function (id, type, tab , llh) {
     window.open(
       "./index-Article-details.html?id=" +
         id +
