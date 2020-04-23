@@ -215,7 +215,7 @@
 
   {{# }else if(item.originalType == 3){ }}
   <li>
-    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3&&type={{item.type}}" target="_blank">
     <div style="cursor:pointer">
       <div class="single-mode">
       <div class="single-mode-title" ><p>{{item.title}}</p></div>
@@ -621,7 +621,7 @@
   arr_sas=arr_sas.filter(item=>item.id!==13);
          var list_arr=[
     {id:"1",url:"./index-follow.html"},
-    {id:"5",url:"./index.html"},
+    { id: "5", url:( llw.istest?"":"/llh-bs")+"/index-pc.html" },
     {id:"6",url:"./index-Hotspot.html"},
     {id:"11",url:"./index-video-list.html"},
     {id:"10",url:"./index-Original.html"},
