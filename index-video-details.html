@@ -173,7 +173,7 @@
                     </divclass="WZXQ_top_bottom_img">
                   </div>
                 </button>
-                <button id="video_sc">
+                <button id="video_sc"> 
                   <div class="video_WZXQ_top_bottom_img"><img src="images/video-sc.png"></div>
                   <div class="SP_top_bottom_p">
                     <p>收藏</p>
@@ -371,7 +371,39 @@
           llh: llw.getCookie('llh'),
           id: getQueryVariable("id"),
         };
-        llw.api.ws("original.content.detail", data, function (rs) { //请求名,数据,回调方法,
+        if( getQueryVariable("type")=='cms_info'){
+          $.ajax({
+            url:'http://manager.laolai.com/llw-bsprefor/info/web/viewNew.jspx',
+            data:{
+              llh: llw.getCookie('llh'),
+              artId: getQueryVariable("id"),
+            },
+            dataType: 'json',
+            type: 'post',
+            success:function(res){
+            var item= res.data;
+            $("#video_a").attr("src", item.video);
+            $(".SP_by_div_left_button_left p").text(item.artTxt);
+            $(".SP_by_div_left_button_left p").attr('title',item.title)
+            $(".SP_bottom_div_left img").attr("src", item.coverImg);
+            $(".SP_bottom_div_center_top p").text(item.artSource);
+            $(".SP_bottom_div_center_bottom_left p").text("发布于 " + item.artDate)
+            $(".SP_bottom_div_center_bottom_right p").text(item.clickRate + "次播放");
+            z_llh = item.info.llh;
+            user_list_a(z_llh);
+            $("#video_gz").hide();
+            $("#video_qxgz").hide();
+            $("#video_ydz").hide();
+            $("#video_dz").hide();
+            $("#video_qxsc").hide();
+            $("#video_sc").hide();
+            },
+            error:function(err){
+              console.log(err);
+            }
+          })
+        }else{
+          llw.api.ws("original.content.detail", data, function (rs) { //请求名,数据,回调方法,
           var item = rs.data.respData[0].original;
           var user = rs.data.respData[0].user;
           if(item.jumpUrl){
@@ -411,6 +443,8 @@
         }, function (err) {
 
         })
+        }
+      
       }
       // 获取url 参数
       function getQueryVariable(variable) {
