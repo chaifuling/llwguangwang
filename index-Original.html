@@ -862,11 +862,11 @@ function gz(toUserId,ithis,type){
         
           var datas = {
           llh: "123",
-          pageNo: pageNo,
-          pageSize: "20",
+          pageNo: 2,
+          pageSize: "5",
           itemId:''
         };
-          datas.channel = 20, // 不同的频道 数值不同
+          datas.channel = 5, // 不同的频道 数值不同
           llw.api.ws("info.headlines.get", datas, function (rs) { //请求名,数据,回调方法,
             debugger
             if(!rs.data){

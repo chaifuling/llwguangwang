@@ -536,11 +536,10 @@ function getAllSeeList () {
              var that=this; 
            var data={  
               llh: "123",
-              pageNo: pageNo,
-              pageSize: "20" ,
-              itemId:''        
+              pageNo: 1,
+              pageSize: "5" ,
             };
-  data.channel= 20, // 不同的频道 数值不同
+  data.channel= 5, // 不同的频道 数值不同
       llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
                     if(!rs.data){
                     if(rs.readyState == 4){
