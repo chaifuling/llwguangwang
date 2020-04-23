@@ -531,7 +531,7 @@ llw.Login = function () {
     llw.isLogin = true;
   } else llw.isLogin = false;
 };
-llw.istest = window.location.host === "www.laolai.com" ? true : false;
+llw.istest = (window.location.host === "www.laolai.com"||window.location.host === "laolai.com") ? true : false;
 llw.api.options.articleurl =
   (llw.istest ? "http://www.laolai.com" : "http://dev.laolai.com:85") +
   (!llw.istest ? "/llh-bs" : "/");
