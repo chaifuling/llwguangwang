@@ -96,8 +96,8 @@
       <li  class="list_tuo_li" style="{{index==4? 'border-bottom:0':'border-bottom: 1px solid rgba(232, 232, 232)'}}">
         <div class="list_tuo_li_a" style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','9',{{item.user?item.user.llh:''}})">
         <div  class="list_tuo_li_a_div" >
-          {{# if(item.coversType!=0){ }}
-          <img src="{{item.coverImgList[0]}}"/>
+          {{# if(item.coverImgList[0]){ }}
+          <img src="{{isimg(item.coverImgList[0])}}"/>
           {{#  }   }}
         </div>
         <div  class="list_tuo_li_a_divtwo" >
@@ -1049,6 +1049,19 @@ function text_num(text){
        text2=text2+"...";
        return text2;
      }
+}
+function isimg(url){
+  var urllengght=url.length;
+  var url2=""
+  var top2=url.substring(0,4);
+  if(top2 != "http"){
+    url2="http:"+url;
+  }else{
+    url2=url;
+  }
+  var bottom2=url.substring(urllengght-1,urllengght);
+    url2=url2.split(";");
+    return url2[0];
 }
     </script>
 
