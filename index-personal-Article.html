@@ -221,7 +221,7 @@
 
   {{# }else if(item.originalDto.originalType == 3){ }}
   <li>
-    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3" target="_blank">
+    <a href="./index-video-details.html?id={{item.contentId}}&&tab=3&&type={{item.type}}" target="_blank">
     <div style="cursor:pointer">
       <div class="single-mode">
       <div class="single-mode-title" ><p>{{item.originalDto.title}}</p></div>
@@ -534,7 +534,7 @@
 
   {{# }else if(item.original.originalType == 3){ }}
   <li>
-    <a href="./index-video-details.html?id={{item.original.id}}&&tab=3" target="_blank">
+    <a href="./index-video-details.html?id={{item.original.id}}&&tab=3&&type={{item.type}}" target="_blank">
     <div style="cursor:pointer">
       <div class="single-mode">
       <div class="single-mode-title" ><p>{{item.original.title}}</p></div>
@@ -609,7 +609,7 @@
   <script id="tp_center_list_b" type="text/html">
   {{#  layui.each(d.info, function(index, item){ }}
  <li class="center_list_b_li">
-  <a href="./index-video-details.html?id={{item.id}}&&tab=3" target="_blank">
+  <a href="./index-video-details.html?id={{item.id}}&&tab=3&&type={{item.type}}" target="_blank">
    <div class="center_list_b_top">
     <img src ="{{item.thumb_s}}" />
    </div>
