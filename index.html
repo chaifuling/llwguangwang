@@ -1488,10 +1488,16 @@ function ifDvideo(){
     $("#text_type").click(function (e) {
       $(".click_xs").hide();
       $(".input_div_tuo_b").show();//显示
-      $(".setTitle_type div").eq(0).css("border","1px solid #208eda");
-      $(".setTitle_type div").eq(1).css("border","1px solid #ccc")
-      $(".setTitle_type div").eq(2).css("border","1px solid #ccc")
-      $("#Article_p").text( "共 0 张，还能上传 1 张");
+      var img_num2=Article_img.length;
+      var num3=1;
+      if(Article_type == 2){
+        num3=3
+      }else{
+        num3=1
+      }
+      $(".setTitle_type div").css("border","1px solid #ccc")
+      $(".setTitle_type div").eq(Article_type-1).css("border","1px solid #208eda");
+      $("#Article_p").text( `共 ${img_num2} 张，还能上传 ${num3-img_num2} 张`);
       e.stopPropagation()
     })
     $("body").click(function (e) {
