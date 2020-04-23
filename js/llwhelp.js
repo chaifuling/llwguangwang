@@ -590,6 +590,6 @@ llw.api.options.ws2url =
     : "/identify-prefor/services/ws?wsdl");
 // llw.api.options.bs2url="http://dev.laolai.com:85/llw-bs-test/llh/article/";
 llw.api.options.ws3url =
-  (llw.istest ? "http://community.laolai.com/" : "http://dev.laolai.com:85/") +
+  (llw.istest ? "http://community-bsp.laolai.com/" : "http://dev.laolai.com:85/") +
   "community-ws/services/ws";
 //                     http://dev.laolai.com:85/llw-bs/info/web/collect.jspx
