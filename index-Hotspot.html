@@ -68,13 +68,13 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
-     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
         <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
 
      </div>
       <div class="single-mode-div" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -120,9 +120,9 @@
   <li>
     <div style="cursor:pointer">
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -175,9 +175,9 @@
     <div style="cursor:pointer">
 
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
         {{#  layui.each(item.coverImgList, function(index, items){ }}
         {{#   if(index <= 3){      }}
         <img style="background: url({{items}});"class="imgs" alt="">
@@ -302,7 +302,7 @@
       {{#  if(d.list.length != 0){   }}
       {{# if(index< 5){ }}
         <li  class="list_tuo_li" style="{{index==4? 'border-bottom:0':'border-bottom: 1px solid rgba(232, 232, 232)'}}">
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','6',{{item.user?item.user.llh:''}})">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','6',{{item.user?item.user.llh:''}})">
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coversType!=0){ }}
             <img src="{{item.coverImgList[0]}}"/>
@@ -444,7 +444,7 @@
     <span class="mc_div_title_red"></span>
     <div class="mc_div_XZ" >
       <div class="mc_div_title">老来网APP下载</div>
-      <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+      <div class="mc_div_img"><img class="footer_logo" style="padding: 12px;" src="./images/footer_logo.png" /></div>
       <div class="input_div_imgs_top" style="display: block;"></div>
           </div>
   
@@ -453,7 +453,7 @@
   <div class="header_div_left"><a >微信公众号</a>
     <div class="mc_div" >
       <div class="mc_div_title">微信公众号：老来网APP</div>
-      <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+      <div class="mc_div_img"><img class="footer_logo" src="http://www.laolai.com/images/tencent_account.jpg" /></div>
       <div class="input_div_imgs_top" style="display: block;"></div>
           </div>
   </div>
@@ -731,9 +731,9 @@ $('#input_aaa').focus(function(){
         llw.api.ws("info.headlines.get",
       {
        "llh": "123",
-		   "pageNo": "1",
-		   "channel": "20",
-		   "pageSize": "3",
+		   "pageNo": "2",
+		   "channel": "5",
+		   "pageSize": "5",
        "itemId": ""
       },
       function(rs){

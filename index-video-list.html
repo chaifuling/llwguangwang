@@ -32,7 +32,7 @@
   {{# if(index<5){ }}  
   {{#  if((index+1)==d.length){   }}
     <li  class="list_tuo_li">
-      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','11')"> 
+      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','11')"> 
       <div  class="list_tuo_li_a_div" >
         {{# if(item.coversType!=0){ }}
         <img src="{{item.coverImgList[0]}}"/>
@@ -45,7 +45,7 @@
         </li> 
   {{#  }else{  }}
     <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
-      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','11')"> 
+      <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','11')"> 
       <div class="list_tuo_li_a_div" >
         {{# if(item.coversType!=0){ }}
         <img src="{{item.coverImgList[0]}}"/>
@@ -218,7 +218,7 @@
     <span class="mc_div_title_red"></span>
     <div class="mc_div_XZ" >
       <div class="mc_div_title">老来网APP下载</div>
-      <div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /></div>
+      <div class="mc_div_img"><img class="footer_logo" style="padding: 12px;" src="./images/footer_logo.png" /></div>
       <div class="input_div_imgs_top" style="display: block;"></div>
           </div>
   
@@ -227,7 +227,7 @@
   <div class="header_div_left"><a >微信公众号</a>
     <div class="mc_div" >
       <div class="mc_div_title">微信公众号：老来网APP</div>
-      <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+      <div class="mc_div_img"><img class="footer_logo" src="http://www.laolai.com/images/tencent_account.jpg" /></div>
       <div class="input_div_imgs_top" style="display: block;"></div>
           </div>
   </div>
@@ -536,11 +536,11 @@ function getAllSeeList () {
              var that=this; 
            var data={  
               llh: "123",
-              pageNo: pageNo,
-              pageSize: "20" ,
-              itemId:''        
+              pageNo: 2,
+              pageSize: "5" ,
+              itemId:""
             };
-  data.channel= 20, // 不同的频道 数值不同
+  data.channel= 5, // 不同的频道 数值不同
       llw.api.ws("info.headlines.get",data,function(rs){ //请求名,数据,回调方法,
                     if(!rs.data){
                     if(rs.readyState == 4){

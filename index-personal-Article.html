@@ -34,7 +34,7 @@
   {{#  layui.each(d, function(index, item){ }}
   {{# if(index<2){ }}
   <li class="right_list_li">
-    <a style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.original.id}},'{{item.type}}','1',{{item.original.llh}})">
+    <a style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'{{item.type}}','1',{{item.original.llh}})">
     <div class="right_list_li_div">
       <p class="right_list_li_div_top">{{item.original.title}}</p>
       <p class="right_list_li_div_bottom">{{llw.isdate(item.original.publishTime)}}</p>
@@ -55,13 +55,13 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
-     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})">
         <img style="background: url({{item.originalDto.covers[0]}});"class="imgs" alt="">
 
      </div>
       <div class="single-mode-div" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})">
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -105,9 +105,9 @@
   <li>
     <div style="cursor:pointer">
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})" >
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -157,9 +157,9 @@
   <li>
     <div style="cursor:pointer">         
     <div class="single-mode">
-      <div class="single-mode-title"   onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
+      <div class="single-mode-title"   onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})"><p>{{item.originalDto.title}}</p></div>
       <div class="single-mode-div_b" >  
-      <div class="single-mode-div-top" onclick="utils.indexArticleDetails({{item.contentId}},'cms_origin','5',{{item.llh}})" >
+      <div class="single-mode-div-top" onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_origin','5',{{item.llh}})" >
         {{#  if(item.originalDto.covers){       }}
           {{#  layui.each(item.originalDto.covers, function(index, items){ }}
           {{#   if(index <= 3){      }}
@@ -277,13 +277,13 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_info','5',{{item.llh}})"><p>{{item.mongoInfoDto.article_title}}</p></div>
-     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.contentId}},'cms_info','5',{{item.llh}})">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_info','5',{{item.llh}})"><p>{{item.mongoInfoDto.article_title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_info','5',{{item.llh}})">
         <img style="background: url({{item.mongoInfoDto.cover_img}});"class="imgs" alt="">
 
      </div>
       <div class="single-mode-div" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_info','5',{{item.llh}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_info','5',{{item.llh}})">
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -309,9 +309,9 @@
   <li>
     <div style="cursor:pointer">
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_info','5',{{item.llh}})"><p>{{item.mongoInfoDto.article_title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_info','5',{{item.llh}})"><p>{{item.mongoInfoDto.article_title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.contentId}},'cms_info','5',{{item.llh}})" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'cms_info','5',{{item.llh}})" >
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -371,13 +371,13 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','5',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
-     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','5',{{item.original.llh}})">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','5',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','5',{{item.original.llh}})">
         <img style="background: url({{item.original.covers?item.original.covers[0]:''}});"class="imgs" alt="">
 
      </div>
       <div class="single-mode-div" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','5',{{item.original.llh}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','5',{{item.original.llh}})">
         <p>{{text_num(item.original.content)?text_num(item.original.content):""}}</p>
       </div>
     </div>
@@ -419,9 +419,9 @@
   <li>
     <div style="cursor:pointer">
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','5',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','5',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','5',{{item.original.llh}})" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','5',{{item.original.llh}})" >
         <p>{{text_num(item.original.content)?text_num(item.original.content):""}}</p>
       </div>
     </div>
@@ -470,9 +470,9 @@
   <li>
     <div style="cursor:pointer">         
     <div class="single-mode">
-      <div class="single-mode-title"   onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
+      <div class="single-mode-title"   onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','',{{item.original.llh}})"><p>{{item.original.title}}</p></div>
       <div class="single-mode-div_b" >  
-      <div class="single-mode-div-top" onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','',{{item.original.llh}})" >
+      <div class="single-mode-div-top" onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','',{{item.original.llh}})" >
         {{#  if(item.original.covers){       }}
           {{#  layui.each(item.original.covers, function(index, items){ }}
          
@@ -632,11 +632,25 @@
   {{#  } }}  
 </script>
   <div class="header">
-    
-    <div class="header_div_left"><span class="mc_div_title_red"></span><a href="#" target="_blank">下载APP</a></div>
-    
-    <div class="header_div_left"><a href="#" target="_blank">微信公众号</a></div>
-    <div class="header_div_right"><a href="http://www.laolai.show" target="_blank" >品牌介绍</a></div>
+    <div class="header_div_left_XZ">下载APP
+      <span class="mc_div_title_red"></span>
+      <div class="mc_div_XZ">
+        <div class="mc_div_title">老来网APP下载</div>
+
+        <div class="mc_div_img"><img class="footer_logo" style="padding: 12px;" src="./images/footer_logo.png" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+
+
+    </div>
+    <div class="header_div_left"><a>微信公众号</a>
+      <div class="mc_div">
+        <div class="mc_div_title">微信公众号：老来网APP</div>
+        <div class="mc_div_img"><img class="footer_logo" src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+        <div class="input_div_imgs_top" style="display: block;"></div>
+      </div>
+    </div>
+    <div class="header_div_right"><a href="http://www.laolai.net" target="_blank" >品牌介绍</a></div>
     <div class="header_div_right"><a onclick="utils.toMyLlh('/index.html')" >老来号认证</a></div>
     <div class="header_div_right"><a onclick="utils.toMyLlh('/common/register.html?type=topWeb')"  >注册</a></div>
     <div class="header_div_right"><a onclick="llw.toHerf('/common/login.html?type=topWeb')"  target="_blank">登录</a></div>
@@ -1200,6 +1214,21 @@ function tag_text(text){
   }
   return text2;
 }
+$(".header_div_left").mouseover(function () {
+      $(".mc_div").show();
+    })
+
+    $(".header_div_left").mouseout(function () {
+      $(".mc_div").hide();
+    })
+
+    $(".header_div_left_XZ").mouseover(function () {
+      $(".mc_div_XZ").show();
+    })
+
+    $(".header_div_left_XZ").mouseout(function () {
+      $(".mc_div_XZ").hide();
+    })  
   </script>
 
 </body>

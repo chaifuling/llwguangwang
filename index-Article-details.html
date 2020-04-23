@@ -140,9 +140,7 @@
               {{#  }); }}
 
             </ul>
-            {{#   if(item.commentTimes >2){           }}
-            <div class="PL_seemore " ids={{index}} onclick="seemore({{index}},{{item.id}})"><div >查看更多回复</div></div>
-            {{#          }       }}
+          <div class="PL_seemore " style="display:{{item.commentTimes >2?'block':'none'}}" ids={{index}} onclick="seemore({{index}},{{item.id}})"><div >查看更多回复</div></div>
             <div class="PL_list_hr"></div>
           </li>
 
@@ -169,7 +167,7 @@
       {{#  layui.each(d, function(index, item){ }}
       {{# if(index< 2){ }}
       <li class="right_list_li">
-        <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.original.id}},'cms_origin','1',{{item.original.llh}})">
+        <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.original.id}},'cms_origin','1',{{item.original.llh}})">
         <div class="right_list_li_div">
           <p class="right_list_li_div_top">{{item.original.title}}</p>
           <p class="right_list_li_div_bottom">{{llw.isdate(item.original.publishTime)}}</p>
@@ -191,7 +189,7 @@
       <li  class="list_tuo_li">
 
       {{#   }  }}
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})">
           <div  class="list_tuo_li_a_div" >{{# if(item.coversType!=0){ }}
                 <img src="{{item.coverImgList[0]}}"/>
                 {{#  }   }}</div>
@@ -356,7 +354,7 @@
       <li>
         <div style="cursor:pointer" >
         <div class="single-mode">
-          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})"><p>{{item.title}}</p></div>
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})"><p>{{item.title}}</p></div>
           <div class="single-mode-lbox">
             <a  href="#" target="_blank" class="img-wrap">
               <div class="single-mode-div_b" >
@@ -422,11 +420,7 @@
         <span class="mc_div_title_red"></span>
         <div class="mc_div_XZ">
           <div class="mc_div_title">老来网APP下载</div>
-          <div class="mc_div_img">
-            <img
-              src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech"
-            />
-          </div>
+          <div class="mc_div_img"><img class="footer_logo" style="padding: 12px;" src="./images/footer_logo.png" /></div>
           <div class="input_div_imgs_top" style="display: block;"></div>
         </div>
       </div>
@@ -435,7 +429,7 @@
         <div class="mc_div">
           <div class="mc_div_title">微信公众号：老来网APP</div>
           <div class="mc_div_img">
-            <img src="http://www.laolai.com/images/tencent_account.jpg" />
+            <div class="mc_div_img"><img class="footer_logo" src="http://www.laolai.com/images/tencent_account.jpg" /></div>
           </div>
           <div class="input_div_imgs_top" style="display: block;"></div>
         </div>
@@ -796,7 +790,7 @@
           pageNo: "1",
           channel: "20",
           pageSize: "3",
-          itemId: "",
+          itemId: getQueryVariable("itemId"),
         },
         function (rs) {
           debugger

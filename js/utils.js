@@ -1,7 +1,11 @@
 (function (window) {
   var _utils = function () {};
   _utils.prototype.loginOut = function () {
-    if (llw.delCookie("llh") && llw.delCookie("token")&&llw.delCookie("llw-community-server-session-id")) {
+    if (
+      llw.delCookie("llh") &&
+      llw.delCookie("token") &&
+      llw.delCookie("llw-community-server-session-id")
+    ) {
       window.location.reload();
     }
   };
@@ -16,16 +20,19 @@
     document.body.appendChild(_a);
     _a.click();
   };
-  _utils.prototype.indexArticleDetails = function (id, type, tab = "", llh) {
+  _utils.prototype.indexArticleDetails = function (itemId, id, type, tab, llh) {
     window.open(
-      (llw.istest?"":"/llh-bs/")+"/static/index-pc/index-Article-details.html?id=" +
+      (llw.istest ? "" : "/llh-bs/") +
+        "/static/index-pc/index-Article-details.html?id=" +
         id +
         "&&tab=" +
         tab +
         "&&type=" +
         type +
         "&&llh=" +
-        llh
+        llh  +
+        "&&itemId="+
+        itemId
     );
   };
   _utils.prototype.rightmue = function () {
@@ -92,12 +99,12 @@
 
       return pasteHtml;
     }
-    $textElem.on('paste', function (e) {
+    $textElem.on("paste", function (e) {
       var pasteHtml = getPasteHtml(e, pasteFilterStyle, false);
-      $textElem.html()
-      $textElem.html("<p>"+pasteHtml+"<p>")
-      $(".contenteditable p").attr("style","height:auto")
-    })
+      $textElem.html();
+      $textElem.html("<p>" + pasteHtml + "<p>");
+      $(".contenteditable p").attr("style", "height:auto");
+    });
   };
   _utils.prototype.letDivCenter = function (divName) {
     var top = ($(window).height() - $(divName).height()) / 2;

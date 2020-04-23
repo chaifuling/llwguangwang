@@ -113,7 +113,7 @@
   {{#  layui.each(d, function(index, item){ }}
   {{# if(index<2){ }}
   <li class="right_list_li">
-    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1',{{item.userId?item.userId:item.user.llh}})">
+    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','1',{{item.userId?item.userId:item.user.llh}})">
     <div class="right_list_li_div">
       <p class="right_list_li_div_top">{{item.original.title}}</p>
       <p class="right_list_li_div_bottom">{{llw.isdate(item.original.publishTime)}}</p>
@@ -127,11 +127,12 @@
 </script>
 
   <div class="header">
-    <div class="header_div_left_XZ"><a href="#" target="_blank">下载APP</a>
+    <div class="header_div_left_XZ">下载APP
       <span class="mc_div_title_red"></span>
       <div class="mc_div_XZ">
         <div class="mc_div_title">老来网APP下载</div>
-        <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+
+        <div class="mc_div_img"><img class="footer_logo" style="padding: 12px;" src="./images/footer_logo.png" /></div>
         <div class="input_div_imgs_top" style="display: block;"></div>
       </div>
 
@@ -140,7 +141,7 @@
     <div class="header_div_left"><a>微信公众号</a>
       <div class="mc_div">
         <div class="mc_div_title">微信公众号：老来网APP</div>
-        <div class="mc_div_img"><img src="http://www.laolai.com/images/tencent_account.jpg" /></div>
+        <div class="mc_div_img"><img class="footer_logo" src="http://www.laolai.com/images/tencent_account.jpg" /></div>
         <div class="input_div_imgs_top" style="display: block;"></div>
       </div>
     </div>
@@ -616,6 +617,21 @@
       }
       user_count();
     }
+    $(".header_div_left").mouseover(function () {
+        $(".mc_div").show();
+      })
+
+      $(".header_div_left").mouseout(function () {
+        $(".mc_div").hide();
+      })
+
+      $(".header_div_left_XZ").mouseover(function () {
+        $(".mc_div_XZ").show();
+      })
+
+      $(".header_div_left_XZ").mouseout(function () {
+        $(".mc_div_XZ").hide();
+      })
   </script>
 
 </body>

@@ -67,7 +67,8 @@
         cval +
         ";expires=" +
         exp.toGMTString() +
-        ((window.location.host == "www.laolai.com"||window.location.host == "laolai.com")
+        (window.location.host == "www.laolai.com" ||
+        window.location.host == "laolai.com"
           ? "; path=/"
           : "; path=/llh-bs");
     return true;
@@ -101,22 +102,20 @@
   };
 
   _llw.prototype.toHerf = function (adress) {
-    debugger
+    debugger;
     var _a = document.createElement("a");
-    var backUrl=window.location.href
-    var XbackUrl=""
-    for(var i=0;i<window.location.href.length;i++){
-      if(backUrl[i] == "&"){
-        XbackUrl=XbackUrl+ "*"
-      }else{
-        XbackUrl=XbackUrl+backUrl[i]
+    var backUrl = window.location.href;
+    var XbackUrl = "";
+    for (var i = 0; i < window.location.href.length; i++) {
+      if (backUrl[i] == "&") {
+        XbackUrl = XbackUrl + "*";
+      } else {
+        XbackUrl = XbackUrl + backUrl[i];
       }
     }
     _a.setAttribute(
       "href",
-        llw.api.options.articleurl +
-        adress +
-        `&backUrl=${XbackUrl}`
+      llw.api.options.articleurl + adress + `&backUrl=${XbackUrl}`
     );
     _a.setAttribute("id", "startTelMedicine");
     // 防止反复添加
@@ -156,12 +155,12 @@
     }
   };
   _llw.prototype.showLogin = function (element) {
-    var imgurl =window.location.href.indexOf('index-pc.html')!=-1?"./static/index-pc/images/tishi.png":"./images/tishi.png"
-    var loginDome = `
-    <div id="mask" class="mask" style="display: none;"></div>
-    <div class="mc_wdl" style="display:bolck "><div class="tologin"><span>
-      <img src=${imgurl}></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >
-      <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>`;
+    var imgs = window.location.href.indexOf("static/index-pc") !== -1;
+    var loginDome =
+      '<div id="mask" class="mask" style="display: none;"></div>' +
+      '<div class="mc_wdl" style="display:bolck "><div class="tologin"><span>' +
+      '<img src='+(imgs?"./images/tishi.png":"./static/index-pc/images/tishi.png")+'></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >' +
+      ' <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>';
     $(element).append(loginDome);
     $("textarea").blur();
     $("input").blur();
@@ -195,8 +194,20 @@
     var h = d.getHours();
     var mm = d.getMinutes();
     var ss = d.getSeconds();
-    if (istype){
-      return y + "-" + m + "-" + D + "  " + (h>9?h:'0'+h) + ":" + (mm>9?mm:'0'+mm) + ":" + (ss>9?ss:'0'+ss);
+    if (istype) {
+      return (
+        y +
+        "-" +
+        m +
+        "-" +
+        D +
+        "  " +
+        (h > 9 ? h : "0" + h) +
+        ":" +
+        (mm > 9 ? mm : "0" + mm) +
+        ":" +
+        (ss > 9 ? ss : "0" + ss)
+      );
     }
     return y + "-" + m + "-" + D;
   };
@@ -531,7 +542,11 @@ llw.Login = function () {
     llw.isLogin = true;
   } else llw.isLogin = false;
 };
-llw.istest = (window.location.host == "www.laolai.com"||window.location.host == "laolai.com") ? true : false;
+llw.istest =
+  window.location.host == "www.laolai.com" ||
+  window.location.host == "laolai.com"
+    ? true
+    : false;
 llw.api.options.articleurl =
   (llw.istest ? "http://www.laolai.com" : "http://dev.laolai.com:85") +
   (!llw.istest ? "/llh-bs" : "/");
@@ -540,13 +555,16 @@ llw.api.options.bsurl =
   (!llw.istest ? "/llw-bs" : "/llw-bs");
 llw.api.options.wsurl =
   (llw.istest ? "http://identify.laolai.com" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/identify-prefor/services/ws?wsdl");
+  (!llw.istest
+    ? "/llw-ws/services/ws?wsdl"
+    : "/identify-prefor/services/ws?wsdl");
 llw.api.options.ws2url =
   (llw.istest ? "http://identify.laolai.com" : "http://dev.laolai.com:85") +
-  (!llw.istest ? "/llw-ws/services/ws?wsdl" : "/identify-prefor/services/ws?wsdl");
+  (!llw.istest
+    ? "/llw-ws/services/ws?wsdl"
+    : "/identify-prefor/services/ws?wsdl");
 // llw.api.options.bs2url="http://dev.laolai.com:85/llw-bs-test/llh/article/";
 llw.api.options.ws3url =
-  (llw.istest
-    ? window.location.protocol + "//" + window.location.host
-    : "http://dev.laolai.com:85") + "/community-ws/services/ws";
+  (llw.istest ? "http://community.laolai.com/" : "http://dev.laolai.com:85/") +
+  "community-ws/services/ws";
 //                     http://dev.laolai.com:85/llw-bs/info/web/collect.jspx
