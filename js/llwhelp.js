@@ -6,12 +6,12 @@
   };
   var _Init = function (opt) {
     if (opt) {
-      Object.keys(opt).forEach(function(x) {
+      Object.keys(opt).forEach((x) => {
         _options[x] = opt[x];
       });
     }
 
-    Object.keys(_Browsers).forEach(function(x) {
+    Object.keys(_Browsers).forEach((x) => {
       this[x] =
         navigator.userAgent.toLowerCase().indexOf(_Browsers[x]) !== -1
           ? true
@@ -116,7 +116,7 @@
       "href",
       (!llw.istest ? "/llh-bs" : "/llh-bspre") +
         adress +
-       "&backUrl="+XbackUrl
+        `&backUrl=${XbackUrl}`
     );
     _a.setAttribute("id", "startTelMedicine");
     // 防止反复添加
@@ -156,10 +156,11 @@
     }
   };
   _llw.prototype.showLogin = function (element) {
-    '<div id="mask" class="mask" style="display: none;"></div>'+
-    '<div class="mc_wdl" style="display:bolck "><div class="tologin"><span>'+
-    '<img src="./images/tishi.png"></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >'+
-    ' <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>';
+    var loginDome = `
+    <div id="mask" class="mask" style="display: none;"></div>
+    <div class="mc_wdl" style="display:bolck "><div class="tologin"><span>
+      <img src="./images/tishi.png"></span><span>需要登录后才能操作</span> </div><div class="mc_wdl_buttom"><div class="mc_wdl_qx" >
+      <button id="qx">取消</button></div><div onclick="llw.toHerf("/common/login.html?type=topWeb")" class="mc_wdl_qdl"><button><a  >登录</a></button></div></div></div>`;
     $(element).append(loginDome);
     $("textarea").blur();
     $("input").blur();

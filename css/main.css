@@ -3991,8 +3991,8 @@ float: left;
 }
 .mc_div{
   position: absolute;
-  width: 348px;
-  height: 384px;
+  width: 266px;
+  height: 304px;
   background-color: #fff;
   border: 1px solid #e8e8e8;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
@@ -4002,6 +4002,7 @@ float: left;
 }
 .mc_div_title{
   padding-left: 20px;
+  color: #000000;
 }
 .center_list_b_top img{
   height: 100%;
@@ -4145,8 +4146,8 @@ float: left;
   .mc_div_XZ{
     position: absolute;
     left: -40px;
-    width: 348px;
-    height: 384px;
+    width: 266px;
+    height: 304px;
     background-color: #fff;
     border: 1px solid #e8e8e8;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
@@ -5335,4 +5336,15 @@ button{
   text-align: center;
   line-height: 103px;
   font-size: 18px;
+}
+.SP_by_div_left_button_left p{
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.footer_logo{
+  width: 264px;
+  height: 264px;
 }
