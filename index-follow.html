@@ -94,7 +94,7 @@
     {{#  if(d.list.length != 0){   }}
     {{# if(index<5){ }} 
       <li  class="list_tuo_li" style="{{index==4? 'border-bottom:0':'border-bottom: 1px solid rgba(232, 232, 232)'}}">
-        <div class="list_tuo_li_a" style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','9',{{item.user?item.user.llh:''}})">
+        <div class="list_tuo_li_a" style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','9',{{item.user?item.user.llh:''}})">
         <div  class="list_tuo_li_a_div" >
           {{# if(item.coverImgList[0]){ }}
           <img src="{{isimg(item.coverImgList[0])}}"/>
@@ -120,13 +120,13 @@
   <li>
     <div style="cursor:pointer">
       <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
-     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
+     <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
         <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
 
      </div>
       <div class="single-mode-div" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -171,9 +171,9 @@
   <li>
     <div style="cursor:pointer">
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})" >
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})" >
         <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
       </div>
     </div>
@@ -225,9 +225,9 @@
     <div style="cursor:pointer">
 
     <div class="single-mode">
-      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
+      <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})"><p>{{item.title}}</p></div>
       <div class="single-mode-div_b" >
-      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
+      <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId?item.userId:(item.user?item.user.llh:'')}})">
           {{#  layui.each(item.coverImgList, function(index, items){ }}
           {{#   if(index <= 3){      }}
           <img style="background: url({{items}});"class="imgs" alt="">

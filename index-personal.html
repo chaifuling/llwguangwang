@@ -113,7 +113,7 @@
   {{#  layui.each(d, function(index, item){ }}
   {{# if(index<2){ }}
   <li class="right_list_li">
-    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','1',{{item.userId?item.userId:item.user.llh}})">
+    <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','1',{{item.userId?item.userId:item.user.llh}})">
     <div class="right_list_li_div">
       <p class="right_list_li_div_top">{{item.original.title}}</p>
       <p class="right_list_li_div_bottom">{{llw.isdate(item.original.publishTime)}}</p>

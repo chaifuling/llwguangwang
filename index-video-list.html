@@ -38,7 +38,7 @@
       {{# if(index<5){ }}
       {{#  if((index+1)==d.length){   }}
         <li  class="list_tuo_li">
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','11')">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','11')">
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coverImgList[0]){ }}
             <img src="{{isimg(item.coverImgList[0])}}"/>
@@ -51,7 +51,7 @@
             </li>
       {{#  }else{  }}
         <li  class="list_tuo_litwo" style="{{index ==4 ?'':'border-bottom:1px solid rgba(232, 232, 232)'}}" >
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemId}},{{item.contentId}},'{{item.type}}','11')">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','11')">
           <div class="list_tuo_li_a_div" >
             {{# if(item.coverImgList[0]){ }}
             <img src="{{isimg(item.coverImgList[0])}}"/>
