@@ -202,13 +202,13 @@
       <li>
         <div style="cursor:pointer">
           <div class="single-mode">
-          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
-         <div class="single-mode-lbox" onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+         <div class="single-mode-lbox" onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
             <img style="background: url({{item.coverImgList[0]}});"class="imgs" alt="">
     
          </div>
           <div class="single-mode-div" >
-          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
             <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
           </div>
         </div>
@@ -254,9 +254,9 @@
       <li>
         <div style="cursor:pointer">
         <div class="single-mode">
-          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
           <div class="single-mode-div_b" >
-          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})" >
             <p>{{text_num(item.summary)?text_num(item.summary):""}}</p>
           </div>
         </div>
@@ -309,9 +309,9 @@
         <div style="cursor:pointer">
     
         <div class="single-mode">
-          <div class="single-mode-title"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
+          <div class="single-mode-title"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})"><p>{{text1(item.title)}}</p></div>
           <div class="single-mode-div_b" >
-          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails({{item.itemid}},{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
+          <div class="single-mode-div-top"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','5',{{item.userId}})">
             {{#  layui.each(item.coverImgList, function(index, items){ }}
             {{#   if(index <= 3){      }}
             <img style="background: url({{items}});"class="imgs" alt="">
