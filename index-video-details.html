@@ -322,7 +322,7 @@
 		      "llh": llw.getCookie("llh"),
 		      "pageSize": 10,
 		      "artTitle": "",
-          itemId:''
+          itemId:getQueryVariable("itemId")
         };
         llw.api.ws("info.headlines.get", data, function (rs) { //请求名,数据,回调方法,
            list_arr =  rs.data.respData ;

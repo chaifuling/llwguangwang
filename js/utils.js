@@ -35,6 +35,21 @@
         (itemId?itemId:"")
     );
   };
+  _utils.prototype.indexVideoDetails = function (itemId, id, type, tab, llh) {
+    window.open(
+      (llw.istest ? "" : "/llh-bs/") +
+        "/static/index-pc/index-video-details.html?id=" +
+        id +
+        "&&tab=" +
+        tab +
+        "&&type=" +
+        type +
+        "&&llh=" +
+        llh  +
+        "&&itemId="+
+        (itemId?itemId:"")
+    );
+  };
   _utils.prototype.rightmue = function () {
     var dom =
       '<div class="company"><p style="margin-bottom:5px" class="J-company-name"> Copyright © 2015 - 2020</p>' +
