@@ -23,7 +23,7 @@
   <script id="tp_SP_right_list" type="text/html">
               {{#  layui.each(d.list, function(index, item){ }}
     <li id={{item.contentId}} onclick=asss({{index}})>
-      <a  class="SP_right_list_li" href="./index-video-details.html?id={{item.contentId}}&&type={{item.type}}"> 
+      <a  class="SP_right_list_li" href="./index-video-details.html?id={{item.contentId}}&&type={{item.type}}&&itemId={{item.itemid}}"> 
       <div class="SP_right_list_li_img"><img src="{{item.coverImgList}}"/></div>
       <div class="SP_right_list_li_text"><p id="{{item.contentId+1}}">{{item.title}}</p></div>
       </a>
