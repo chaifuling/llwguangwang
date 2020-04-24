@@ -189,7 +189,7 @@
       <li  class="list_tuo_li">
 
       {{#   }  }}
-          <div style="cursor:pointer"  onclick="utils.indexArticleDetails({{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})">
+          <div style="cursor:pointer"  onclick="utils.indexArticleDetails('{{item.itemid}}',{{item.contentId}},'{{item.type}}','1',{{item.user?item.user.llh:''}})">
           <div  class="list_tuo_li_a_div" >
             {{# if(item.coverImgList[0]){ }}
                 <img src="{{isimg(item.coverImgList[0])}}"/>
@@ -1074,7 +1074,7 @@
                     btnAlign: "c",
                     moveType: 1, //拖拽模式，0或者1
                     content:
-                      '<div class="mc_div_img"><img src="https://a.app.qq.com/o/image/microQr.png?pkgName=com.laolaiwangtech" /><div style=" text-align: center;">扫描二维码下载老来网App</div></div>',
+                      '<div class="mc_div_img"><img style="width:300px;height:300px;background-size: cover;" src="./images/footer_logo.png" /><div style=" text-align: center;">扫描二维码下载老来网App</div></div>',
                     success: function () {},
                   });
                 });
