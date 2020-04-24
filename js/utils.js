@@ -32,7 +32,7 @@
         "&&llh=" +
         llh  +
         "&&itemId="+
-        itemId
+        (itemId?itemId:"")
     );
   };
   _utils.prototype.rightmue = function () {

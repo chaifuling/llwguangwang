@@ -56,7 +56,7 @@
   _llw.prototype.getCookie = function (name) {
     var arr,
       reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    return (arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
+    return (arr = document.cookie.match(reg)) ? unescape(arr[2]) : "";
   };
   _llw.prototype.setCookie = function (name) {
     var Days = 30;

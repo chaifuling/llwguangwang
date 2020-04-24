@@ -704,7 +704,7 @@
       function leftMenu() {
         var that = this;
         var data = {
-          llh: llh,
+          llh: llw.getCookie('llh')||""
         };
 
         llw.api.ws(
@@ -758,7 +758,7 @@
         var that = this;
         var data = {
           artId: 126,
-          llh: llw.getCookie("llh"),
+          llh: llw.getCookie('llh')||"",
           pageNum: pageNum,
           pageSize: pagesize,
           commentType: "originalId",
@@ -789,7 +789,7 @@
         {
           llh: "123",
           pageNo: "1",
-          channel: "20",
+          channel: "21",
           pageSize: "3",
           itemId: getQueryVariable("itemId"),
         },
@@ -834,7 +834,7 @@
       function getAttentionList() {
         var that = this;
         var data = {
-          llh: llw.getCookie("llh"),
+          llh: llw.getCookie('llh')||"",
           pageNo: pageNo,
           pageSize: "20",
           itemId: "",
@@ -895,10 +895,10 @@
       list_newText();
       function list_newText() {
         data = {
-          llh: getQueryVariable("llh"),
+          llh: getQueryVariable("llh")||"",
           pageNo: 1,
           pageSize: 20,
-          toLlh: getQueryVariable("llh"),
+          toLlh: getQueryVariable("llh")||"",
         };
         llw.api.ws(
           "myOriginal.content.find",
@@ -939,7 +939,7 @@
       function morepl(id, commentId) {
         var data = {
           artId: getQueryVariable("id"),
-          llh: llh,
+          llh: llw.getCookie('llh')||"",
           pageNo: (morePlList[id] && morePlList[id].pageNo) || 1,
           pageSize: 10,
           commentId: commentId,
@@ -983,7 +983,7 @@
       function pl() {
         var data = {
           artId: getQueryVariable("id"),
-          llh: llh,
+          llh: llw.getCookie('llh')||"",
           pageNum: addnum || 1,
           pageSize: pagesize,
           commentType: "originalId",
@@ -1181,7 +1181,7 @@
                     var num = $(".PL_list_like_left").index(this);
                     var id = $(".PL_list_like_left").eq(num).attr("lid");
                     data = {
-                      llh: llh,
+                      llh: llw.getCookie('llh')||"",
                       likeId: id,
                       likeType: "commentId",
                     };
@@ -1208,7 +1208,7 @@
                     var num = $(".PL_list_like_left_qx").index(this);
                     var id = $(".PL_list_like_left_qx").eq(num).attr("lid");
                     data = {
-                      llh: llh,
+                      llh: llw.getCookie('llh')||"",
                       likeId: id,
                       likeType: "commentId",
                     };
@@ -1307,7 +1307,7 @@
           llw.api.bs(
             "viewNew",
             {
-              llh: llh,
+              llh: llw.getCookie('llh')||"",
               artId: getQueryVariable("id"),
             },
             function (rs) {
@@ -1519,7 +1519,7 @@
       $("#article_qxdz").click(function () {
         if (llw.isLogin) {
           data = {
-            llh: llh,
+            llh: llw.getCookie('llh')||"",
             likeId: getQueryVariable("id"),
             likeType: "artId",
           };
@@ -1609,7 +1609,7 @@
       $("#article_qxsc").click(function () {
         if (llw.isLogin) {
           data = {
-            llh: llh,
+            llh: llw.getCookie('llh')||"",
             artId: getQueryVariable("id"),
             type: "originalId",
             collectToggle: 0,
@@ -1682,7 +1682,7 @@
       function PL_reply(id, text, type) {
         data = {
           originalId: getQueryVariable("id"),
-          llh: llh,
+          llh: llw.getCookie('llh')||"",
           comment: text,
           linkCommentId: id,
         };
@@ -1700,7 +1700,7 @@
               headIcon: userInof.headIcon,
               comment: text,
               id: id,
-              llh: llh,
+              llh: llw.getCookie('llh')||"",
               userName: userInof.nickName,
               time:" "+ llw.isdate(new Date(),true),
               linkCommentDto:{
@@ -1725,7 +1725,7 @@
       function reply_PL_reply(id, text, type) {
         data = {
           originalId: getQueryVariable("id"),
-          llh: llh,
+          llh: llw.getCookie('llh')||"",
           comment: text,
           linkCommentId: id,
         };
@@ -1739,7 +1739,7 @@
               headIcon: userInof.headIcon,
               comment: text,
               id: id,
-              llh: llh,
+              llh: llw.getCookie('llh')||"",
               userName: userInof.nickName,
               time:" "+ llw.isdate(new Date(),true),
               linkCommentDto:{
@@ -1817,7 +1817,7 @@
         }
         data = {
           toLlh: z_llh,
-          llh: llw.getCookie("llh"),
+          llh: llw.getCookie('llh')||"",
         };
         llw.api.ws(
           "friends.attention.add",
@@ -1841,7 +1841,7 @@
         }
         data = {
           toLlh: z_llh,
-          llh: llh,
+          llh: llw.getCookie('llh')||"",
         };
         llw.api.ws(
           "friends.attention.delete",
@@ -1885,7 +1885,7 @@
       function user_count() {
         var data = {
           selectLlh: getQueryVariable("llh"),
-          llh: llw.getCookie("llh"),
+          llh: llw.getCookie('llh')||"",
         };
         llw.api.ws(
           "friend.user.count.get",
@@ -1916,7 +1916,7 @@
         );
         var datas = {
           selectLlh: llw.getCookie("llh"),
-          llh: llw.getCookie("llh"),
+          llh:llw.getCookie('llh')||"",
         };
         setTimeout(function () {
           llw.api.ws(

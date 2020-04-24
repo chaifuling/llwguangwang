@@ -1337,7 +1337,7 @@ function ifDvideo(){
     function leftMenu() {
       var that = this;
       var data = {
-        llh: llw.getCookie('llh')
+        llh: llw.getCookie('llh')||""
       };
 
       llw.api.ws("info.channel.get", data, function (rs) { //请求名,数据,回调方法,  

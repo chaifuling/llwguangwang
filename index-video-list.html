@@ -402,7 +402,7 @@
       function leftMenu2() {
         var that = this;
         var data = {
-          llh: "",
+          llh:llw.getCookie('llh')||""
         };
 
         llw.api.ws(
@@ -679,7 +679,7 @@
         });
       }
       var pageNo = 1;
-      var channel = 23;
+      var channel = 13;
       var arr_ac = [];
       var llh = "";
       function getPlList() {

@@ -420,7 +420,7 @@
       function leftMenu2() {
         var that=this; 
         var data={  
-          llh: ""
+          llh: llw.getCookie('llh')||""
          };
 
         llw.api.ws("info.channel.get",data,function(rs){ //请求名,数据,回调方法,  
@@ -593,7 +593,7 @@ gzzzz()
 function gzzzz(){
   
   data={
-    llh:llw.getCookie('llh'),
+    llh:llw.getCookie('llh')||"",
     activityId:urlId,
     pageNo:1,
     pageSize:1
@@ -669,7 +669,7 @@ function user_Land(){
     $(".header_div_right").eq(4).show();
     $(".header_div_right").eq(5).show();
     data={
-    llh:llh,
+    llh:llw.getCookie('llh')||"",
     selectLlh: llh
   }
   llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  
@@ -702,7 +702,7 @@ function shutComment(index){
 //个人主页基本信息 
 function ceshi2(){
   data={
-    llh:llw.getCookie('llh')
+    llh:llw.getCookie('llh')||"",
   }
           llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,
             console.log(err)
@@ -714,7 +714,7 @@ function ceshi2(){
 //个人主页列表 
 function ceshi3(){
   data={
-    llh:llw.getCookie('llh'),
+    llh:llw.getCookie('llh')||"",
     pageNo:1,
     pageSize:10
   }
@@ -870,7 +870,7 @@ $(".HD_list_type0").click(function(){
 //活动评论列表
 function hd_pl(){
   data={
-    llh:llh,
+    llh:llw.getCookie('llh')||"",
     activityId:62,
     pageNo:1,
     pageSize:1
@@ -885,7 +885,7 @@ function hd_pl(){
 function user_count(){
   data={
     selectLlh: llh,
-    llh:llh,
+    llh:llw.getCookie('llh')||"",
   }
           llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,
 

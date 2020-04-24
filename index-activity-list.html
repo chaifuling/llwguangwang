@@ -404,7 +404,7 @@ function gz(toUserId,ithis,type){
   if(llw.isLogin){
   data={
     toLlh:toUserId,
-    llh:llw.getCookie("llh"),
+    llh:llw.getCookie('llh')||"",
   }
   // 关注
   if(type==1){
@@ -441,7 +441,7 @@ getAttentionList()
 function getAttentionList () {
   var that=this; 
   var data={  
-  llh: llw.getCookie("llh"),
+  llh: llw.getCookie('llh')||"",
      pageNo: pageNo,
      pageSize: "20" ,
      itemId:''        
@@ -499,7 +499,7 @@ $('#seachBtn').click(function(){
       function leftMenu2() {
         var that=this; 
         var data={  
-          llh: llw.getCookie('llh')
+          llh: llw.getCookie('llh')||""
          };
 
         llw.api.ws("info.channel.get",data,function(rs){ //请求名,数据,回调方法,  
@@ -676,14 +676,14 @@ utils.rightmue()
 user_Land()
 function user_Land(){
   llw.Login();
-  llh =llw.getCookie('llh');
+  llh =llw.getCookie('llh')||""
   if(llw.isLogin){
     $(".outer_div_div").hide();
     $(".outer_div_div_DL").show();
     $(".header_div_right").eq(2).show();
     $(".header_div_right").eq(3).show();
     data={
-    llh:llh,
+    llh:llw.getCookie('llh')||"",
     selectLlh: llh
   }
   llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,  

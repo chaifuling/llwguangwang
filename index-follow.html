@@ -541,7 +541,7 @@
       function leftMenu2() {
         var that=this; 
         var data={  
-          llh: llh      
+          llh: llw.getCookie('llh')||""     
          };
 
         llw.api.ws("info.channel.get",data,function(rs){ //请求名,数据,回调方法,  
@@ -598,7 +598,7 @@ $.ajax({
       function leftMenu() {
         var that=this; 
         var data={  
-          llh: llw.getCookie('llh'),
+          llh: llw.getCookie('llh')||"",
           size: 8    
          };
         llw.api.ws("friend.recommend.list.get",data,function(rs){ //请求名,数据,回调方法,
@@ -618,7 +618,7 @@ $.ajax({
         })
       }
 
-      var llh=llw.getCookie('llh');
+      var llh=llw.getCookie('llh')||"",
       var userid="";
       user_Land()
       function user_Land(){
@@ -731,7 +731,7 @@ function gz(toUserId,ithis,type,mode){
   if(llw.isLogin){
   data={
     toLlh:toUserId,
-    llh:llw.getCookie("llh"),
+    llh:llw.getCookie('llh')||"",
   }
   // 关注
   if(type==1){
@@ -792,7 +792,7 @@ getdl()
    function getdl() {
            var that=this; 
            var data={  
-              llh: llh,    
+              llh: llw.getCookie('llh')||"",   
             };
             llw.api.ws("fn.cache.version.get",data,function(rs){ //请求名,数据,回调方法,
 
@@ -841,8 +841,8 @@ $(".body_logo_s").click(function () {
 
 function user_count(){
   data={
-    selectLlh: llh,
-    llh:llh
+    selectLlh: llw.getCookie('llh')||"",
+    llh:llw.getCookie('llh')||"",
   }
           llw.api.ws("friend.user.count.get",data,function(rs){ //请求名,数据,回调方法,
               if(rs.data.respData&&rs.data.respData.attentionCount >0){
@@ -876,7 +876,7 @@ var getPlList_jiazai=true;
   getPlList_jiazai=false;
            var that=this; 
            var data={  
-              llh: llh,
+              llh: llw.getCookie('llh')||"",
               pageNo: zzpageNo,
               pageSize: "20",
               itemId:''         
@@ -956,7 +956,7 @@ getAttentionList()
 function getAttentionList () {
              var that=this; 
            var data={  
-              llh: llw.getCookie("llh"),
+              llh: llw.getCookie('llh')||"",
               pageNo: pageNo,
               pageSize: "20" ,
               itemId:''        
