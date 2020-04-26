@@ -373,7 +373,7 @@
         };
         if( getQueryVariable("type")=='cms_info'){
           $.ajax({
-            url:'http://www.laolai.com/llw-bsprefor/info/web/viewNew.jspx',
+            url:llw.api.options.bsurl+'/info/web/viewNew.jspx',
             data:{
               llh: llw.getCookie('llh'),
               artId: getQueryVariable("id"),
